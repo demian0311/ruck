@@ -4,6 +4,7 @@ class BacklogController
    def index = { redirect(action:list,params:params) }
    Sprint backlog
    Project project
+   Integer totalStoryPoints
 
    // the delete, save and update actions only accept POST requests
    static def allowedMethods = [delete:'POST', save:'POST', update:'POST']
@@ -48,12 +49,12 @@ class BacklogController
 
       if(project)
       {
-         for (currentSprint in project.sprints)
-         {  
-            if(currentSprint.name == 'backlog')
-            {  
-               backlog = currentSprint
-            }
+         backlog = Sprint.findWhere(project: project, number: 0)
+
+         totalStoryPoints = 0
+         for(currStory in backlog.stories)
+         {
+            totalStoryPoints += currStory.points
          }
       }
       else
@@ -76,6 +77,7 @@ class BacklogController
       def storyInstance = new Story(params)
       storyInstance.sprint = backlog
       storyInstance.save(flush:true)
+
       redirect(controller:'backlog',action:'list', id:project.id)
    }
 

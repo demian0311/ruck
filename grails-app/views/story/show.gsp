@@ -38,7 +38,10 @@ add one called 'doit'.
 <input type="hidden" name="story.id" value="<%=storyInstance.id%>"/>
 <input class="save" tabindex="3" type="submit" value="add" />
 </g:form>
+
+<br/><br/><hr/>
 <g:link controller="sprint" action="show" id="${storyInstance.sprint.id}"><font size="-1">go back to the sprint</font></g:link>
+</div>
 
 
 </body></html>

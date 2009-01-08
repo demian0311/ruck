@@ -87,6 +87,9 @@ window.onload = function()
 
 </td></tr></table>
 
+<br/><br/><hr/>
+<g:link controller="sprint" action="show" id="${sprint.id}">go to the sprint</g:link>
+
 </div>
 </body>
 </html>

@@ -209,7 +209,8 @@ window.onload = function()
 </g:each>
 </table>
 
-<br/> <br/> <br/>
+<br/> <br/>
+<hr/>
 <g:link controller="sprint" action="plan" id="${sprint.id}">add stories from backlog</g:link>
 <br/>
 <g:link controller="sprint" action="close" id="${sprint.id}">close this sprint</g:link>

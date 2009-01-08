@@ -157,7 +157,10 @@ pre
 #backlogGroup
 {
    cursor: move;
-   padding: 20px;
+   /*padding: 20px;*/
+   padding-top: 20px;
+   padding-bottom: 20px;
+   /*margin: 0px;*/
    margin: 0px;
    width: 80%;
    background: #f7f7f7;
