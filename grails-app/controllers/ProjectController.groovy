@@ -71,6 +71,16 @@ class ProjectController {
 
     def save = {
         def projectInstance = new Project(params)
+        if(projectInstance.startDate == null)
+        {
+           projectInstance.startDate = new Date()
+        }
+
+        if(projectInstance.sprintLength == null)
+        {
+           projectInstance.sprintLength = 1 
+        }
+
         if(!projectInstance.hasErrors() && projectInstance.save()) {
             // now create a default backlog 
             def backlogSprint = new Sprint()

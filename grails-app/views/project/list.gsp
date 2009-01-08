@@ -49,26 +49,6 @@
                   </td>
                </tr> 
          
-               <tr class="prop">
-                  <td valign="top" class="name">
-                     <label for="sprintLength">sprint length</label>
-                  </td>
-                  <td valign="top" class="value ${hasErrors(bean:projectInstance,field:'sprintLength','errors')}">
-                     <input type="text" id="sprintLength" name="sprintLength" 
-                        value="${fieldValue(bean:projectInstance,field:'sprintLength')}" />
-                     <div class="aside">(weeks)</div>
-                  </td>
-               </tr> 
-         
-               <tr class="prop">
-                  <td valign="top" class="name">
-                     <label for="startDate">start date</label>
-                  </td>
-                  <td valign="top" class="value ${hasErrors(bean:projectInstance,field:'startDate','errors')}">
-                     <g:datePicker name="startDate" value="${projectInstance?.startDate}" ></g:datePicker>
-                  </td>
-               </tr> 
-
                <tr>
                   <td colspan="2">
                      <input class="button" class="save" type="submit" value="create project" />
