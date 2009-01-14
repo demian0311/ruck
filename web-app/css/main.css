@@ -224,6 +224,11 @@ input, select, textarea {
     padding: 2px 4px;
 }
 
+.biginput
+{
+    font-size: 200%;
+}
+
 .button
 {
     border: 1px solid #ccc;

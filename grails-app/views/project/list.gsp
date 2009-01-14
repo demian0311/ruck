@@ -30,31 +30,18 @@
    <div class="errors"><g:renderErrors bean="${projectInstance}" as="list" /></div>
    </g:hasErrors>
    <g:form action="save" method="post" >
-            <table border="1">
-               <tr class="prop">
-                  <td valign="top" class="name">
-                     <label for="name">name</label>
-                  </td>
-                  <td valign="top" class="value ${hasErrors(bean:projectInstance,field:'name','errors')}">
-                     <input type="text" id="name" name="name" value="${fieldValue(bean:projectInstance,field:'name')}"/>
-                  </td>
-               </tr> 
-         
-               <tr class="prop">
-                  <td valign="top" class="name">
-                     <label for="description">description</label>
-                  </td>
-                  <td valign="top" class="value ${hasErrors(bean:projectInstance,field:'description','errors')}">
-                     <input type="text" id="description" name="description" value="${fieldValue(bean:projectInstance,field:'description')}"/>
-                  </td>
-               </tr> 
-         
-               <tr>
+      <div align="center">
+      <font size="200%">
+                     <input onfocus="this.value=''" onblur="this.value='project name'" value="project name" type="text" id="name" name="name" value="${fieldValue(bean:projectInstance,field:'name')}"/>
+                     <br/>
+
+                     <input onfocus="this.value=''" onblur="this.value='project description'" value="project description" type="text" id="description" name="description" value="${fieldValue(bean:projectInstance,field:'description')}"/>
+                     <br/>
+
                   <td colspan="2">
                      <input class="button" class="save" type="submit" value="create project" />
-                  </td>
-               </tr>
-            </table>
+                     </font>
+      </div>
    </g:form>
 
         </div>
