@@ -1,8 +1,8 @@
 x if there are no tasks defined for a story then i want a reminder to go add tasks
 x i should be able to update the backlog
 
-@ backlog
-   @ as i add stories to the backlog i want a total computed
+/ backlog
+   x as i add stories to the backlog i want a total computed
    @ i want to edit stories in the backlog
    @ i want to delete stories in the backlog
 
