@@ -17,7 +17,13 @@
 <g:if test="${flash.message}"><div class="message">${flash.message}</div></g:if>
 
 <g:each in="${storyInstance.tasks}" var="currTask">
-   <li>${currTask}</li>
+   <li>${currTask} 
+      <g:link 
+         controller="story" 
+         action="deleteTask" 
+         id="${currTask.id}">
+         <font size="-1">delete</font></g:link>
+   </li>
 </g:each>
 
 <g:if test="${storyInstance.tasks.isEmpty()}">

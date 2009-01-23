@@ -20,6 +20,28 @@ class StoryController {
         else { return [ storyInstance : storyInstance ] }
     }
 
+    def deleteTask = 
+    {
+      // get code from task controller for deletion
+
+        def taskInstance = Task.get( params.id )
+        taskInstance.delete()
+        redirect(action:show)
+        /*
+        if(taskInstance) {
+            taskInstance.delete()
+            flash.message = "Task ${params.id} deleted"
+            redirect(action:show)
+        }
+        */
+        /*
+        else {
+            flash.message = "Task not found with id ${params.id}"
+            redirect(action:show)
+        }
+        */
+    }
+
     def delete = {
         def storyInstance = Story.get( params.id )
         if(storyInstance) {
