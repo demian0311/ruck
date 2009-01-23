@@ -25,8 +25,13 @@ function updateOrder()
 }
 
 
-window.onload = function() 
+//window.onload = function() 
+//{
+//}
+
+Event.observe(window, 'load', function() 
 {
+
    Sortable.create
    (
       'backlogGroup', // the div id we're going to sort
@@ -36,9 +41,28 @@ window.onload = function()
       }
    );
 
-}
-</script>
+   <g:each in="${backlog.stories}" status="ii" var="storyInstance">
 
+      new Ajax.InPlaceEditor
+      (
+         'story_${storyInstance.id}', 
+         {
+            externalControl:'edit_${storyInstance.id}',
+            externalControlOnly:true
+         }
+      );
+
+/*    var story_editor_${storyInstance.id} = new Ajax.InPlaceEditor(
+         'story_${storyInstance.id}', 
+         'http://www.google.com');
+      */
+
+      //story_editor_${storyInstance.id}.dispose();
+      // editor.enterEditMode('click');
+   </g:each>
+
+});
+</script>
 
 <% numStories = 0 %>
 <ul>
@@ -51,7 +75,7 @@ window.onload = function()
          onmouseover="$('tool_${storyInstance.id}').show();">${storyInstance}
 
          <i id="tool_${storyInstance.id}" style="display: none">
-            <a href="">&#916;</a>
+            <i id="edit_${storyInstance.id}">&#916;</i>
             <a href="">-</a>
          </i>
 
