@@ -14,6 +14,13 @@ class Sprint implements Comparable
       goal(nullable: true)
    }
 
+   /* this is for sorting things in the UI */
+   static mapping = 
+   {
+      sort "number":"desc"
+   }  
+
+
    String toString() 
    { 
       if(name)

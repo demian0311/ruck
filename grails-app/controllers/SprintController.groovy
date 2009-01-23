@@ -95,11 +95,17 @@ class SprintController {
       println 'params: ' + params
       sprint = Sprint.get(params.id)
       println 'sprint: ' + sprint
+      println 'sprint.stories.isEmpty(): ' + sprint.stories.isEmpty()
 
       if(!sprint) 
       {
          flash.message = "Sprint not found with id ${params.id}"
          redirect(action:list)
+      }
+
+      if(sprint.stories.isEmpty())
+      {
+         redirect(action:plan,id:sprint.id)
       }
     }
 

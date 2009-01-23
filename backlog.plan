@@ -6,8 +6,10 @@ x i should be able to update the backlog
    @ i want to edit stories in the backlog
    @ i want to delete stories in the backlog
 
+@ if i go into a sprint and there are no stories, i want to go to the plan screen right away
 @ if i go to plan the sprint and there are no items in the backlog i want a link for editing the backlog
-@ sprints should be ordered by their number in the project screen
+x sprints should be ordered by their number in the project screen
+   - http://www.ibm.com/developerworks/java/library/j-grails01209/index.html?S_TACT=105AGX02&S_CMP=EDU
 @ i want to delete tasks in the sprint
 
 @ as i'm moving stories from the backlog into a sprint i want the total number of points computed
