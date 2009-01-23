@@ -23,10 +23,13 @@ class StoryController {
     def deleteTask = 
     {
       // get code from task controller for deletion
-
         def taskInstance = Task.get( params.id )
+        Story story = taskInstance.story 
         taskInstance.delete()
-        redirect(action:show)
+
+        params.id = story.id
+
+        redirect(controller:'story', action:'show', id:story.id) 
         /*
         if(taskInstance) {
             taskInstance.delete()
