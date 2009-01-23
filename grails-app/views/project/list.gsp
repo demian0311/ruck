@@ -30,18 +30,16 @@
    <div class="errors"><g:renderErrors bean="${projectInstance}" as="list" /></div>
    </g:hasErrors>
    <g:form action="save" method="post" >
-      <div align="center">
-      <font size="200%">
-                     <input onfocus="this.value=''" onblur="this.value='project name'" value="project name" type="text" id="name" name="name" value="${fieldValue(bean:projectInstance,field:'name')}"/>
-                     <br/>
+      <table><tr><td>project name</td><td>
+                     <input type="text" id="name" name="name" value="${fieldValue(bean:projectInstance,field:'name')}"/>
+                     </td></tr>
+      <tr><td>description</td><td>
+                     <input type="text" id="description" name="description" value="${fieldValue(bean:projectInstance,field:'description')}"/>
+                     </td></tr>
 
-                     <input onfocus="this.value=''" onblur="this.value='project description'" value="project description" type="text" id="description" name="description" value="${fieldValue(bean:projectInstance,field:'description')}"/>
-                     <br/>
-
-                  <td colspan="2">
+      <td colspan="2">
                      <input class="button" class="save" type="submit" value="create project" />
-                     </font>
-      </div>
+      </td></tr></table>
    </g:form>
 
         </div>

@@ -45,9 +45,16 @@ window.onload = function()
 <div id="backlogGroup">
    <g:each in="${backlog.stories}" status="ii" var="storyInstance">
       <% numStories++ %>
-      <li id="story_${storyInstance.id}">${storyInstance}
-      <a href="">&#916;</a>
-      <a href="">-</a>
+
+      <li id="story_${storyInstance.id}" 
+         onmouseout="$('tool_${storyInstance.id}').hide();"
+         onmouseover="$('tool_${storyInstance.id}').show();">${storyInstance}
+
+         <i id="tool_${storyInstance.id}" style="display: none">
+            <a href="">&#916;</a>
+            <a href="">-</a>
+         </i>
+
       </li>
    </g:each>
 </div>
