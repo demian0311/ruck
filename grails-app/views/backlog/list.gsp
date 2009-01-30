@@ -37,7 +37,8 @@ Event.observe(window, 'load', function()
       'backlogGroup', // the div id we're going to sort
       {
          ghosting:'true', // keep original in place and show a ghost
-         onUpdate:updateOrder
+         onUpdate:updateOrder,
+         handle: 'handle'
       }
    );
 
@@ -45,14 +46,31 @@ Event.observe(window, 'load', function()
 
       new Ajax.InPlaceEditor
       (
-         'story_${storyInstance.id}', 
+         'story_points_${storyInstance.id}', 
          {
-            externalControl:'edit_${storyInstance.id}',
-            externalControlOnly:true
+            size:2,
+            cols:2,
+            submitOnBlur: true,
+            okControl: false,
+            cancelControl: false
          }
       );
 
-/*    var story_editor_${storyInstance.id} = new Ajax.InPlaceEditor(
+
+      new Ajax.InPlaceEditor
+      (
+         'story_description_${storyInstance.id}', 
+         {
+            size:75,
+            cols:75,
+            submitOnBlur: true,
+            okControl: false,
+            cancelControl: false
+         }
+      );
+
+      /*    
+         var story_editor_${storyInstance.id} = new Ajax.InPlaceEditor(
          'story_${storyInstance.id}', 
          'http://www.google.com');
       */
@@ -72,13 +90,15 @@ Event.observe(window, 'load', function()
 
       <li id="story_${storyInstance.id}" 
          onmouseout="$('tool_${storyInstance.id}').hide();"
-         onmouseover="$('tool_${storyInstance.id}').show();">${storyInstance}
-
+         onmouseover="$('tool_${storyInstance.id}').show();">
+         (<i id="story_points_${storyInstance.id}">${storyInstance.points}</i>)
+         <i id="story_description_${storyInstance.id}">${storyInstance.description}</i>
          <i id="tool_${storyInstance.id}" style="display: none">
-            <i id="edit_${storyInstance.id}">&#916;</i>
-            <a href="">-</a>
+            {
+               <i class='handle'>move</i>
+               <a href="">delete</a>
+            }
          </i>
-
       </li>
    </g:each>
 </div>

@@ -20,6 +20,31 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	vertical-align: baseline;
 	background: transparent;
 }
+
+
+form.inplaceeditor-form {  
+   display: inline;
+}
+
+form.inplaceeditor-form input[type="text"] { /* Input box */
+   display: inline;
+}
+
+form.inplaceeditor-form textarea { /* Textarea, if multiple columns */
+   display: inline;
+}
+
+form.inplaceeditor-form input[type="submit"] { /* The submit button */
+   display: inline;
+  margin-left:1em;
+}
+
+form.inplaceeditor-form a { /* The cancel link */
+   display: inline;
+  margin-left:1em;
+}
+
+
 body {
 	line-height: 1;
 }
