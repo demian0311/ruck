@@ -42,13 +42,11 @@ Event.observe(window, 'load', function()
       new Ajax.InPlaceEditor
       (
          'story_points_${storyInstance.id}', 
+         '',
          {
-            savingText: '',
-            clickToEditText: 'click here to edit the story points',
-            okText: 'save',
-            okControl: 'false', 
-            cancelControl: 'false',
-            rows:1, cols:75
+            cols: 2,
+            okControl: false,
+            cancelControl: false
          }
       );
 
@@ -56,13 +54,11 @@ Event.observe(window, 'load', function()
       new Ajax.InPlaceEditor
       (
          'story_description_${storyInstance.id}', 
+         '',
          {
-            savingText: '',
-            clickToEditText: 'click here to edit the story description',
-            okText: 'save',
-            okControl: 'false', 
-            cancelControl: 'false',
-            rows:1, cols:75
+            cols: 75,
+            okControl: false,
+            cancelControl: false
          }
       );
    </g:each>
