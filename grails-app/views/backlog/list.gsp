@@ -24,11 +24,6 @@ function updateOrder()
    new Ajax.Request('order/${project.id}', options);
 }
 
-
-//window.onload = function() 
-//{
-//}
-
 Event.observe(window, 'load', function() 
 {
 
@@ -48,11 +43,12 @@ Event.observe(window, 'load', function()
       (
          'story_points_${storyInstance.id}', 
          {
-            size:2,
-            cols:2,
-            submitOnBlur: true,
-            okControl: false,
-            cancelControl: false
+            savingText: '',
+            clickToEditText: 'click here to edit the story points',
+            okText: 'save',
+            okControl: 'false', 
+            cancelControl: 'false',
+            rows:1, cols:75
          }
       );
 
@@ -61,22 +57,14 @@ Event.observe(window, 'load', function()
       (
          'story_description_${storyInstance.id}', 
          {
-            size:75,
-            cols:75,
-            submitOnBlur: true,
-            okControl: false,
-            cancelControl: false
+            savingText: '',
+            clickToEditText: 'click here to edit the story description',
+            okText: 'save',
+            okControl: 'false', 
+            cancelControl: 'false',
+            rows:1, cols:75
          }
       );
-
-      /*    
-         var story_editor_${storyInstance.id} = new Ajax.InPlaceEditor(
-         'story_${storyInstance.id}', 
-         'http://www.google.com');
-      */
-
-      //story_editor_${storyInstance.id}.dispose();
-      // editor.enterEditMode('click');
    </g:each>
 
 });

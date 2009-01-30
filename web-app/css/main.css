@@ -22,27 +22,34 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 }
 
 
+/* BEGIN: prototype inplace text editor */
 form.inplaceeditor-form {  
+   margin: 0;
    display: inline;
 }
 
 form.inplaceeditor-form input[type="text"] { /* Input box */
+   margin: 0;
    display: inline;
 }
 
 form.inplaceeditor-form textarea { /* Textarea, if multiple columns */
+   margin: 0;
    display: inline;
 }
 
 form.inplaceeditor-form input[type="submit"] { /* The submit button */
+   margin: 0;
    display: inline;
   margin-left:1em;
 }
 
 form.inplaceeditor-form a { /* The cancel link */
+   margin: 0;
    display: inline;
   margin-left:1em;
 }
+/* END: prototype inplace text editor */
 
 
 body {
