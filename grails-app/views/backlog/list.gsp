@@ -76,7 +76,8 @@ Event.observe(window, 'load', function()
          <i id="tool_${storyInstance.id}" style="display: none">
             {
                <i class='handle'>move</i>
-               <a href="">delete</a>
+               <g:link controller="backlog" action="deletestory" id="${storyInstance.id}"
+                  >delete</g:link>
             }
          </i>
       </li>

@@ -32,6 +32,14 @@ class BacklogController
       render "" + story.description 
    }
 
+   def deletestory = 
+   {
+      def story = Story.get(params.id)
+      def backlogId = story.sprint.id
+      story.delete()
+      redirect(controller:'backlog',action:'list', id:backlogId)
+   }
+
    def order = 
    {
       def backlog = Sprint.get(params.id)
