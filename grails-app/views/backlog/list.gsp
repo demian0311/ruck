@@ -26,7 +26,6 @@ function updateOrder()
 
 Event.observe(window, 'load', function() 
 {
-
    Sortable.create
    (
       'backlogGroup', // the div id we're going to sort
@@ -38,11 +37,10 @@ Event.observe(window, 'load', function()
    );
 
    <g:each in="${backlog.stories}" status="ii" var="storyInstance">
-
       new Ajax.InPlaceEditor
       (
          'story_points_${storyInstance.id}', 
-         '',
+         'changestorypoints/${storyInstance.id}', // server side resource
          {
             cols: 2,
             okControl: false,
@@ -50,11 +48,10 @@ Event.observe(window, 'load', function()
          }
       );
 
-
       new Ajax.InPlaceEditor
       (
          'story_description_${storyInstance.id}', 
-         '',
+         'changestorydescription/${storyInstance.id}', // server side resource
          {
             cols: 75,
             okControl: false,
@@ -62,7 +59,6 @@ Event.observe(window, 'load', function()
          }
       );
    </g:each>
-
 });
 </script>
 

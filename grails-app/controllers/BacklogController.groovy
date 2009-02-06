@@ -14,6 +14,23 @@ class BacklogController
       render "${new Date()}"
    }
 
+   def changestorypoints = 
+   {
+      def story = Story.get(params.id)
+      story.points = Integer.parseInt(params.value)
+      story.save(flush: true)
+
+      render "" + story.points 
+   }
+
+   def changestorydescription = 
+   {
+      def story = Story.get(params.id)
+      story.description = params.value
+      story.save(flush: true)
+
+      render "" + story.description 
+   }
 
    def order = 
    {
@@ -36,9 +53,8 @@ class BacklogController
          println '\t' + currentStory
       }
 
-
       render "persisted: " + params 
-    }
+   }
 
 
    def list = {
