@@ -15,7 +15,7 @@ x i want to delete tasks from a story
 
 / inplace editing
    @ i want to edit stories in the sprint
-   @ i want to edit tasks in the sprint
+   @ i want to delete tasks in the sprint
 
 @ sprint status
    @ the status of a sprint should be tracked (open, closed)

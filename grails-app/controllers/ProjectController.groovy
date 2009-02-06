@@ -1,6 +1,9 @@
 class ProjectController {
     
-    def index = { redirect(action:list,params:params) }
+   def index = { redirect(action:list,params:params) }
+   Sprint backlog
+   Project project
+   Integer totalStoryPoints
 
     // the delete, save and update actions only accept POST requests
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST']
@@ -10,14 +13,16 @@ class ProjectController {
         [ projectInstanceList: Project.list( params ) ]
     }
 
-    def show = {
-        def projectInstance = Project.get( params.id )
+    def show = 
+    {
+         project = Project.get(params.id)
+         backlog = Sprint.findWhere(project: project, number: 0)
 
-        if(!projectInstance) {
-            flash.message = "Project not found with id ${params.id}"
-            redirect(action:list)
-        }
-        else { return [ projectInstance : projectInstance ] }
+         totalStoryPoints = 0
+         for(currStory in backlog.stories)
+         {
+            totalStoryPoints += currStory.points
+         }
     }
 
     def delete = {

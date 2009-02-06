@@ -37,9 +37,10 @@
                      <input type="text" id="description" name="description" value="${fieldValue(bean:projectInstance,field:'description')}"/>
                      </td></tr>
 
-      <td colspan="2">
-                     <input class="button" class="save" type="submit" value="create project" />
-      </td></tr></table>
+      <tr>
+         <td>&nbsp;</td>
+         <td><input class="button" class="save" type="submit" value="create project" /></td>
+      </tr></table>
    </g:form>
 
         </div>
