@@ -11,6 +11,9 @@ x sprints should be ordered by their number in the project screen
    - http://www.ibm.com/developerworks/java/library/j-grails01209/index.html?S_TACT=105AGX02&S_CMP=EDU
 x i want to delete tasks from a story 
 
+x add a better start page
+/ add sample data
+
 @ as i'm moving stories from the backlog into a sprint i want the total number of points computed
 
 / inplace editing
@@ -59,4 +62,3 @@ x i want to delete tasks from a story
 @ i want a scrum-master role
 @ i want a team member role
 @ i want a chicken role
-
