@@ -1,0 +1,11 @@
+# refer to http://www.yaml.org/spec/1.1/ for clarification on YAML collections
+ruck:
+  path: /Users/johnnywey/code/ruck/web-app/css
+  namespace: ruck-
+  custom_layout:
+    column_count: 12
+    column_width: 70
+    gutter_width: 10
+  plugins:
+    - fancy-type
+    - buttons
