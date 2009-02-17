@@ -21,7 +21,7 @@ function updateOrder()
       method : 'post',
       parameters : Sortable.serialize('backlogGroup')
    };
-   new Ajax.Request('order/${project.id}', options);
+   new Ajax.Request('order/${backlog.id}', options);
 }
 
 Event.observe(window, 'load', function() 
