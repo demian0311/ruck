@@ -1,18 +1,17 @@
 <html>
-   <head>
-      <title>ruck</title>
-      <meta name="layout" content="main" />
-   </head>
-   <body>
-   <div id="banner"><a href="/ruck">ruck</a> | howdy</div>
-   <div id="content">
-   <div id="bigContent">
-   <font size="+4">
-      <g:link controller="project">Start using ruck!</g:link>
-      <br/><br/>
-      ruck is a very simple scrum management tool.  Nothing more, nothing less. 
-   </font>
-   </div>
-   </div>
-   </body>
+<head>
+  <title>ruck</title>
+  <meta name="layout" content="main"/>
+</head>
+<body>
+<div id="navigation"><div class="ruck-nav-left"/><div class="ruck-nav-right">
+  <a href="/ruck">ruck</a> | pick project
+</div></div>
+<hr class="ruck-space"/>
+
+<fieldset>
+  <h1><g:link controller="project">Start using ruck!</g:link></h1>
+  <h3>ruck is a very simple scrum management tool ... <span class="alt">Nothing more, nothing less.</span></h3>
+</fieldset>
+</body>
 </html>

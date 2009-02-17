@@ -2,6 +2,7 @@
 <head>
     <title>ruck | pick project</title>
     <link rel="stylesheet" href="screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="navigation.css" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="print.css" type="text/css" media="print">
     <!--[if IE]>
              <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
@@ -12,7 +13,11 @@
 <body>
 
 <div class="ruck-container">
-<div class="ruck-box"><a href="/ruck">ruck</a> | pick project</div>
+<div id="navigation"><div class="ruck-nav-left" /><div class="ruck-nav-right">
+    <a href="/ruck">ruck</a> | pick project
+</div></div>
+<hr class="ruck-space"/>
+
 <div class="ruck-error">
     <ul>
         <li>This is what an error looks like</li>
@@ -20,7 +25,7 @@
 </div>
 <div class="ruck-notice">This is a notice</div>
 <div class="ruck-success">This is a success message</div>
-<h2>pick an existing project</h2>
+<h1>pick an existing project</h1>
 <ul>
     <li>
         <a href="/ruck/project/show/1">front end - web ui</a>
@@ -240,8 +245,8 @@
 </form>
 </div>
 
-<div class="ruck-span-24">
-    <div class="ruck-box">Sat Jan 03 22:09:40 MST 2009 |<a href="http://neidetcher.com/ruck">ruck</a>&nbsp;&nbsp;</div>
+<div id="footer">
+    <div class="ruck-box">Sat Jan 03 22:09:40 MST 2009 |<a href="http://neidetcher.com/ruck">ruck</a></div>
 </div>
 
 </div>

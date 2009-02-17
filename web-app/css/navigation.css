@@ -1,0 +1,4 @@
+div#navigation {width:950px;background: url(../images/nav-center.png) repeat-x;height: 30px;}
+div.ruck-nav-left {background: url(../images/nav-left.png) no-repeat left;height: 30px;}
+div.ruck-nav-right {background: url(../images/nav-right.png) no-repeat right;height: 30px;padding-left: 10px;}
+#footer {float:left;width:940px;padding-left:10px;background:#E5ECF9;}
