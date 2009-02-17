@@ -46,6 +46,18 @@ class BootStrap {
          s3.ordinal = 3 
          backlogSprint.addToStories(s3)
 
+         Story s4 = new Story()
+         s4.points = 8 
+         s4.description = 'as a customer I want to pause my account'
+         s4.ordinal = 4 
+         backlogSprint.addToStories(s4)
+
+         Story s5 = new Story()
+         s5.points = 13 
+         s5.description = 'as billing I want to block a user out of our system'
+         s5.ordinal = 5 
+         backlogSprint.addToStories(s5)
+
          // create the first sprint
          def sprint1 = new Sprint()
          sprint1.number = 1 

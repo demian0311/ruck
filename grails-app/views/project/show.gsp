@@ -14,7 +14,6 @@
   <div class="ruck-notice">${flash.message}</div>
 </g:if>
 
-
 <hr />
 <h3><em>Sprints are ${fieldValue(bean: project, field: 'sprintLength')} week(s) long
   starting on ${fieldValue(bean: project, field: 'startDate')}</em></h3>
@@ -25,7 +24,7 @@
   <fieldset>
     <h6>(${totalStoryPoints}) <g:link controller="backlog" id="${project.id}">backlog</g:link></h6>
     <ul>
-      <g:each var="currStory" in="${backlog.stories}">
+      <g:each var="currStory" in="${topStories}">
         <ul>${currStory}</ul>
       </g:each>
     </ul>

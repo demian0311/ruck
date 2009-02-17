@@ -4,6 +4,10 @@ class ProjectController {
    Sprint backlog
    Project project
    Integer totalStoryPoints
+   def topStories 
+   Integer totalStories
+   Integer moreStories
+   private def STORIES_TO_SHOW_IN_BACKLOG = 3
 
     // the delete, save and update actions only accept POST requests
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST']
@@ -18,10 +22,18 @@ class ProjectController {
          project = Project.get(params.id)
          backlog = Sprint.findWhere(project: project, number: 0)
 
+         totalStories = backlog.stories.size()
+         moreStories = totalStories - STORIES_TO_SHOW_IN_BACKLOG 
          totalStoryPoints = 0
+         topStories = [] 
+         int count = 0
          for(currStory in backlog.stories)
          {
             totalStoryPoints += currStory.points
+            if(count++ < STORIES_TO_SHOW_IN_BACKLOG)
+            {
+               topStories.add(currStory)
+            }
          }
     }
 
