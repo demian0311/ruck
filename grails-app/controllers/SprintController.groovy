@@ -144,21 +144,29 @@ class SprintController {
       println 'uncompletedStories: ' + uncompletedStories 
 
       // move all those stories to the backlog
-      def backlog = Sprint.findWhere(project: project, number: 0)
-      println 'found the backlog: ' + backlog
+      //def backlog = Sprint.findWhere(project: project, number: 0)
+      //println 'found the backlog: ' + backlog
 
-      for(currUncompletedStory in uncompletedStories)
-      {
-         println 'moving ' + currUncompletedStory + ' to backlog'
-         backlog.addToStories(currUncompletedStory)
-      }
-      backlog.save()
+      //for(currUncompletedStory in uncompletedStories)
+      //{
+      //  println 'moving ' + currUncompletedStory + ' to backlog'
+      // backlog.addToStories(currUncompletedStory)
+      //}
+      //backlog.save()
       // TODO: still need to set this to the top of the backlog
 
       def nextSprint = new Sprint()
       nextSprint.number = sprint.number + 1 
+
       project.addToSprints(nextSprint)
       project.save(flush:true)
+
+      //for(currUncompletedStory in uncompletedStories)
+      //{
+      //   println 'moving ' + currUncompletedStory + ' to backlog'
+       //  nextSprint.addToStories(currUncompletedStory)
+      //}
+      //nextSprint.save(flush:true)
 
 /*
 def backlogSprint = new Sprint()
@@ -192,24 +200,17 @@ projectInstance.save()
          println 'the new sprint id is null'
       }
 
+      // move the old stories over to the next sprint
+      for(currUncompletedStory in uncompletedStories)
+      {
+         println 'moving ' + currUncompletedStory + ' to backlog'
+         nextSprintResult.addToStories(currUncompletedStory)
+      }
+      nextSprintResult.save(flush:true)
+
       redirect(action:plan,id:nextSprintResult.id)
     }
 
-
-/*
-    def delete = {
-        def sprintInstance = Sprint.get( params.id )
-        if(sprintInstance) {
-            sprintInstance.delete()
-            flash.message = "Sprint ${params.id} deleted"
-            redirect(action:list)
-        }
-        else {
-            flash.message = "Sprint not found with id ${params.id}"
-            redirect(action:list)
-        }
-    }
-    */
 
     def edit = {
         def sprintInstance = Sprint.get( params.id )

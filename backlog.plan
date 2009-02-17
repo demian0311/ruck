@@ -10,6 +10,7 @@ x sprints should be ordered by their number in the project screen
 x i want to delete tasks from a story 
 x add a better start page
 x add sample data
+x when I close a sprint I want all the un-finished stories put into the next sprint
 
 @ as i'm moving stories from the backlog into a sprint i want the total number of points computed
 
