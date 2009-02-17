@@ -23,9 +23,10 @@
   <h3>Stories</h3>
   <fieldset>
     <h6>(${totalStoryPoints}) <g:link controller="backlog" id="${project.id}">backlog</g:link></h6>
+    <hr />
     <ul>
       <g:each var="currStory" in="${topStories}">
-        <ul>${currStory}</ul>
+        <li>${currStory}</li>
       </g:each>
     </ul>
   </fieldset>
