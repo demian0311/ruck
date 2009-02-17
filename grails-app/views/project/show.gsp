@@ -18,12 +18,16 @@ summary</div>
 Sprints are ${fieldValue(bean:project, field:'sprintLength')} week(s) long.<br/>
 The start date is ${fieldValue(bean:project, field:'startDate')}.
 
-<h2>(${totalStoryPoints}) <g:link controller="backlog" id="${project.id}">backlog</g:link></h2>
+<h2>(${totalStoryPoints}) 
+   <g:link controller="backlog" id="${project.id}">backlog</g:link>
+</h2>
+
 <ul>
-<g:each var="currStory" in="${backlog.stories}">
-   <ul>${currStory}</ul>
+<g:each var="currStory" in="${topStories}">
+   <li>${currStory}</li>
 </g:each>
 </ul>
+<g:link controller="backlog" id="${project.id}">...and ${moreStories} more</g:link>
 
 </td><td>&nbsp;</td><td>
 

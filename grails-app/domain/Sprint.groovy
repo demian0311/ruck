@@ -32,6 +32,6 @@ class Sprint implements Comparable
 
    int compareTo(obj)
    {
-      number.compareTo(obj.number)
+      number.compareTo(obj.number) * (-1)
    }
 }
