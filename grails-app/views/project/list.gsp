@@ -37,12 +37,13 @@
     <g:form action="save" method="post">
       <p>
         <label for="name">Project name</label> <br/>
-        <input type="text" name="name" id="name" class="ruck-text" value="${fieldValue(bean: projectInstance, field: 'name')}"/>
+        <input type="text" name="name" id="name" class="ruck-text" size="30" value="${fieldValue(bean: projectInstance, field: 'name')}"/>
       </p>
       <p>
         <label for="description">Description</label><br/>
-        <input type="text" class="ruck-text" id="description" name="description" value="${fieldValue(bean: projectInstance, field: 'description')}"/>
+        <input type="text" class="ruck-text" id="description" name="description" size="30" value="${fieldValue(bean: projectInstance, field: 'description')}"/>
       </p>
+      <hr />
       <button type="submit" class="positive"><img src="${createLinkTo(dir: 'images/icons', file: 'tick.png')}" alt=""/>create project</button></td>
     </g:form>
   </fieldset>
