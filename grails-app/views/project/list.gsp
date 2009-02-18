@@ -44,7 +44,7 @@
         <input type="text" class="ruck-text" id="description" name="description" size="30" value="${fieldValue(bean: projectInstance, field: 'description')}"/>
       </p>
       <hr />
-      <button type="submit" class="positive"><img src="${createLinkTo(dir: 'images/icons', file: 'tick.png')}" alt=""/>create project</button></td>
+      <button type="submit" class="positive"><img src="${createLinkTo(dir: 'images/icons', file: 'tick.png')}" alt=""/>create project</button>
     </g:form>
   </fieldset>
 </div>

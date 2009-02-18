@@ -1,6 +1,5 @@
 class BacklogController 
 {
-    
    def index = { redirect(action:list,params:params) }
    Sprint backlog
    Project project
@@ -9,13 +8,11 @@ class BacklogController
    // the delete, save and update actions only accept POST requests
    static def allowedMethods = [delete:'POST', save:'POST', update:'POST']
 
-   def time = 
-   {
+   def time = {
       render "${new Date()}"
    }
 
-   def changestorypoints = 
-   {
+   def changestorypoints = {
       def story = Story.get(params.id)
       story.points = Integer.parseInt(params.value)
       story.save(flush: true)
@@ -23,8 +20,7 @@ class BacklogController
       render "" + story.points 
    }
 
-   def changestorydescription = 
-   {
+   def changestorydescription = {
       def story = Story.get(params.id)
       story.description = params.value
       story.save(flush: true)
@@ -40,13 +36,12 @@ class BacklogController
       redirect(controller:'backlog',action:'list', id:backlogId)
    }
 
-   def order = 
-   {
+   def order =  {
       def backlog = Sprint.get(params.id)
       println 'backlog: ' + backlog
 
       def currOrdinal = 0
-      for (currentId in params['backlogGroup[]'])
+      for (currentId in params['stories[]'])
       {
          def story = Story.get(currentId)
          story.ordinal = currOrdinal++

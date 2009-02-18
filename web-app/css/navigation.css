@@ -2,3 +2,7 @@ div#navigation {width:950px;background: url(../images/nav-center.png) repeat-x;h
 div.ruck-nav-left {background: url(../images/nav-left.png) no-repeat left;height: 30px;}
 div.ruck-nav-right {background: url(../images/nav-right.png) no-repeat right;height: 30px;padding-left: 10px;}
 #footer {float:left;width:940px;padding-left:10px;background:#E5ECF9;}
+ul.story {margin: 0;padding: 0;list-style-type:none;}
+li.story {background:#E5ECF9;font-weight:bold;margin: 2px;padding: 5px;}
+#handle {cursor:move;}
+.handle{cursor:move;}

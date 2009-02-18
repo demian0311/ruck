@@ -11,7 +11,7 @@
 <hr class="ruck-space"/>
 
 <g:if test="${flash.message}">
-  <div class="ruck-notice">${flash.message}</div>
+  <div class="ruck-success">${flash.message}</div>
 </g:if>
 
 <hr />
