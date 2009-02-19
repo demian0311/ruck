@@ -3,6 +3,11 @@ div.ruck-nav-left {background: url(../images/nav-left.png) no-repeat left;height
 div.ruck-nav-right {background: url(../images/nav-right.png) no-repeat right;height: 30px;padding-left: 10px;}
 #footer {float:left;width:940px;padding-left:10px;background:#E5ECF9;}
 ul.story {margin: 0;padding: 0;list-style-type:none;}
-li.story {background:#E5ECF9;font-weight:bold;margin: 2px;padding: 5px;}
+li.story {background:#E5ECF9;font-weight:bold;margin:2px;padding:5px;}
+ul.storyTitle{margin:0;padding:0;list-style-type:none;}
+li.storyTitle{font-weight:bold;margin:2px;padding:5px;height:50px;border-bottom:gainsboro solid thin;}
+ul.task{margin:0;padding:0;list-style-type:none;}
+li.task{background:#E5ECF9;font-weight:bold;margin:2px;height:50px;padding:5px;}
+li.emptyTask{background:white;font-weight:bold;margin:2px;height:50px;padding:5px;}
 #handle {cursor:move;}
 .handle{cursor:move;}

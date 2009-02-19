@@ -13,6 +13,7 @@
   <g:javascript library="application"/>
   <g:javascript library="prototype"/>
   <g:javascript library="scriptaculous"/>
+  <g:javascript library="taskboard"/>
 </head>
 <body>
 <div class="ruck-container ">

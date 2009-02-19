@@ -1,6 +1,5 @@
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="layout" content="main"/>
   <title>show sprint</title>
 </head>
@@ -17,26 +16,29 @@
   <div class="ruck-success">${flash.message}</div>
 </g:if>
 
-<div class="ruck-span-4 ruck-colborder">
+<div class="ruck-span-7 ruck-colborder">
   <h6>Story</h6>
   <hr/>
   <g:each var="currStory" in="${sprint.stories}" status="count">
-    <g:link controller="story" action="show" id="${currStory.id}">${currStory.description}</g:link>
-    <% // are there any tasks?    %>
-    <g:if test="${currStory.tasks.isEmpty()}">click on the story to add tasks</g:if>
-    <br />
+    <ul class="storyTitle">
+      <li class="storyTitle" id="${currStory.id}">
+        <g:link controller="story" action="show" id="${currStory.id}">${currStory.description}</g:link>
+        <% // are there any tasks?       %>
+        <g:if test="${currStory.tasks.isEmpty()}">click on the story to add tasks</g:if>
+      </li>
+    </ul>
   </g:each>
 </div>
 
-<div class="ruck-span-4 ruck-colborder">
+<div class="ruck-span-4">
   <h6>Not Started</h6>
   <hr/>
   <g:each var="currStory" in="${sprint.stories}" status="count">
     <g:if test="${!currStory.tasks.isEmpty()}">
-      <ul class="story" id="notStartedGroup_${currStory.id}" class="dragGroup">
+      <ul class="task" id="notStartedGroup_${currStory.id}" class="dragGroup">
         <g:each var="currTask" in="${currStory.tasks}">
           <g:if test="${currTask.status == 'not started'}">
-            <li class="story handle" id="task_${currTask.id}" class="dragItem">${currTask}</li>
+            <li class="task handle" id="task_${currTask.id}" class="dragItem">${currTask}</li>
           </g:if>
         </g:each>
       </ul>
@@ -44,15 +46,15 @@
   </g:each>
 </div>
 
-<div class="ruck-span-4 ruck-colborder">
+<div class="ruck-span-4">
   <h6>Working</h6>
   <hr/>
   <g:each var="currStory" in="${sprint.stories}" status="count">
     <g:if test="${!currStory.tasks.isEmpty()}">
-      <ul class="story handle" id="workingGroup_${currStory.id}" class="dragGroup">
+      <ul class="task" id="workingGroup_${currStory.id}" class="dragGroup">
         <g:each var="currTask" in="${currStory.tasks}">
           <g:if test="${currTask.status == 'working'}">
-            <li class="story" id="task_${currTask.id}" class="dragItem">${currTask}</li>
+            <li class="task handle" id="task_${currTask.id}" class="dragItem">${currTask}</li>
           </g:if>
         </g:each>
       </ul>
@@ -60,15 +62,15 @@
   </g:each>
 </div>
 
-<div class="ruck-span-4 ruck-colborder">
+<div class="ruck-span-4">
   <h6>Verification</h6>
   <hr/>
   <g:each var="currStory" in="${sprint.stories}" status="count">
     <g:if test="${!currStory.tasks.isEmpty()}">
-      <ul class="story" id="verificationGroup_${currStory.id}" class="dragGroup">
+      <ul class="task" id="verificationGroup_${currStory.id}" class="dragGroup">
         <g:each var="currTask" in="${currStory.tasks}">
           <g:if test="${currTask.status == 'verification'}">
-            <li class="story handle" id="task_${currTask.id}" class="dragItem">${currTask}</li>
+            <li class="task handle" id="task_${currTask.id}" class="dragItem">${currTask}</li>
           </g:if>
         </g:each>
       </ul>
@@ -81,10 +83,10 @@
   <hr/>
   <g:each var="currStory" in="${sprint.stories}" status="count">
     <g:if test="${!currStory.tasks.isEmpty()}">
-      <ul class="story" id="doneGroup_${currStory.id}" class="dragGroup">
+      <ul class="task" id="doneGroup_${currStory.id}" class="dragGroup">
         <g:each var="currTask" in="${currStory.tasks}">
           <g:if test="${currTask.status == 'done'}">
-            <li class="story handle" id="task_${currTask.id}" class="dragItem">${currTask}</li>
+            <li class="task handle" id="task_${currTask.id}" class="dragItem">${currTask}</li>
           </g:if>
         </g:each>
       </ul>
@@ -101,6 +103,7 @@
 
 <script type="text/javascript">
   var postUrl = '/ruck/sprint/moveTask/${sprint.id}'; // this is the ID of the story
+  var taskboard;
 
   <g:each var="currStory" in="${sprint.stories}">
   // update methods for ${currStory}
@@ -140,7 +143,7 @@
     new Ajax.Request(postUrl, options);
   }
 
-  function updateDoneGroup_${currStory.id}() {
+  updateDoneGroup_${currStory.id} = function() {
     var params = Sortable.serialize('doneGroup_${currStory.id}');
     params += '&newStatus=done'
 
@@ -155,6 +158,8 @@
   </g:each>
 
   Event.observe(window, 'load', function() {
+    var columns = $w('notStartedGroup workingGroup verificationGroup doneGroup');
+    taskboard = new TaskBoard(columns);
   <g:each var="currStory" in="${sprint.stories}">
   <g:if test="${!currStory.tasks.isEmpty()}"><!-- there are no stories -->
     var groups = [ 'notStartedGroup_${currStory.id}','workingGroup_${currStory.id}','verificationGroup_${currStory.id}', 'doneGroup_${currStory.id}']
