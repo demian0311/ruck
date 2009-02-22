@@ -11,7 +11,7 @@
 <hr class="ruck-space"/>
 
 <g:if test="${flash.message}">
-  <div class="ruck-notice">${flash.message}</div>
+  <div class="ruck-success">${flash.message}</div>
 </g:if>
 
 <g:if test="${!backlog.stories.isEmpty()}">
@@ -35,7 +35,7 @@
 <g:else>
   <div id="backlogGroup" class="ruck-span-24">
     <fieldset>
-      <h6>This is where you add new stories to your backlog.</h6>
+      <h6>This is where you add new stories to your backlog</h6>
       <hr/>
       <p>The <strong>first field (in parens) is the story points</strong>.
       Story points are unitless but they convey the relative
@@ -54,6 +54,7 @@
     </fieldset>
   </div>
 </g:else>
+
 <hr class="ruck-space"/>
 <g:form action="save" method="post">
   <fieldset>

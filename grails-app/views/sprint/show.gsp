@@ -202,7 +202,7 @@
         updateDoneGroup_${currStory.id}();
       }
     });
-  </g:if><!-- there are no stories -->
+  </g:if>
   </g:each>
   });
 </script>

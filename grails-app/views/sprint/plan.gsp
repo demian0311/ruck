@@ -1,95 +1,93 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta name="layout" content="main" />
-<title>sprint plan</title>
+  <meta name="layout" content="main"/>
+  <title>Sprint Plan</title>
 </head>
 <body>
 
-<div id="banner">
-<a href="/ruck">ruck</a> | 
-<g:link controller="project" action="show" id="${sprint.project.id}">${sprint.project.name}</g:link> | 
-<g:link controller="sprint" action="show" id="${sprint.id}">${sprint}</g:link> | 
-<a href="">plan</a></div>
+<div id="navigation"><div class="ruck-nav-left"/><div class="ruck-nav-right">
+  <a href="/ruck">ruck</a> | <g:link controller="project" action="show" id="${sprint.project.id}">${sprint.project.name}</g:link> |
+  <g:link controller="sprint" action="show" id="${sprint.id}">${sprint}</g:link> | <a href="">plan</a>
+</div></div>
+<hr class="ruck-space"/>
 
-<div id="content">
-
+<div class="ruck-span-12">
+  <fieldset>
+    <legend>${backlog}</legend>
+    <ul id="stories" class="story">
+      <g:each var="currStory" in="${backlog.stories}">
+        <li id="story_${currStory.id}" class="story handle">${currStory}</li>
+      </g:each>
+    </ul>
+  </fieldset>
+</div>
+<div class="ruck-span-12 ruck-last">
+  <fieldset>
+    <legend>${sprint}</legend>
+    <ul id="sprintGroup" class="story">
+      <g:each var="currStory" in="${sprint.stories}">
+        <li id="story_${currStory.id}" class="story handle">${currStory}</li>
+      </g:each>
+    </ul>
+  </fieldset>
+</div>
 
 <script type="text/javascript">
-function updateBacklogPlan()
-{
-   var options = 
-   {
+  var groups = $w('stories sprintGroup');
+  updateBacklogPlan = function() {
+    var options = {
       method : 'post',
-      parameters : Sortable.serialize('backlogGroup')
-   };
-   new Ajax.Request('/ruck/backlog/order/${backlog.id}', options);
-}
+      parameters : Sortable.serialize('stories')
+    };
+    new Ajax.Request('/ruck/backlog/order/${backlog.id}', options);
+  },
 
-function updateSprintPlan()
-{
-   var options = 
-   {
+  updateSprintPlan = function() {
+    var options = {
       method : 'post',
       parameters : Sortable.serialize('sprintGroup')
-   };
-   new Ajax.Request('/ruck/sprint/order/${sprint.id}', options);
-}
+    };
+    new Ajax.Request('/ruck/sprint/order/${sprint.id}', options);
+  },
 
-window.onload = function()
-{
-   groups = [ 'backlogGroup','sprintGroup' ]
-   Sortable.create
-   (
-      'backlogGroup', // the div id we're going to sort
-      {
-         ghosting:'true', // keep original in place and show a ghost
-         dropOnEmpty: true, 
-         containment: groups,
-         constraint: false,
-         onUpdate:updateBacklogPlan
-      }
-   );
+  adjustHeight = function() {
+    var overflowHeight = 15;
+    var preferredHeight = $('stories').getHeight() + overflowHeight;
+    if($('sprintGroup').getHeight() > preferredHeight)
+      preferredHeight = $('sprintGroup').getHeight() + overflowHeight;
+    $('stories').up().setStyle({height: preferredHeight + 'px'});
+    $('sprintGroup').up().setStyle({height: preferredHeight + 'px'});
+    if($('stories').childElements().size() < 1)
+      $('stories').setStyle({height: (preferredHeight - overflowHeight) + "px"});
+    if($('sprintGroup').childElements().size() < 1)
+      $('sprintGroup').setStyle({height: (preferredHeight - overflowHeight) + "px"});
+  },
 
-   Sortable.create
-   (
-      'sprintGroup', // the div id we're going to sort
-      {
-         ghosting:'true', // keep original in place and show a ghost
-         dropOnEmpty: true, 
-         containment: groups,
-         constraint: false,
-         onUpdate:updateSprintPlan
+  document.observe("dom:loaded", function() {
+    adjustHeight();
+    Sortable.create('stories', {
+      ghosting:'true',
+      dropOnEmpty: true,
+      containment: groups,
+      constraint: false,
+      onUpdate: function() {
+        updateBacklogPlan();
+        adjustHeight();
       }
-   );
-}
+    });
+
+    Sortable.create('sprintGroup', {
+      ghosting:'true',
+      dropOnEmpty: true,
+      containment: groups,
+      constraint: false,
+      onUpdate: function() {
+        updateSprintPlan();
+        adjustHeight();
+      }
+    });
+  });
 </script>
 
-<table><tr><td valign='top'>
-<div align="center">${backlog}</div>
-<ul>
-   <div id="backlogGroup" class="group">
-   <g:each var="currStory" in="${backlog.stories}">
-      <li id="story_${currStory.id}">${currStory}</li>
-   </g:each>
-   </div>
-</ul>
-</td><td valign='top'>
-
-<div align="center">${sprint}</div>
-<ul>
-   <div id="sprintGroup" class="group">
-   <g:each var="currStory" in="${sprint.stories}">
-      <li id="story_${currStory.id}">${currStory}</li>
-   </g:each>
-   </div>
-</ul>
-
-</td></tr></table>
-
-<br/><br/><hr/>
-<g:link controller="sprint" action="show" id="${sprint.id}">go to the sprint</g:link>
-
-</div>
 </body>
 </html>

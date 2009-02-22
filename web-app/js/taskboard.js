@@ -29,3 +29,8 @@ var TaskBoard = Class.create({
     }
 });
 
+// :TODO: Place AJAX communication / sortables in this calss
+// :TODO: Re-order <li> items by story points when moved into
+// :TODO: a new column
+// :TODO: Add destination highlighting 
+

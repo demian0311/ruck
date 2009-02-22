@@ -58,7 +58,6 @@ class SprintController
     render "persisted: " + params
   }
 
-
   def moveTask = {
     println '*****************************'
     println '* MOVE TASK                 *'
