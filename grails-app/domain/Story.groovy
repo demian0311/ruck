@@ -6,20 +6,17 @@ class Story implements Comparable
    String description
    Integer points
 
-   static constraints = 
-   {
+   static constraints =  {
       points(nullable:true)
       description(blank:false, unique:'sprint')
       ordinal()
    }
 
-   String toString() 
-   { 
+   String toString() {
       return "(" + points + ") " + description
    }
 
-   int compareTo(obj) 
-   {
+   int compareTo(obj) {
       ordinal.compareTo(obj.ordinal)
    }
 }
