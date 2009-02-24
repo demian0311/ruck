@@ -20,10 +20,8 @@
 <hr />
 
 <div class="ruck-span-11 ruck-colborder">
-  <h3>Stories</h3>
   <fieldset>
-    <h6>(${totalStoryPoints}) <g:link controller="backlog" id="${project.id}">backlog</g:link></h6>
-    <hr />
+   <legend><g:link controller="backlog" id="${project.id}">backlog</g:link> has ${totalStoryPoints} points</legend>
     <ul>
       <g:each var="currStory" in="${topStories}">
         <li>${currStory}</li>
@@ -36,8 +34,8 @@
 </div>
 
 <div class="ruck-span-12 ruck-last">
-  <h3>Sprints</h3>
   <fieldset>
+      <legend>sprints</legend>
     <ul>
       <g:each var="s" in="${project.sprints}">
         <g:if test="${s.number != 0}">

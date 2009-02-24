@@ -17,17 +17,36 @@
 <g:if test="${!backlog.stories.isEmpty()}">
   <div class="ruck-span-24">
     <fieldset>
-      <legend>Existing Stories</legend>
+      <legend>backlog has ${totalStoryPoints} points</legend>
       <ul class="story" id="stories">
         <g:each in="${backlog.stories}" status="ii" var="storyInstance">
           <li class="story" id="story_${storyInstance.id}" onmouseout="$('tool_${storyInstance.id}').hide();" onmouseover="$('tool_${storyInstance.id}').show();">
-            (<span id="story_points_${storyInstance.id}">${storyInstance.points}</span>) <span id="story_description_${storyInstance.id}">${storyInstance.description}</span>
+            (<span id="story_points_${storyInstance.id}">${storyInstance.points}</span>) 
+            <span id="story_description_${storyInstance.id}">${storyInstance.description}</span>
+
             <span id="tool_${storyInstance.id}" style="display: none">{<span id="handle">move</span>
               <g:link controller="backlog" action="deletestory" id="${storyInstance.id}">delete</g:link>}
             </span>
           </li>
         </g:each>
       </ul>
+
+<g:form action="save" method="post">
+    <table><tr><td>
+    ( <input type="text" tabindex="1" size="1" id="points" name="points" class="ruck-text" value="${fieldValue(bean: storyInstance, field: 'points')}"/> )
+    </td><td>
+    <input type="text" tabindex="2" size="75" id="description" name="description" class="ruck-text" value="${fieldValue(bean: storyInstance, field: 'description')}"/>
+    </td><td>
+    <input type="hidden" name="ordinal" value="<%=numStories + 1%>"/>
+    <input type="hidden" name="projectId" value="<%=project.id%>"/>
+    <input type="hidden" name="sprint" value="<%=backlog.id%>"/>
+    <button type="submit" tabindex="3" class="positive"><img src="${createLinkTo(dir: 'images/icons', file: 'tick.png')}" alt="add"/>add</button>
+    </td></tr></table>
+  </fieldset>
+</g:form>
+
+
+
     </fieldset>
   </div>
 </g:if>
@@ -54,26 +73,7 @@
     </fieldset>
   </div>
 </g:else>
-
 <hr class="ruck-space"/>
-<g:form action="save" method="post">
-  <fieldset>
-    <legend>Add a New Story</legend>
-    <p>
-      <label for="points">Points</label><br/>
-      <input type="text" tabindex="1" size="1" id="points" name="points" class="ruck-text" value="${fieldValue(bean: storyInstance, field: 'points')}"/>
-    </p>
-    <p>
-      <label for="description">Description</label><br/>
-      <input type="text" tabindex="2" size="75" id="description" name="description" class="ruck-text" value="${fieldValue(bean: storyInstance, field: 'description')}"/>
-    </p>
-    <input type="hidden" name="ordinal" value="<%=numStories + 1%>"/>
-    <input type="hidden" name="projectId" value="<%=project.id%>"/>
-    <input type="hidden" name="sprint" value="<%=backlog.id%>"/>
-    <hr/>
-    <button type="submit" class="positive"><img src="${createLinkTo(dir: 'images/icons', file: 'tick.png')}" alt=""/>add</button>
-  </fieldset>
-</g:form>
 
 <% //javascript placed below main content %>
 <script type="text/javascript">
