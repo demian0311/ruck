@@ -5,12 +5,11 @@
 </head>
 <body>
 
-<div id="navigation"><div class="ruck-nav-left"/><div class="ruck-nav-right">
-  <a href="/ruck">ruck</a> |
-  <g:link controller="project" action="show" id="${sprint.project.id}">${sprint.project.name}</g:link> |
+<div id="navigation">
+  <a href="/ruck">ruck</a> &raquo; 
+  <g:link controller="project" action="show" id="${sprint.project.id}">${sprint.project.name}</g:link> &raquo; 
   <g:link controller="sprint" action="show" id="${sprint.id}">${sprint}</g:link>
-</div></div>
-<hr class="ruck-space"/>
+</div>
 
 <g:if test="${flash.message}">
   <div class="ruck-success">${flash.message}</div>

@@ -5,10 +5,11 @@
 </head>
 <body>
 
-<div id="navigation"><div class="ruck-nav-left"/><div class="ruck-nav-right">
-  <a href="/ruck">ruck</a> | <g:link controller="project" action="show" id="${project.id}">${project.name}</g:link> | backlog(${totalStoryPoints})
-</div></div>
-<hr class="ruck-space"/>
+<div id="navigation">
+  <a href="/ruck">ruck</a> &raquo; 
+  <g:link controller="project" action="show" id="${project.id}">${project.name}</g:link> &raquo; 
+  backlog
+</div>
 
 <g:if test="${flash.message}">
   <div class="ruck-success">${flash.message}</div>

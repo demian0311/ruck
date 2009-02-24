@@ -5,10 +5,9 @@
 </head>
 <body>
 
-<div id="navigation"><div class="ruck-nav-left"/><div class="ruck-nav-right">
-  <a href="/ruck">ruck</a> | pick project
-</div></div>
-<hr class="ruck-space"/>
+<div id="navigation">
+  <a href="/ruck">ruck</a> &raquo; pick project
+</div>
 
 <g:if test="${!projectInstanceList.isEmpty()}">
   <div class="ruck-span-12">

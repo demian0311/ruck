@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>ruck | <g:layoutTitle/></title>
+  <title>ruck &raquo; <g:layoutTitle/></title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'screen.css')}" type="text/css" media="screen, projection">
   <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'navigation.css')}" type="text/css" media="screen, projection">
@@ -16,6 +16,7 @@
   <g:javascript library="taskboard"/>
 </head>
 <body>
+
 <div class="ruck-container">
   <g:layoutBody/>
   <div id="footer">${new Date()} | <a href="http://github.com/demian0311/ruck/tree/master">ruck</a></div>
