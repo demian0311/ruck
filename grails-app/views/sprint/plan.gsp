@@ -23,7 +23,7 @@
 </div>
 <div class="ruck-span-12 ruck-last">
   <fieldset>
-    <legend>${sprint}</legend>
+    <legend>${sprint} has <span id="total">0</span> points</legend>
     <ul id="sprintGroup" class="story">
       <g:each var="currStory" in="${sprint.stories}">
         <li id="story_${currStory.id}" class="story handle">${currStory}</li>
@@ -31,8 +31,6 @@
     </ul>
   </fieldset>
 </div>
-
-<h1>Total:<span id="total">0</span></h1>
 
 <script type="text/javascript">
   var groups = $w('stories sprintGroup');
