@@ -15,7 +15,7 @@
 </g:if>
 
 <g:if test="${!backlog.stories.isEmpty()}">
-  <div id="backlogGroup">
+  <div class="ruck-span-24">
     <fieldset>
       <legend>Existing Stories</legend>
       <ul class="story" id="stories">
@@ -33,7 +33,7 @@
 </g:if>
 
 <g:else>
-  <div id="backlogGroup" class="ruck-span-24">
+  <div id="stories" class="ruck-span-24">
     <fieldset>
       <h6>This is where you add new stories to your backlog</h6>
       <hr/>

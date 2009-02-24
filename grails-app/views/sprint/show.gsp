@@ -41,13 +41,13 @@
 
 %{-- each of these blocks is a story's row --}%
 <g:each var="currStory" in="${sprint.stories}" status="count">
-  <div class="ruck-span-24">
+  <div class="ruck-span-24 ${(count % 2)==0 ? '' : 'oddRow'}">
     <div class="ruck-span-7 ruck-colborder">
       <ul class="storyTitle">
         <li class="storyTitle" id="${currStory.id}"><g:link controller="story" action="show" id="${currStory.id}">${currStory.description}</g:link>
         %{-- are there any tasks? --}%
         <g:if test="${currStory.tasks.isEmpty()}">
-          click on the story to add tasks
+          <br /><em>click on the story to add tasks</em>
         </g:if>
         </li>
       </ul>
