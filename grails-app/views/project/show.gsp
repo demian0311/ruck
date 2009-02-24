@@ -7,8 +7,7 @@
 
 <div id="navigation">
   <a href="/ruck">ruck</a> &raquo; 
-  <g:link controller="project" action="show" id="${project.id}">${project.name}</g:link> &raquo; 
-  summary
+  <g:link controller="project" action="show" id="${project.id}">${project.name}</g:link>
 </div>
 
 <g:if test="${flash.message}">
