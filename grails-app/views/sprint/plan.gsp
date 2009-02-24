@@ -32,6 +32,8 @@
   </fieldset>
 </div>
 
+<h1>Total:<span id="total">0</span></h1>
+
 <script type="text/javascript">
   var groups = $w('stories sprintGroup');
   updateBacklogPlan = function() {
@@ -61,6 +63,13 @@
       $('stories').setStyle({height: (preferredHeight - overflowHeight) + "px"});
     if($('sprintGroup').childElements().size() < 1)
       $('sprintGroup').setStyle({height: (preferredHeight - overflowHeight) + "px"});
+    var totalPoints = 0;
+    $('sprintGroup').childElements().each(function(e){
+       var leftSide = e.innerHTML.split(")");
+       var number = leftSide[0].split("(");
+       totalPoints += (number[1] * 1);
+    });
+    $('total').innerHTML = totalPoints;
   },
 
   document.observe("dom:loaded", function() {
