@@ -16,7 +16,7 @@
   <g:javascript library="taskboard"/>
 </head>
 <body>
-<div class="ruck-container ">
+<div class="ruck-container">
   <g:layoutBody/>
   <div id="footer">${new Date()} | <a href="http://github.com/demian0311/ruck/tree/master">ruck</a></div>
 </div>
