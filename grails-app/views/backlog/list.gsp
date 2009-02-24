@@ -67,7 +67,7 @@
       <label for="description">Description</label><br/>
       <input type="text" tabindex="2" size="75" id="description" name="description" class="ruck-text" value="${fieldValue(bean: storyInstance, field: 'description')}"/>
     </p>
-    <input type="hidden" name="ordinal" value="<%=numStories%>"/>
+    <input type="hidden" name="ordinal" value="<%=numStories + 1%>"/>
     <input type="hidden" name="projectId" value="<%=project.id%>"/>
     <input type="hidden" name="sprint" value="<%=backlog.id%>"/>
     <hr/>

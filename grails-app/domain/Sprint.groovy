@@ -6,12 +6,14 @@ class Sprint implements Comparable
    String name
    String goal
    Integer number
+   //String status
 
    static constraints = 
    {
       number(unique:'project')
       name(nullable: true)
       goal(nullable: true)
+      //status(inList:["open", "done"]) 
    }
 
    /* this is for sorting things in the UI */
