@@ -8,6 +8,7 @@ class BacklogController
   Sprint backlog
   Project project
   Integer totalStoryPoints
+  Integer numStories
 
   // the delete, save and update actions only accept POST requests
   static def allowedMethods = [delete: 'POST', save: 'POST', update: 'POST']
@@ -73,6 +74,8 @@ class BacklogController
       for (currStory in backlog.stories) {
         totalStoryPoints += currStory.points
       }
+
+      numStories = backlog.stories.size()
     }
     else {
       flash.message = "select a project to see backlog"
@@ -92,6 +95,8 @@ class BacklogController
     def storyInstance = new Story(params)
     storyInstance.sprint = backlog
     storyInstance.save(flush: true)
+
+    println 'story after saving: ' + storyInstance
 
     redirect(controller: 'backlog', action: 'list', id: project.id)
   }
