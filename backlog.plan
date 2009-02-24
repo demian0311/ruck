@@ -19,6 +19,9 @@ x show the first X stories in the backlog and then "...and (total - 5) more
    x i want to delete tasks in the sprint
    @ i want to edit stories in the sprint
 
+@authentication
+- possible authentication solution: http://docs.codehaus.org/display/GRAILS/Authentication+Plugin
+
 @ sprint status
    @ the status of a sprint should be tracked (open, closed)
    @ if a sprint is closed i shouldn't be able to adjust the task board
