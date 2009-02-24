@@ -29,6 +29,9 @@
         <li>${currStory}</li>
       </g:each>
     </ul>
+    <g:if test="${moreStories > 0}">
+      <g:link controller="backlog" id="${project.id}">...and ${moreStories} more</g:link>
+    </g:if>
   </fieldset>
 </div>
 
