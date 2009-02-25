@@ -15,7 +15,6 @@
   <div class="ruck-success">${flash.message}</div>
 </g:if>
 
-<g:if test="${!backlog.stories.isEmpty()}">
   <div class="ruck-span-24">
     <fieldset>
       <legend>backlog has ${totalStoryPoints} points</legend>
@@ -33,30 +32,17 @@
       </ul>
 
 <g:form action="save" method="post">
-    <table><tr><td>
-    ( <input type="text" tabindex="1" size="1" id="points" name="points" class="ruck-text" value="${fieldValue(bean: storyInstance, field: 'points')}"/> )
-    </td><td>
-    <input type="text" tabindex="2" size="75" id="description" name="description" class="ruck-text" value="${fieldValue(bean: storyInstance, field: 'description')}"/>
-    </td><td>
+    <input class="ruck-text" type="text" tabindex="1" size="1" id="points" name="points" class="ruck-text"/> 
+    <input type="text" tabindex="2" size="75" id="description" name="description" class="ruck-text"/>
     <input type="hidden" name="ordinal" value="<%=numStories + 1%>"/>
     <input type="hidden" name="projectId" value="<%=project.id%>"/>
     <input type="hidden" name="sprint" value="<%=backlog.id%>"/>
     <button type="submit" tabindex="3" class="positive"><img src="${createLinkTo(dir: 'images/icons', file: 'tick.png')}" alt="add"/>add</button>
-    </td></tr></table>
-  </fieldset>
 </g:form>
 
 
-
-    </fieldset>
-  </div>
-</g:if>
-
-<g:else>
-  <div id="stories" class="ruck-span-24">
-    <fieldset>
+<g:if test="${backlog.stories.isEmpty()}">
       <h6>This is where you add new stories to your backlog</h6>
-      <hr/>
       <p>The <strong>first field (in parens) is the story points</strong>.
       Story points are unitless but they convey the relative
       complexity of a story.  Points come from developers,
@@ -71,10 +57,10 @@
       <blockquote>
         <strong>(3) as a user I want to log in so I can access the system</strong>
       </blockquote>
+</g:if>
+
     </fieldset>
   </div>
-</g:else>
-<hr class="ruck-space"/>
 
 <% //javascript placed below main content %>
 <script type="text/javascript">

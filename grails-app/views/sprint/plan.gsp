@@ -9,7 +9,7 @@
   <a href="/ruck">ruck</a> &raquo; 
   <g:link controller="project" action="show" id="${sprint.project.id}">${sprint.project.name}</g:link> &raquo; 
   <g:link controller="sprint" action="show" id="${sprint.id}">${sprint}</g:link> &raquo; 
-  <a href="">plan</a>
+  plan
 </div>
 
 <div class="ruck-span-12">
