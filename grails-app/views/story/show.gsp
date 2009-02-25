@@ -16,7 +16,7 @@
   <div class="ruck-success">${flash.message}</div>
 </g:if>
 <h1><i>
-  ${storyInstance.description}
+   <span id="storydescription">${storyInstance.description}</span>
 </i></h1>
 
   <div class="ruck-span-24">
@@ -47,5 +47,19 @@
 
     </fieldset>
   </div>
+
+<% //javascript placed below main content %>
+<script type="text/javascript">
+Event.observe(window, 'load', function() 
+{
+   new Ajax.InPlaceEditor('storydescription','/ruck/backlog/changestorydescription/${storyInstance.id}', 
+   {
+      cols: 75,
+      okControl: true,
+      cancelControl: true
+   }); 
+
+}); 
+</script>
 
 </body></html>
