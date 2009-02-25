@@ -48,7 +48,14 @@
   <div class="ruck-span-24 ${(count % 2)==0 ? 'evenRow' : 'oddRow'}">
     <div class="ruck-span-7 ruck-colborder">
       <ul class="storyTitle">
-        <li class="storyTitle" id="${currStory.id}"><g:link controller="story" action="show" id="${currStory.id}">${currStory.description}</g:link>
+        <li class="storyTitle" id="${currStory.id}">
+            <g:if test="${!sprint.closed}">
+               <g:link controller="story" action="show" id="${currStory.id}">${currStory.description}</g:link>
+            </g:if>
+            <g:if test="${sprint.closed}">${currStory.description}</g:if>
+
+
+
         %{-- are there any tasks? --}%
         <g:if test="${currStory.tasks.isEmpty()}">
           <div class="ruck-notice">click on the story to add tasks</div>
@@ -107,12 +114,14 @@
   </div>
 </g:each>
 
-<br/> <br/>
-<hr/>
-<g:link controller="sprint" action="plan" id="${sprint.id}">add stories from backlog</g:link>
-<br/>
-<g:link controller="sprint" action="close" id="${sprint.id}">close this sprint</g:link>
+<br/><br/>
+<g:if test="${!sprint.closed}">
+   <g:link controller="sprint" action="plan" id="${sprint.id}">add stories from backlog</g:link>
+   <br/>
+   <g:link controller="sprint" action="close" id="${sprint.id}">close this sprint</g:link>
+</g:if>
 
+<g:if test="${!sprint.closed}">
 
 <script type="text/javascript">
   var postUrl = '/ruck/sprint/moveTask/${sprint.id}'; // this is the ID of the story
@@ -210,5 +219,7 @@
   </g:each>
   });
 </script>
+</g:if>
+
 </body>
 </html>
