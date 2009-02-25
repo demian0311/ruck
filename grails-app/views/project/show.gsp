@@ -14,12 +14,10 @@
   <div class="ruck-success">${flash.message}</div>
 </g:if>
 
-<hr />
 <h3><em>Sprints are ${fieldValue(bean: project, field: 'sprintLength')} week(s) long
   starting on ${fieldValue(bean: project, field: 'startDate')}</em></h3>
-<hr />
 
-<div class="ruck-span-11 ruck-colborder">
+<div class="ruck-span-11">
   <fieldset>
    <legend><g:link controller="backlog" id="${project.id}">backlog</g:link> has ${totalStoryPoints} points</legend>
     <ul>
@@ -33,7 +31,7 @@
   </fieldset>
 </div>
 
-<div class="ruck-span-12 ruck-last">
+<div class="ruck-span-12">
   <fieldset>
       <legend>sprints</legend>
     <ul>

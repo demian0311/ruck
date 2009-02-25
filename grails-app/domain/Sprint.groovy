@@ -6,6 +6,7 @@ class Sprint implements Comparable
    String name
    String goal
    Integer number
+   Boolean closed = false
    //String status
 
    static constraints = 
@@ -25,11 +26,23 @@ class Sprint implements Comparable
 
    String toString() 
    { 
+      def outStr = ""
+
       if(name)
       {
-         return name + ' #' + number
+         outStr += name + ' #' + number
       }
-      return 'sprint #' + number
+      else
+      {
+         outStr += 'sprint #' + number
+      }
+
+      if(closed)
+      {
+         outStr += " (closed)"
+      }
+
+      return outStr
    }
 
    int compareTo(obj)

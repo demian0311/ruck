@@ -105,6 +105,9 @@ class SprintController
     println '*****************************'
     println 'params: ' + params
     sprint = Sprint.get(params.id)
+    sprint.closed = true
+    sprint.save(flush: true)
+
     project = sprint.project
 
     println 'sprint: ' + sprint
