@@ -13,28 +13,34 @@ x add sample data
 x when I close a sprint I want all the un-finished stories put into the next sprint
 x sort the sprints in reverse order
 x show the first X stories in the backlog and then "...and (total - 5) more
-@ as i'm moving stories from the backlog into a sprint i want the total number of points computed
+x as i'm moving stories from the backlog into a sprint i want the total number of points computed
 
-/ inplace editing
+x inplace editing
    x i want to delete tasks in the sprint
-   @ i want to edit stories in the sprint
+   x i want to edit stories in the sprint
+
+@ need to style the input stuff created by scriptaculous
 
 @authentication
-- possible authentication solution: http://docs.codehaus.org/display/GRAILS/Authentication+Plugin
+   @ i want to log into the system
+   @ i want a scrum-master role
+   @ i want a team member role
+   @ i want a chicken role
+   - possible authentication solution: http://docs.codehaus.org/display/GRAILS/Authentication+Plugin
 
-@ sprint status
-   @ the status of a sprint should be tracked (open, closed)
-   @ if a sprint is closed i shouldn't be able to adjust the task board
-   @ if a sprint is closed i shouldn't be able to close it
-   @ if a sprint is closed i shouldn't be able to add stories fromt he backlog 
-   @ if a sprint is closed it should say so on the project screen 
+x sprint status
+   x the status of a sprint should be tracked (open, closed)
+   x if a sprint is closed i shouldn't be able to adjust the task board
+   x if a sprint is closed i shouldn't be able to close it
+   x if a sprint is closed i shouldn't be able to add stories fromt he backlog 
+   x if a sprint is closed it should say so on the project screen 
 
 @ reporting
    @ the beginning story points of a sprint should be tracked
    @ the actual story points of a sprint should be tracked
    @ i want historical graphs of story completion for each sprint
 
-@ I want an indication of what the current sprint is
+x I want an indication of what the current sprint is
 @ story points should be restricted to valid values
 @ i want to edit project data
 
@@ -60,7 +66,3 @@ x show the first X stories in the backlog and then "...and (total - 5) more
 @ apply fuzzy logic to duplicate story creation
 @ sprints should close based on time
 
-@ i want to log into the system
-@ i want a scrum-master role
-@ i want a team member role
-@ i want a chicken role
