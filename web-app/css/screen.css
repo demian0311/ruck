@@ -65,7 +65,7 @@ caption {background:#eee;}
 .ruck-hide {display:none;}
 .ruck-quiet {color:#666;}
 .ruck-loud {color:#000;}
-.ruck-highlight {background:#ff0;}
+.ruck-highlight {background:#ff0; color: red;}
 .ruck-added {background:#060;color:#fff;}
 .ruck-removed {background:#900;color:#fff;}
 .ruck-first {margin-left:0;padding-left:0;}

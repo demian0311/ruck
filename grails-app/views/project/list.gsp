@@ -1,12 +1,12 @@
 <html>
 <head>
   <meta name="layout" content="main"/>
-  <title>pick project</title>
+  <title>ruck</title>
 </head>
 <body>
 
 <div id="navigation">
-  <a href="/ruck">ruck</a> &raquo; pick project
+  <a href="/ruck">ruck</a>
 </div>
 
 <g:if test="${!projectInstanceList.isEmpty()}">

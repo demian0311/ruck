@@ -8,7 +8,7 @@
 <div id="navigation">
   <a href="/ruck">ruck</a> &raquo; 
   <g:link controller="project" action="show" id="${sprint.project.id}">${sprint.project.name}</g:link> &raquo; 
-  <g:link controller="sprint" action="show" id="${sprint.id}">${sprint}</g:link>
+  ${sprint}
 </div>
 
 <g:if test="${flash.message}">
@@ -17,36 +17,41 @@
 
 <div class="ruck-span-24">
   <div class="ruck-span-7 ruck-colborder">
-    <h6>Story</h6>
-    <hr/>
+   <h3>
+    Story
+    </h3>
   </div>
   <div class="ruck-span-4">
-    <h6>Not Started</h6>
-    <hr/>
+   <h3>
+    Not Started
+    </h3>
   </div>
   <div class="ruck-span-4">
-    <h6>Working</h6>
-    <hr/>
+   <h3>
+    Working
+    </h3>
   </div>
   <div class="ruck-span-4">
-    <h6>Verification</h6>
-    <hr/>
+   <h3>
+    Verification
+    </h3>
   </div>
   <div class="ruck-span-4 ruck-last">
-    <h6>Done</h6>
-    <hr/>
+   <h3>
+    Done
+    </h3>
   </div>
 </div>
 
 %{-- each of these blocks is a story's row --}%
 <g:each var="currStory" in="${sprint.stories}" status="count">
-  <div class="ruck-span-24 ${(count % 2)==0 ? '' : 'oddRow'}">
+  <div class="ruck-span-24 ${(count % 2)==0 ? 'evenRow' : 'oddRow'}">
     <div class="ruck-span-7 ruck-colborder">
       <ul class="storyTitle">
         <li class="storyTitle" id="${currStory.id}"><g:link controller="story" action="show" id="${currStory.id}">${currStory.description}</g:link>
         %{-- are there any tasks? --}%
         <g:if test="${currStory.tasks.isEmpty()}">
-          <br /><em>click on the story to add tasks</em>
+          <div class="ruck-notice">click on the story to add tasks</div>
         </g:if>
         </li>
       </ul>
