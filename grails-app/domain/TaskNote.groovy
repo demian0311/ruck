@@ -1,4 +1,5 @@
-class TaskNote {
+class TaskNote 
+{
    static belongsTo = [task:Task]
    String content
    Date createDate
