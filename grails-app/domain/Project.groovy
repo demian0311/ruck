@@ -1,4 +1,5 @@
 class Project {
+   SortedSet sprints
    static hasMany = [sprints:Sprint]
    String name
    String description

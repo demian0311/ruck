@@ -1,7 +1,7 @@
 <html>
 <head>
   <meta name="layout" content="main"/>
-  <title>show sprint</title>
+  <title>${sprint.project.name} &raquo; ${sprint}</title>
 </head>
 <body>
 

@@ -1,7 +1,7 @@
 <html>
 <head>
   <meta name="layout" content="main"/>
-  <title>${project.name} | backlog</title>
+  <title>${project.name} &raquo; backlog</title>
 </head>
 <body>
 

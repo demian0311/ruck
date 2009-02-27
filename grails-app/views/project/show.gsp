@@ -1,7 +1,7 @@
 <html>
 <head>
   <meta name="layout" content="main"/>
-  <title>${project.name} | summary</title>
+  <title>${project.name}</title>
 </head>
 <body>
 

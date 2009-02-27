@@ -1,5 +1,6 @@
 class Story implements Comparable
 {
+   SortedSet tasks
    static belongsTo = [sprint:Sprint]
    static hasMany = [tasks:Task]
    Integer ordinal
