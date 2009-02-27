@@ -31,10 +31,10 @@
   </fieldset>
 </div>
 
-<div class="ruck-span-12">
+<div class="ruck-span-11">
   <fieldset>
    <legend>burndown</legend>
-      <img src="${request.contextPath}/chart?cht=lc&chd=s:9gounjqGJD&chco=008000&chls=2.0,4.0,1.0&chxt=x,y&chxl=0:|1|2|3|4|1:||50|100&chs=400x200"/>
+      <img src="${request.contextPath}/chart?cht=lc&chd=s:9gounjqGJD&chco=008000&chls=2.0,4.0,1.0&chxt=x,y&chxl=0:|1|2|3|4|1:||50|350&chs=400x200"/>
   </fieldset>
 </div>
 
@@ -54,7 +54,7 @@
 </div>
 
 
-<div class="ruck-span-12">
+<div class="ruck-span-11">
   <fieldset>
       <legend>velocity</legend>
       <img src=
@@ -62,6 +62,8 @@
       <!-- all the data is 0-100, based on your top range you have to
            do the math to make it look right.  like if your top range was 33
            you need to multiply all of your values by 3 for it to match.  weird -->
+      <!-- 100 / (MAX_RANGE) = MULTIPLIER
+           DATAPOINT * MULTIPLIER= what you put in the data -->
   </fieldset>
 </div>
 <hr class="ruck-space"/>
