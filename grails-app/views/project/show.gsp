@@ -14,8 +14,10 @@
   <div class="ruck-success">${flash.message}</div>
 </g:if>
 
+<!--
 <h3><em>Sprints are ${fieldValue(bean: project, field: 'sprintLength')} week(s) long
   starting on ${fieldValue(bean: project, field: 'startDate')}</em></h3>
+  -->
 
 <div class="ruck-span-12">
   <fieldset>
@@ -24,10 +26,10 @@
       <g:each var="currStory" in="${topStories}">
         <li>${currStory}</li>
       </g:each>
-    </ul>
     <g:if test="${moreStories > 0}">
-      <g:link controller="backlog" id="${project.id}">...and ${moreStories} more</g:link>
+      <li><g:link controller="backlog" id="${project.id}">...and ${moreStories} more</g:link></li>
     </g:if>
+    </ul>
   </fieldset>
 </div>
 
