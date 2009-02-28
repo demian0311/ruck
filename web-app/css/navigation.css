@@ -4,7 +4,7 @@ div#navigation {width:950px;background: url(../images/nav-center.png) repeat-x;h
 div.ruck-nav-left {background: url(../images/nav-left.png) no-repeat left;height: 30px;}
 div.ruck-nav-right {background: url(../images/nav-right.png) no-repeat right;height: 30px;padding-left: 10px;}
 */
-div.evenRow{background:#fafafa;}
+div.evenRow{background:#f5f5f5;}
 div.oddRow{background:#ffffff;}
 #footer {float:left;width:940px;padding-left:10px;background:#E5ECF9; text-align: right; margin-top: 10px; margin-bottom: 20px;}
 ul.story {margin: 0;padding: 0;list-style-type:none;}

@@ -1,6 +1,7 @@
 class BootStrap {
 
      def init = { servletContext ->
+
          // set up a new project
          Project p = new Project()
          p.name = 'example'
@@ -15,49 +16,55 @@ class BootStrap {
          backlogSprint.goal = 'stories to here before being worked on'
          backlogSprint.number = 0 
          p.addToSprints(backlogSprint)
-
          p.save()
 
+         // create stories for the backlog 
+         (1..47).each
+         {
+            Story story = new Story()
+            story.points = it % 5 
+            story.description = 'as a user' + it + ' I want to change my contact information'
+            story.ordinal = it 
 
-         p.save()
+            backlogSprint.addToStories(story)
+         }
 
-         // add stories to the backlog
-         Story s0 = new Story()
-         s0.points = 1 
-         s0.description = 'as a user I want to change my contact information'
-         s0.ordinal = 0
-         backlogSprint.addToStories(s0)
+         (1..6).each
+         {
+            // create the first sprint
+            def sprint = new Sprint()
+            sprint.number = it 
+            if(it < 6)
+            {
+               sprint.closed = true
+            }
+            p.addToSprints(sprint)
 
-         Story s1 = new Story()
-         s1.points = 5 
-         s1.description = 'as an admin I want to assign roles to users'
-         s1.ordinal = 1
-         backlogSprint.addToStories(s1)
+            def numStories = (it % 3) + 2
 
-         Story s2 = new Story()
-         s2.points = 3 
-         s2.description = 'as an admin I want to de-activate an account'
-         s2.ordinal = 2 
-         backlogSprint.addToStories(s2)
+            (1..numStories).each
+            {
+               Story story = new Story()
+               story.points = ((it % 2) * 3) + it
+               story.description = 'as a user' + it + ' I want to log into the system'
+               story.ordinal = it 
 
-         Story s3 = new Story()
-         s3.points = 2 
-         s3.description = 'as a customer I want to request a new account'
-         s3.ordinal = 3 
-         backlogSprint.addToStories(s3)
+               sprint.addToStories(story)
 
-         Story s4 = new Story()
-         s4.points = 8 
-         s4.description = 'as a customer I want to pause my account'
-         s4.ordinal = 4 
-         backlogSprint.addToStories(s4)
+               (1..3).each
+               {
+                  Task task = new Task()
+                  task.name = 'doit'
+                  task.status = 'done'
+                  task.hoursEstimate = (it * 2)
+                  story.addToTasks(task)
+               }
 
-         Story s5 = new Story()
-         s5.points = 13 
-         s5.description = 'as billing I want to block a user out of our system'
-         s5.ordinal = 5 
-         backlogSprint.addToStories(s5)
+            }
 
+         }
+
+         /*
          // create the first sprint
          def sprint1 = new Sprint()
          sprint1.number = 1 
@@ -134,6 +141,7 @@ class BootStrap {
             t031.status = 'working'
             t031.hoursEstimate = 2 
             s03.addToTasks(t031)
+      */
      }
      def destroy = {
      }

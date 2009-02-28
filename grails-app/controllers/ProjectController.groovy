@@ -7,7 +7,7 @@ class ProjectController {
    def topStories 
    Integer totalStories
    Integer moreStories
-   private def STORIES_TO_SHOW_IN_BACKLOG = 3
+   private def STORIES_TO_SHOW_IN_BACKLOG = 10
 
     // the delete, save and update actions only accept POST requests
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST']
@@ -34,6 +34,13 @@ class ProjectController {
             {
                topStories.add(currStory)
             }
+         }
+
+         // do the math on the story points
+         println '********************************************'
+         for(currSprint in project.sprints)
+         {
+            println currSprint.number + ': ' + currSprint.getCompletedStoryPoints().toString()
          }
     }
 
