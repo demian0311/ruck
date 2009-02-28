@@ -23,6 +23,40 @@ class Sprint implements Comparable
       sort "number":"desc"
    }  
 
+/*
+   Integer getStoryPoints()
+   {
+      def storyPoints = 0
+      for (story in stories)
+      {
+         storyPoints += story.points
+      }
+      return storyPoints
+   }
+
+   void setStoryPoints(Integer pointsIn)
+   {
+      // why do i need this?
+   }
+   */
+
+   Integer getCompletedStoryPoints()
+   {
+      def completedStoryPoints = 0
+      for (story in stories)
+      {
+         if (story.getStatus() == "done")
+         {
+            completedStoryPoints += story.points
+         }
+      }
+      return completedStoryPoints
+   }
+
+   void setCompletedStoryPoints(Integer pointsIn)
+   {
+      // why do i need this? 
+   }
 
    String toString() 
    { 
