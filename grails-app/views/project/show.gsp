@@ -62,23 +62,9 @@
 <div class="ruck-span-11">
   <fieldset>
       <legend>velocity</legend>
-      <img src=
-      "${request.contextPath}/chart?cht=bvg&chs=400x200&chxt=x,y&chxl=0:|1|2|3|3|4|5|&chco=ddddee&chd=t:60,57,78,48,63&chxr=1,10,33"/>
-      <!-- all the data is 0-100, based on your top range you have to
-           do the math to make it look right.  like if your top range was 33
-           you need to multiply all of your values by 3 for it to match.  weird -->
-      <!-- 100 / (MAX_RANGE) = MULTIPLIER
-           DATAPOINT * MULTIPLIER= what you put in the data -->
+      <img src="${request.contextPath}/chart?${velocityChartUrl}"/>
   </fieldset>
 </div>
 <hr class="ruck-space"/>
-
-<h1>${request.contextPath}/chart?${velocityChartUrl}</h1>
-<img src="${request.contextPath}/chart?${velocityChartUrl}"/>
-
-
-<h1>/ruck/chart?cht=bvg&chs=400x200&chxt=x,y&chco=dddee&chxl=0:|0|1|2|3|4|5|6|7|&chxr=1,0,18&chd=t:36,96,72,36,96,72,0</h1>
-<img src="/ruck/chart?cht=bvg&chs=400x200&chxt=x,y&chco=dddee&chxl=0:|0|1|2|3|4|5|6|7|&chxr=1,0,18&chd=t:36,96,72,36,96,72,0"/>
-
 </body>
 </html>

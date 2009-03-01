@@ -40,23 +40,11 @@ class ProjectController {
             }
          }
 
-         // do the math on the story points
-         println '********************************************'
          for(currSprint in project.sprints)
          {
             println currSprint.number + ': ' + currSprint.getCompletedStoryPoints().toString()
          }
 
-         // create the url for the velocity chart
-         ////////////////////////////////////////
-         // cht=bvg&
-         // chs=400x200&
-         // chxt=x,y&
-         // chxl=0:|1|2|3|3|4|5|&
-         // chco=ddddee&
-         // chd=t:60,57,78,48,63&
-         // chxr=1,10,33
-         
          velocityChartUrl = "cht=bvg&"
          velocityChartUrl += "chs=400x200&"
          velocityChartUrl += "chxt=x,y&"
@@ -84,23 +72,26 @@ class ProjectController {
 
          velocityChartUrl += "chxr=1,0," + top + "&"
          velocityChartUrl += "chd=t:"
-         // TODO: 
-         // the problem is that we have it return sprints
-         // in reverse order, so maybe we'll do a series
-         // of prepending
+
+         def dataSet = ""
+         def sprintCount = project.sprints.size()
          project.sprints.each
          {
             def currVelocity = it.getCompletedStoryPoints()
             println "${it} - " + currVelocity 
 
             def adjustedVelocity = currVelocity * multiplier
-            velocityChartUrl += adjustedVelocity + "," 
+
+            sprintCount--
+            if(sprintCount > 0)
+            {
+               dataSet = adjustedVelocity + "," + dataSet 
+            }
          }
+         velocityChartUrl += dataSet
          def lastPosition = velocityChartUrl.size() - 2 
 
          velocityChartUrl = velocityChartUrl[0..lastPosition]
-         println '**********************************************'
-         println 'velocity chart url: ' + velocityChartUrl
     }
 
     def delete = {

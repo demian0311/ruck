@@ -29,9 +29,9 @@ x sprint status
 
 / basic reporting
    x need more complexity in domain objects to trickle up statistics
-   / create a handful of sprints for good reporting data
-   @ velocity
-      @ loop thru each closed sprint and figure out how many completed story points each
+   x create a handful of sprints for good reporting data
+   x velocity
+      x loop thru each closed sprint and figure out how many completed story points each
    @ burn-down (lame version)
       @ starting from all story points in the whole system, subtract for each sprint
 
