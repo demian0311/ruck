@@ -52,6 +52,9 @@
         </g:if>
       </g:each>
     </ul>
+
+
+
   </fieldset>
 </div>
 
@@ -69,5 +72,13 @@
   </fieldset>
 </div>
 <hr class="ruck-space"/>
+
+<h1>${request.contextPath}/chart?${velocityChartUrl}</h1>
+<img src="${request.contextPath}/chart?${velocityChartUrl}"/>
+
+
+<h1>/ruck/chart?cht=bvg&chs=400x200&chxt=x,y&chco=dddee&chxl=0:|0|1|2|3|4|5|6|7|&chxr=1,0,18&chd=t:36,96,72,36,96,72,0</h1>
+<img src="/ruck/chart?cht=bvg&chs=400x200&chxt=x,y&chco=dddee&chxl=0:|0|1|2|3|4|5|6|7|&chxr=1,0,18&chd=t:36,96,72,36,96,72,0"/>
+
 </body>
 </html>

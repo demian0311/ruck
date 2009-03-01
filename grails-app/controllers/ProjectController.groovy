@@ -1,3 +1,6 @@
+import java.math.RoundingMode
+import java.math.MathContext
+
 class ProjectController {
     
    def index = { redirect(action:list,params:params) }
@@ -8,6 +11,7 @@ class ProjectController {
    Integer totalStories
    Integer moreStories
    private def STORIES_TO_SHOW_IN_BACKLOG = 10
+   String velocityChartUrl
 
     // the delete, save and update actions only accept POST requests
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST']
@@ -42,6 +46,61 @@ class ProjectController {
          {
             println currSprint.number + ': ' + currSprint.getCompletedStoryPoints().toString()
          }
+
+         // create the url for the velocity chart
+         ////////////////////////////////////////
+         // cht=bvg&
+         // chs=400x200&
+         // chxt=x,y&
+         // chxl=0:|1|2|3|3|4|5|&
+         // chco=ddddee&
+         // chd=t:60,57,78,48,63&
+         // chxr=1,10,33
+         
+         velocityChartUrl = "cht=bvg&"
+         velocityChartUrl += "chs=400x200&"
+         velocityChartUrl += "chxt=x,y&"
+         velocityChartUrl += "chco=ddddee&"
+         velocityChartUrl += "chxl=0:|"
+         (1..(project.sprints.size() - 1)).each
+         {
+            velocityChartUrl += it + "|"
+         }
+         velocityChartUrl += "&"
+
+         // find the max velocity
+         def maxVelocity = 0
+         for(currSprint in project.sprints)
+         {
+            def currVelocity = currSprint.getCompletedStoryPoints()
+            if(currVelocity > maxVelocity)
+            {
+               maxVelocity = currVelocity
+            }
+         }
+         def top = maxVelocity + 2
+         //def multiplier = 100.divide(top, 0, RoundingMode.UP)
+         def multiplier = (100.div(top)).round(new MathContext(1))
+
+         velocityChartUrl += "chxr=1,0," + top + "&"
+         velocityChartUrl += "chd=t:"
+         // TODO: 
+         // the problem is that we have it return sprints
+         // in reverse order, so maybe we'll do a series
+         // of prepending
+         project.sprints.each
+         {
+            def currVelocity = it.getCompletedStoryPoints()
+            println "${it} - " + currVelocity 
+
+            def adjustedVelocity = currVelocity * multiplier
+            velocityChartUrl += adjustedVelocity + "," 
+         }
+         def lastPosition = velocityChartUrl.size() - 2 
+
+         velocityChartUrl = velocityChartUrl[0..lastPosition]
+         println '**********************************************'
+         println 'velocity chart url: ' + velocityChartUrl
     }
 
     def delete = {
@@ -57,7 +116,8 @@ class ProjectController {
         }
     }
 
-    def edit = {
+    def edit = 
+    {
         def projectInstance = Project.get( params.id )
 
         if(!projectInstance) {
