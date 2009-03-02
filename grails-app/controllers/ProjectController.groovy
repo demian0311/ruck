@@ -41,14 +41,21 @@ class ProjectController {
             }
          }
 
+         //////////////////////////////////////////////////////////
+         //////////////////////////////////////////////////////////
+         // burndown chart url
+         //////////////////////////////////////////////////////////
+         //////////////////////////////////////////////////////////
+         // make dots
+
          // create the url for the burndown chart
          burndownChartUrl = "cht=lc&"
          burndownChartUrl += "chxt=x,y&"
-         burndownChartUrl += "chls=2.0,4.0,1.0&"
+         burndownChartUrl += "chls=4,1,0&"
          burndownChartUrl += "chs=400x200&"
          burndownChartUrl += "chco=ddddee&"
          // chxl=0:|1|2|3|4|1:||50|350 
-
+         
          // TODO: i must need to do the same math on the burndown that i 
          // had to do for the velocity chart
 
@@ -57,13 +64,12 @@ class ProjectController {
          def labels = "chxl=0:|"
          (0..(project.sprints.size() - 2)).each
          {
-            labels += ++currSprintNumber + "|"
+            labels += currSprintNumber++ + "|"
          }
          burndownChartUrl += labels + "&"
 
          // do data
          // chd=s:9gounjqGJD&
-         burndownChartUrl += "chd=t:"
 
          // figure out total story points in the entire project
          def totalStoryPoints = 0
@@ -74,21 +80,53 @@ class ProjectController {
             totalStoryPoints += currSprint.getStoryPoints()
          }
          println "total story points: ${totalStoryPoints}"
+         
+         // velocityChartUrl += "chxr=1,0," + top + "&"
+         def burndownTop = totalStoryPoints + 10 
+         burndownChartUrl += "chxr=1,0," + burndownTop + "&" 
+         def burndownMultiplier = (100.div(burndownTop)).round(new MathContext(1))
 
          // now create data points by decrementing the total points
-         def dataSet = "${totalStoryPoints}"
+         def dataSet = "${totalStoryPoints * burndownMultiplier}"
          def currPoints = totalStoryPoints
+
+         // got to make sure this doesn't include the backlog and
+         // the current sprint that has points in it but the points
+         // are not done
+         def firstSprint = true
          for(currSprint in project.sprints)
          {
-            println "currSprint.getStoryPoints(): ${currSprint.getStoryPoints()}"
-            currPoints = currPoints - currSprint.getStoryPoints()
-            dataSet = dataSet + "," + currPoints
+            if(firstSprint)
+            {
+               firstSprint = false
+               // this is stupid
+            }
+            else
+            {
+               currPoints = currPoints - currSprint.getStoryPoints()
+               def adjustedPoints = currPoints * burndownMultiplier 
+               println ">>> ${currPoints} -> ${adjustedPoints}" 
+               dataSet = dataSet + "," + (currPoints * burndownMultiplier)
+            }
          }
+
+         dataSet = dataSet[0..(dataSet.size() - 4)]
          println "dataSet: ${dataSet}"
-         burndownChartUrl += dataSet
+         burndownChartUrl += "chd=t:"
+         burndownChartUrl += dataSet + "&"
+
+         // eastwood doesn't support this yet
+         //burndownChartUrl += "chm=o,ff9900,0,${dataSet}&"
 
          def lastPositionBurndown = burndownChartUrl.size() - 3 
          burndownChartUrl = burndownChartUrl[0..lastPositionBurndown]
+
+
+         //////////////////////////////////////////////////////////
+         //////////////////////////////////////////////////////////
+         // velocity chart
+         //////////////////////////////////////////////////////////
+         //////////////////////////////////////////////////////////
 
          // create the url for the velocity chart
          velocityChartUrl = "cht=bvg&"
