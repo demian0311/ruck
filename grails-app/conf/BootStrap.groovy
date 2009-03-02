@@ -42,10 +42,17 @@ class BootStrap {
 
             def numStories = (it % 3) + 2
 
+            def multiplier = 3 
+            if(it % 3 == 0)
+            {
+               multiplier = 9 
+            }
+
             (1..numStories).each
             {
                Story story = new Story()
-               story.points = ((it % 2) * 3) + it
+               story.points = ((it % 2) * multiplier) + it
+
                story.description = 'as a user' + it + ' I want to log into the system'
                story.ordinal = it 
 
@@ -59,9 +66,7 @@ class BootStrap {
                   task.hoursEstimate = (it * 2)
                   story.addToTasks(task)
                }
-
             }
-
          }
 
          /*

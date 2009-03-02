@@ -27,18 +27,18 @@ x sprint status
    x if a sprint is closed i shouldn't be able to add stories fromt he backlog 
    x if a sprint is closed it should say so on the project screen 
 
-/ basic reporting
+x basic reporting
    x need more complexity in domain objects to trickle up statistics
    x create a handful of sprints for good reporting data
    x velocity
       x loop thru each closed sprint and figure out how many completed story points each
-   @ burn-down (lame version)
-      @ starting from all story points in the whole system, subtract for each sprint
+   x burn-down (lame version)
+      x starting from all story points in the whole system, subtract for each sprint
 
 @ backlog items should by default be movable, there should be a link to make it editable
 @ i want to edit project data (name, desc)
-@ stories should default to 0 points if no points are entered
-@ UI should un-intrusively correct story points (round up, down?)
+@ stories should default to 0 points if no points are entered (currently does npe)
+@ system should un-intrusively correct story points (round up, down?)
 @ i should know when i'm using story points and hours (just verbage on screen)
 
 ----- the line -----
