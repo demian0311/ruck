@@ -23,7 +23,6 @@ class Sprint implements Comparable
       sort "number":"desc"
    }  
 
-/*
    Integer getStoryPoints()
    {
       def storyPoints = 0
@@ -38,7 +37,6 @@ class Sprint implements Comparable
    {
       // why do i need this?
    }
-   */
 
    Integer getCompletedStoryPoints()
    {

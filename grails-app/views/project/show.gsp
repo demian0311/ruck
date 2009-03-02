@@ -37,6 +37,9 @@
   <fieldset>
    <legend>burndown</legend>
       <img src="${request.contextPath}/chart?cht=lc&chd=s:9gounjqGJD&chco=008000&chls=2.0,4.0,1.0&chxt=x,y&chxl=0:|1|2|3|4|1:||50|350&chs=400x200"/>
+   <h3>${burndownChartUrl}</h3>
+   <img src="${request.contextPath}/chart?${burndownChartUrl}"/>
+
   </fieldset>
 </div>
 

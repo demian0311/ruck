@@ -6,12 +6,13 @@ class ProjectController {
    def index = { redirect(action:list,params:params) }
    Sprint backlog
    Project project
-   Integer totalStoryPoints
+   Integer totalBacklogStoryPoints
    def topStories 
    Integer totalStories
    Integer moreStories
-   private def STORIES_TO_SHOW_IN_BACKLOG = 10
+   private def STORIES_TO_SHOW_IN_BACKLOG = 5 
    String velocityChartUrl
+   String burndownChartUrl
 
     // the delete, save and update actions only accept POST requests
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST']
@@ -28,23 +29,68 @@ class ProjectController {
 
          totalStories = backlog.stories.size()
          moreStories = totalStories - STORIES_TO_SHOW_IN_BACKLOG 
-         totalStoryPoints = 0
+         totalBacklogStoryPoints = 0
          topStories = [] 
          int count = 0
          for(currStory in backlog.stories)
          {
-            totalStoryPoints += currStory.points
+            totalBacklogStoryPoints += currStory.points
             if(count++ < STORIES_TO_SHOW_IN_BACKLOG)
             {
                topStories.add(currStory)
             }
          }
 
+         // create the url for the burndown chart
+         burndownChartUrl = "cht=lc&"
+         burndownChartUrl += "chxt=x,y&"
+         burndownChartUrl += "chls=2.0,4.0,1.0&"
+         burndownChartUrl += "chs=400x200&"
+         burndownChartUrl += "chco=ddddee&"
+         // chxl=0:|1|2|3|4|1:||50|350 
+
+         // TODO: i must need to do the same math on the burndown that i 
+         // had to do for the velocity chart
+
+         // do labels
+         def currSprintNumber = 0
+         def labels = "chxl=0:|"
+         (0..(project.sprints.size() - 2)).each
+         {
+            labels += ++currSprintNumber + "|"
+         }
+         burndownChartUrl += labels + "&"
+
+         // do data
+         // chd=s:9gounjqGJD&
+         burndownChartUrl += "chd=t:"
+
+         // figure out total story points in the entire project
+         def totalStoryPoints = 0
          for(currSprint in project.sprints)
          {
-            println currSprint.number + ': ' + currSprint.getCompletedStoryPoints().toString()
+            // not sure if this method is correct
+            // it should get completed and uncompleted story points
+            totalStoryPoints += currSprint.getStoryPoints()
          }
+         println "total story points: ${totalStoryPoints}"
 
+         // now create data points by decrementing the total points
+         def dataSet = "${totalStoryPoints}"
+         def currPoints = totalStoryPoints
+         for(currSprint in project.sprints)
+         {
+            println "currSprint.getStoryPoints(): ${currSprint.getStoryPoints()}"
+            currPoints = currPoints - currSprint.getStoryPoints()
+            dataSet = dataSet + "," + currPoints
+         }
+         println "dataSet: ${dataSet}"
+         burndownChartUrl += dataSet
+
+         def lastPositionBurndown = burndownChartUrl.size() - 3 
+         burndownChartUrl = burndownChartUrl[0..lastPositionBurndown]
+
+         // create the url for the velocity chart
          velocityChartUrl = "cht=bvg&"
          velocityChartUrl += "chs=400x200&"
          velocityChartUrl += "chxt=x,y&"
@@ -73,7 +119,7 @@ class ProjectController {
          velocityChartUrl += "chxr=1,0," + top + "&"
          velocityChartUrl += "chd=t:"
 
-         def dataSet = ""
+         dataSet = "" // re-using a variable, so bad
          def sprintCount = project.sprints.size()
          project.sprints.each
          {
