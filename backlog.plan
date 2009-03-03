@@ -36,13 +36,21 @@ x basic reporting
       x starting from all story points in the whole system, subtract for each sprint
 
 @ fix 'backlog has points'
-@ put story points total in the velocity chart
+@ put story points total in the velocity chart, on top of the bars or something
 @ backlog items should by default be movable, there should be a link to make it editable
 @ i want to edit project data (name, desc)
 @ stories should default to 0 points if no points are entered (currently does npe)
 @ system should un-intrusively correct story points (round up, down?)
 @ i should know when i'm using story points and hours (just verbage on screen)
-
+   - this comes into play between stories and tasks, eliminate ambiguity
+@ add more data to the project screen
+   @ percent completion
+   @ total backlog points
+   @ projected last sprint
+   @ sprint average
+   @ sprint max
+   @ sprint min
+@ show sprint points in a tabular format
 
 ----- the line -----
 @ what ceremony is required at the conclusion of the project?
@@ -93,6 +101,7 @@ x basic reporting
    @ velocity
       @ show average of all, avg of best 3, avg of worst 3, avg of last 3
    @ burn-down
+      @ show trajectories, need to extend chart to future sprints
       @ normal trajectory
       @ best 3 sprints trajectory
       @ worst 3 sprints trajectory
