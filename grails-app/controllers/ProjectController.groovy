@@ -9,6 +9,7 @@ class ProjectController {
    Integer totalBacklogStoryPoints
    def topStories 
    Integer totalStories
+   Integer displayTotalStoryPoints
    Integer moreStories
    private def STORIES_TO_SHOW_IN_BACKLOG = 5 
    String velocityChartUrl
@@ -37,6 +38,7 @@ class ProjectController {
          totalBacklogStoryPoints = 0
          topStories = [] 
          int count = 0
+
          for(currStory in backlog.stories)
          {
             totalBacklogStoryPoints += currStory.points
@@ -59,10 +61,6 @@ class ProjectController {
          burndownChartUrl += "chls=4,1,0&"
          burndownChartUrl += "chs=400x200&"
          burndownChartUrl += "chco=ddddee&"
-         // chxl=0:|1|2|3|4|1:||50|350 
-         
-         // TODO: i must need to do the same math on the burndown that i 
-         // had to do for the velocity chart
 
          // do labels
          def currSprintNumber = 0
@@ -85,6 +83,7 @@ class ProjectController {
             totalStoryPoints += currSprint.getStoryPoints()
          }
          println "total story points: ${totalStoryPoints}"
+         displayTotalStoryPoints = totalStoryPoints
          
          // velocityChartUrl += "chxr=1,0," + top + "&"
          def burndownTop = totalStoryPoints + 10 
@@ -99,6 +98,7 @@ class ProjectController {
          // the current sprint that has points in it but the points
          // are not done
          def firstSprint = true
+         totalStoryPoints = 0
          for(currSprint in project.sprints)
          {
             if(firstSprint)
@@ -109,6 +109,7 @@ class ProjectController {
             else
             {
                currPoints = currPoints - currSprint.getStoryPoints()
+               totalStoryPoints += currPoints
                def adjustedPoints = currPoints * burndownMultiplier 
                println ">>> ${currPoints} -> ${adjustedPoints}" 
                dataSet = dataSet + "," + (currPoints * burndownMultiplier)

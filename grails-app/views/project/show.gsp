@@ -21,7 +21,7 @@
 
 <div class="ruck-span-12">
   <fieldset>
-   <legend><g:link controller="backlog" id="${project.id}">backlog</g:link> has ${totalStoryPoints} points</legend>
+   <legend><g:link controller="backlog" id="${project.id}">backlog</g:link> has ${displayTotalStoryPoints} points</legend>
     <ul>
       <g:each var="currStory" in="${topStories}">
         <li>${currStory}</li>
