@@ -23,7 +23,7 @@ class Sprint implements Comparable
       sort "number":"desc"
    }  
 
-   Integer getStoryPoints()
+   Integer findStoryPoints()
    {
       def storyPoints = 0
       for (story in stories)
@@ -33,12 +33,7 @@ class Sprint implements Comparable
       return storyPoints
    }
 
-   void setStoryPoints(Integer pointsIn)
-   {
-      // why do i need this?
-   }
-
-   Integer getCompletedStoryPoints()
+   Integer findCompletedStoryPoints()
    {
       def completedStoryPoints = 0
       for (story in stories)
@@ -49,11 +44,6 @@ class Sprint implements Comparable
          }
       }
       return completedStoryPoints
-   }
-
-   void setCompletedStoryPoints(Integer pointsIn)
-   {
-      // why do i need this? 
    }
 
    String toString() 
@@ -74,7 +64,7 @@ class Sprint implements Comparable
          outStr += " (closed)"
       }
 
-      outStr += " " + getCompletedStoryPoints() + " completed points"
+      outStr += " " + findCompletedStoryPoints() + " completed points"
 
       return outStr
    }

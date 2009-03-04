@@ -8,8 +8,11 @@ class ProjectController {
    Project project
    Integer totalBacklogStoryPoints
    def topStories 
-   Integer totalStories
+   //Integer totalStories
    Integer displayTotalStoryPoints
+   Integer displayDoneStoryPoints
+   Integer displayBacklogStoryPoints
+
    Integer moreStories
    private def STORIES_TO_SHOW_IN_BACKLOG = 5 
    String velocityChartUrl
@@ -33,8 +36,7 @@ class ProjectController {
          project = Project.get(params.id)
          backlog = Sprint.findWhere(project: project, number: 0)
 
-         totalStories = backlog.stories.size()
-         moreStories = totalStories - STORIES_TO_SHOW_IN_BACKLOG 
+         moreStories = backlog.stories.size() - STORIES_TO_SHOW_IN_BACKLOG 
          totalBacklogStoryPoints = 0
          topStories = [] 
          int count = 0
@@ -80,7 +82,7 @@ class ProjectController {
          {
             // not sure if this method is correct
             // it should get completed and uncompleted story points
-            totalStoryPoints += currSprint.getStoryPoints()
+            totalStoryPoints += currSprint.findStoryPoints()
          }
          println "total story points: ${totalStoryPoints}"
          displayTotalStoryPoints = totalStoryPoints
@@ -108,7 +110,7 @@ class ProjectController {
             }
             else
             {
-               currPoints = currPoints - currSprint.getStoryPoints()
+               currPoints = currPoints - currSprint.findStoryPoints()
                totalStoryPoints += currPoints
                def adjustedPoints = currPoints * burndownMultiplier 
                println ">>> ${currPoints} -> ${adjustedPoints}" 
@@ -150,7 +152,7 @@ class ProjectController {
          def maxVelocity = 0
          for(currSprint in project.sprints)
          {
-            def currVelocity = currSprint.getCompletedStoryPoints()
+            def currVelocity = currSprint.findCompletedStoryPoints()
             if(currVelocity > maxVelocity)
             {
                maxVelocity = currVelocity
@@ -167,7 +169,7 @@ class ProjectController {
          def sprintCount = project.sprints.size()
          project.sprints.each
          {
-            def currVelocity = it.getCompletedStoryPoints()
+            def currVelocity = it.findCompletedStoryPoints()
             println "${it} - " + currVelocity 
 
             def adjustedVelocity = currVelocity * multiplier
@@ -184,6 +186,7 @@ class ProjectController {
          velocityChartUrl = velocityChartUrl[0..lastPosition]
     }
 
+/*
     def delete = {
         def projectInstance = Project.get( params.id )
         if(projectInstance) {
@@ -196,6 +199,7 @@ class ProjectController {
             redirect(action:list)
         }
     }
+    */
 
     def edit = 
     {
@@ -228,11 +232,13 @@ class ProjectController {
         }
     }
 
+/*
     def create = {
         def projectInstance = new Project()
         projectInstance.properties = params
         return ['projectInstance':projectInstance]
     }
+    */
 
     def save = {
         def projectInstance = new Project(params)
@@ -260,7 +266,8 @@ class ProjectController {
 
             projectInstance.save()
 
-            flash.message = "Project <i>${projectInstance}</i> created, click on <b>manage backlog</b> to add stories to the project"
+            flash.message = 
+               "Project <i>${projectInstance}</i> created, click on <b>manage backlog</b> to add stories to the project"
             redirect(action:show,id:projectInstance.id)
         }
         else {

@@ -14,6 +14,31 @@ class Project {
       startDate()
    }
 
+   Sprint findBacklog()
+   {
+       return Sprint.findWhere(project: this, number: 0)
+   }
+
+   Integer findStoryPoints()
+   {
+      def storyPoints = 0
+      for (sprint in sprints)
+      {
+         storyPoints += sprint.findStoryPoints()
+      }
+      return storyPoints
+   }
+
+   Integer findCompletedStoryPoints()
+   {
+      def completedStoryPoints = 0
+      for (sprint in sprints)
+      {
+         completedStoryPoints += sprint.findCompletedStoryPoints()
+      }
+      return completedStoryPoints
+   }
+
    String toString() 
    { 
       if(description)

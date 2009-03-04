@@ -36,6 +36,8 @@ x basic reporting
       x starting from all story points in the whole system, subtract for each sprint
 
 x fix 'backlog has points'
+@ move a lot of the figuring into the 'project' domain class
+@ if the project just started, don't show any of the graphs
 @ put story points total in the velocity chart, on top of the bars or something
 @ backlog items should by default be movable, there should be a link to make it editable
 @ i want to edit project data (name, desc)
