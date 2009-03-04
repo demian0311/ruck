@@ -36,19 +36,15 @@ x basic reporting
       x starting from all story points in the whole system, subtract for each sprint
 
 x fix 'backlog has points'
-@ move a lot of the figuring into the 'project' domain class
-@ if the project just started, don't show any of the graphs
+x move a lot of the figuring into the 'project' domain class
+x if the project just started, don't show any of the graphs
+x stories should default to 0 points if no points are entered (currently does npe)
 @ put story points total in the velocity chart, on top of the bars or something
 @ backlog items should by default be movable, there should be a link to make it editable
 @ i want to edit project data (name, desc)
-@ stories should default to 0 points if no points are entered (currently does npe)
 @ system should un-intrusively correct story points (round up, down?)
 @ i should know when i'm using story points and hours (just verbage on screen)
-
    - this comes into play between stories and tasks, eliminate ambiguity
-@ urls should be of the format: <project>/<sprint>/<story>/<task>
-   - example/0 would be the backlog for the example project
-   - example/3/as-a-user-i-want-to-login/create-database
 @ add more data to the project screen
    @ percent completion
    @ total backlog points
@@ -57,8 +53,13 @@ x fix 'backlog has points'
    @ sprint max
    @ sprint min
 @ show sprint points in a tabular format
+@ make zebra-stripe darker for sprint show
+@ fix title for sprint show
 
 ----- the line -----
+@ urls should be of the format: <project>/<sprint>/<story>/<task>
+   - example/0 would be the backlog for the example project
+   - example/3/as-a-user-i-want-to-login/create-database
 @ what ceremony is required at the conclusion of the project?
 @ i want a more explicit indicator for where my drop goes in the backlog
    - I think the framework gives you a css class/ id to style

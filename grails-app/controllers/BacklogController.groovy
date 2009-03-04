@@ -94,6 +94,10 @@ class BacklogController
 
     def storyInstance = new Story(params)
     storyInstance.sprint = backlog
+    if(!storyInstance.points)
+   {
+      storyInstance.points = 0
+   }
     storyInstance.save(flush: true)
 
     println 'story after saving: ' + storyInstance

@@ -18,22 +18,33 @@ class ProjectController {
    String velocityChartUrl
    String burndownChartUrl
 
-    // the delete, save and update actions only accept POST requests
-    static def allowedMethods = [delete:'POST', save:'POST', update:'POST']
+   Boolean showGraphs = true
 
-    def list = {
-        if(!params.max) params.max = 10
-        [ projectInstanceList: Project.list( params ) ]
-    }
+   // the delete, save and update actions only accept POST requests
+   static def allowedMethods = [delete:'POST', save:'POST', update:'POST']
 
-    def show = 
-    {
+   def list = 
+   {
+      if(!params.max) params.max = 10
+      [ projectInstanceList: Project.list( params ) ]
+   }
+
+   def show = 
+   {
          project = Project.get(params.id)
+         displayTotalStoryPoints = project.findStoryPoints()
+         if(displayTotalStoryPoints == 0)
+         {
+            totalBacklogStoryPoints = 0
+            showGraphs = false
+            return
+         }
+
          backlog = project.findBacklog() 
+         totalBacklogStoryPoints = backlog.findStoryPoints()
 
          moreStories = backlog.stories.size() - STORIES_TO_SHOW_IN_BACKLOG 
-         totalBacklogStoryPoints = backlog.findStoryPoints()//0
-         topStories = backlog.findTopStories(STORIES_TO_SHOW_IN_BACKLOG)//[] 
+         topStories = backlog.findTopStories(STORIES_TO_SHOW_IN_BACKLOG)
          burndownChartUrl = createBurndownChartUrl()
          velocityChartUrl = createVelocityChartUrl()
    }
@@ -60,7 +71,7 @@ class ProjectController {
          def totalStoryPoints = project.findStoryPoints()
 
          println "total story points: ${totalStoryPoints}"
-         displayTotalStoryPoints = totalStoryPoints
+         //displayTotalStoryPoints = totalStoryPoints
          
          // velocityChartUrl += "chxr=1,0," + top + "&"
          def burndownTop = totalStoryPoints + 10 

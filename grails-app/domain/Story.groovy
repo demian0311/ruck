@@ -5,7 +5,7 @@ class Story implements Comparable
    static hasMany = [tasks:Task]
    Integer ordinal
    String description
-   Integer points
+   Integer points = 0
 
    static constraints =  {
       points(nullable:true)

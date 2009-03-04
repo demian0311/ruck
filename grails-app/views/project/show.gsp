@@ -14,11 +14,6 @@
   <div class="ruck-success">${flash.message}</div>
 </g:if>
 
-<!--
-<h3><em>Sprints are ${fieldValue(bean: project, field: 'sprintLength')} week(s) long
-  starting on ${fieldValue(bean: project, field: 'startDate')}</em></h3>
-  -->
-
 <div class="ruck-span-12">
   <fieldset>
    <legend><g:link controller="backlog" id="${project.id}">backlog</g:link> has ${totalBacklogStoryPoints} points</legend>
@@ -33,12 +28,14 @@
   </fieldset>
 </div>
 
+<g:if test="${showGraphs}">
 <div class="ruck-span-11">
   <fieldset>
    <legend>burndown</legend>
    <img src="${request.contextPath}/chart?${burndownChartUrl}"/>
   </fieldset>
 </div>
+</g:if>
 
 <div class="ruck-span-12">
   <fieldset>
@@ -55,12 +52,15 @@
   </fieldset>
 </div>
 
+<g:if test="${showGraphs}">
 <div class="ruck-span-11">
   <fieldset>
       <legend>velocity</legend>
       <img src="${request.contextPath}/chart?${velocityChartUrl}"/>
   </fieldset>
 </div>
+</g:if>
+
 <hr class="ruck-space"/>
 </body>
 </html>
