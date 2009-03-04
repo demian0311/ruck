@@ -19,6 +19,20 @@ class Project {
        return Sprint.findWhere(project: this, number: 0)
    }
 
+   Integer findMaxVelocity()
+   {
+      def maxVelocity = 0
+      for(currSprint in sprints)
+      {
+         def currVelocity = currSprint.findCompletedStoryPoints()
+         if(currVelocity > maxVelocity)
+         {
+            maxVelocity = currVelocity
+         }
+      }
+      return maxVelocity
+   }
+
    Integer findStoryPoints()
    {
       def storyPoints = 0

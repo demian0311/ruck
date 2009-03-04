@@ -28,27 +28,20 @@ class ProjectController {
 
     def show = 
     {
-         //////////////////////////////////////////////////////////
-         //////////////////////////////////////////////////////////
-         // this code sucks but is marginally functional, lots to refactor
-         //////////////////////////////////////////////////////////
-         //////////////////////////////////////////////////////////
          project = Project.get(params.id)
          backlog = project.findBacklog() 
 
          moreStories = backlog.stories.size() - STORIES_TO_SHOW_IN_BACKLOG 
          totalBacklogStoryPoints = backlog.findStoryPoints()//0
          topStories = backlog.findTopStories(STORIES_TO_SHOW_IN_BACKLOG)//[] 
+         burndownChartUrl = createBurndownChartUrl()
+         velocityChartUrl = createVelocityChartUrl()
+   }
 
-         //////////////////////////////////////////////////////////
-         //////////////////////////////////////////////////////////
-         // burndown chart url
-         //////////////////////////////////////////////////////////
-         //////////////////////////////////////////////////////////
-         // make dots
-
+   String createBurndownChartUrl()
+   {
          // create the url for the burndown chart
-         burndownChartUrl = "cht=lc&"
+         def burndownChartUrl = "cht=lc&"
          burndownChartUrl += "chxt=x,y&"
          burndownChartUrl += "chls=4,1,0&"
          burndownChartUrl += "chs=400x200&"
@@ -63,17 +56,9 @@ class ProjectController {
          }
          burndownChartUrl += labels + "&"
 
-         // do data
-         // chd=s:9gounjqGJD&
-
          // figure out total story points in the entire project
-         def totalStoryPoints = 0
-         for(currSprint in project.sprints)
-         {
-            // not sure if this method is correct
-            // it should get completed and uncompleted story points
-            totalStoryPoints += currSprint.findStoryPoints()
-         }
+         def totalStoryPoints = project.findStoryPoints()
+
          println "total story points: ${totalStoryPoints}"
          displayTotalStoryPoints = totalStoryPoints
          
@@ -115,81 +100,52 @@ class ProjectController {
 
          // eastwood doesn't support this yet
          //burndownChartUrl += "chm=o,ff9900,0,${dataSet}&"
-
          def lastPositionBurndown = burndownChartUrl.size() - 3 
          burndownChartUrl = burndownChartUrl[0..lastPositionBurndown]
+         return burndownChartUrl
+   }
 
 
-         //////////////////////////////////////////////////////////
-         //////////////////////////////////////////////////////////
-         // velocity chart
-         //////////////////////////////////////////////////////////
-         //////////////////////////////////////////////////////////
-
-         // create the url for the velocity chart
-         velocityChartUrl = "cht=bvg&"
-         velocityChartUrl += "chs=400x200&"
-         velocityChartUrl += "chxt=x,y&"
-         velocityChartUrl += "chco=ddddee&"
-         velocityChartUrl += "chxl=0:|"
-         (1..(project.sprints.size() - 1)).each
-         {
+   String createVelocityChartUrl()
+   {
+      // create the url for the velocity chart
+      def velocityChartUrl = "cht=bvg&"
+      velocityChartUrl += "chs=400x200&"
+      velocityChartUrl += "chxt=x,y&"
+      velocityChartUrl += "chco=ddddee&"
+      velocityChartUrl += "chxl=0:|"
+      (1..(project.sprints.size() - 1)).each
+      {
             velocityChartUrl += it + "|"
-         }
-         velocityChartUrl += "&"
+      }
+      velocityChartUrl += "&"
 
-         // find the max velocity
-         def maxVelocity = 0
-         for(currSprint in project.sprints)
+      def top = project.findMaxVelocity() + 2
+      def multiplier = (100.div(top)).round(new MathContext(1))
+
+      velocityChartUrl += "chxr=1,0," + top + "&"
+      velocityChartUrl += "chd=t:"
+
+      def dataSet = "" 
+      def sprintCount = project.sprints.size()
+      project.sprints.each
+      {
+         def currVelocity = it.findCompletedStoryPoints()
+         println "${it} - " + currVelocity 
+         def adjustedVelocity = currVelocity * multiplier
+
+         sprintCount--
+         if(sprintCount > 0)
          {
-            def currVelocity = currSprint.findCompletedStoryPoints()
-            if(currVelocity > maxVelocity)
-            {
-               maxVelocity = currVelocity
-            }
+            dataSet = adjustedVelocity + "," + dataSet 
          }
-         def top = maxVelocity + 2
-         //def multiplier = 100.divide(top, 0, RoundingMode.UP)
-         def multiplier = (100.div(top)).round(new MathContext(1))
+      }
+      velocityChartUrl += dataSet
+      def lastPosition = velocityChartUrl.size() - 2 
 
-         velocityChartUrl += "chxr=1,0," + top + "&"
-         velocityChartUrl += "chd=t:"
-
-         dataSet = "" // re-using a variable, so bad
-         def sprintCount = project.sprints.size()
-         project.sprints.each
-         {
-            def currVelocity = it.findCompletedStoryPoints()
-            println "${it} - " + currVelocity 
-
-            def adjustedVelocity = currVelocity * multiplier
-
-            sprintCount--
-            if(sprintCount > 0)
-            {
-               dataSet = adjustedVelocity + "," + dataSet 
-            }
-         }
-         velocityChartUrl += dataSet
-         def lastPosition = velocityChartUrl.size() - 2 
-
-         velocityChartUrl = velocityChartUrl[0..lastPosition]
+      velocityChartUrl = velocityChartUrl[0..lastPosition]
+      return velocityChartUrl
     }
-
-/*
-    def delete = {
-        def projectInstance = Project.get( params.id )
-        if(projectInstance) {
-            projectInstance.delete()
-            flash.message = "Project ${params.id} deleted"
-            redirect(action:list)
-        }
-        else {
-            flash.message = "Project not found with id ${params.id}"
-            redirect(action:list)
-        }
-    }
-    */
 
     def edit = 
     {
