@@ -34,21 +34,11 @@ class ProjectController {
          //////////////////////////////////////////////////////////
          //////////////////////////////////////////////////////////
          project = Project.get(params.id)
-         backlog = Sprint.findWhere(project: project, number: 0)
+         backlog = project.findBacklog() 
 
          moreStories = backlog.stories.size() - STORIES_TO_SHOW_IN_BACKLOG 
-         totalBacklogStoryPoints = 0
-         topStories = [] 
-         int count = 0
-
-         for(currStory in backlog.stories)
-         {
-            totalBacklogStoryPoints += currStory.points
-            if(count++ < STORIES_TO_SHOW_IN_BACKLOG)
-            {
-               topStories.add(currStory)
-            }
-         }
+         totalBacklogStoryPoints = backlog.findStoryPoints()//0
+         topStories = backlog.findTopStories(STORIES_TO_SHOW_IN_BACKLOG)//[] 
 
          //////////////////////////////////////////////////////////
          //////////////////////////////////////////////////////////

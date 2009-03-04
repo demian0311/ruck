@@ -7,7 +7,6 @@ class Sprint implements Comparable
    String goal
    Integer number
    Boolean closed = false
-   //String status
 
    static constraints = 
    {
@@ -22,6 +21,20 @@ class Sprint implements Comparable
    {
       sort "number":"desc"
    }  
+
+   Story[] findTopStories(Integer numStories)
+   {
+      def topStories = []  
+      int count = 0 
+      for(currStory in stories)
+      {
+         if(count++ < numStories)
+         {
+            topStories.add(currStory)
+         }
+      }
+      return topStories
+   }
 
    Integer findStoryPoints()
    {
