@@ -1,12 +1,13 @@
 <html>
 <head>
   <meta name="layout" content="main"/>
+  <script type="text/javascript" src="${createLinkTo(dir: 'js', file: 'ruckbackloginplace.js')}"/>
   <title>${project.name} &raquo; backlog</title>
 </head>
 <body>
 
 <div id="navigation">
-  <a href="/ruck">ruck</a> &raquo; 
+  <a href="/ruck">ruck</a> &raquo;
   <g:link controller="project" action="show" id="${project.id}">${project.name}</g:link> &raquo; 
   backlog
 </div>
@@ -20,13 +21,9 @@
       <legend>backlog has ${totalStoryPoints} points</legend>
       <ul class="story" id="stories">
         <g:each in="${backlog.stories}" status="ii" var="storyInstance">
-          <li class="story" id="story_${storyInstance.id}" onmouseout="$('tool_${storyInstance.id}').hide();" onmouseover="$('tool_${storyInstance.id}').show();">
-            (<span id="story_points_${storyInstance.id}">${storyInstance.points}</span>) 
-            <span id="story_description_${storyInstance.id}">${storyInstance.description}</span>
-
-            <span id="tool_${storyInstance.id}" style="display: none">{<span id="handle">move</span>
-              <g:link controller="backlog" action="deletestory" id="${storyInstance.id}">delete</g:link>}
-            </span>
+          <li class="story handle" id="story_${storyInstance.id}">
+            <span id="story_update_${storyInstance.id}">(${storyInstance.points}) ${storyInstance.description}</span>
+            <a href="#" onclick="ruckBacklogInPlace('story_update_${storyInstance.id}', this);return false;">Update</a>
           </li>
         </g:each>
       </ul>
@@ -75,23 +72,8 @@
   Event.observe(window, 'load', function() {
     Sortable.create('stories', {
       ghosting:'true',
-      onUpdate:updateOrder,
-      handle: 'handle'
+      onUpdate:updateOrder      
     });
-
-  <g:each in="${backlog.stories}" status="ii" var="storyInstance">
-    new Ajax.InPlaceEditor('story_points_${storyInstance.id}','changestorypoints/${storyInstance.id}', {
-      cols: 2,
-      okControl: false,
-      cancelControl: false
-    });
-
-    new Ajax.InPlaceEditor('story_description_${storyInstance.id}', 'changestorydescription/${storyInstance.id}', {
-      cols: 75,
-      okControl: false,
-      cancelControl: false
-    });
-  </g:each>
   });
 </script>
 
