@@ -42,25 +42,25 @@ class BacklogController
 
   def order = {
     def backlog = Sprint.get(params.id)
+    println 'params: ' + params
     println 'backlog: ' + backlog
 
     def currOrdinal = 0
-    /*
     if(! params['stories[]'])
     {
+      println 'no stories found to order, returning now'
+      render "no stories found to re-order, returning: " + params
       return
     }
-    */
 
-    //for (currentId in params['stories[]'].split(',')) 
-    for (currentId in params['stories[]']) 
+    //for (currentId in params['stories[]']) 
+    for (currentId in params['stories[]'].split(',')) 
     {
       def story = Story.get(currentId)
-      story.ordinal = currOrdinal+
+      story.ordinal = currOrdinal
       backlog.addToStories(story)
       println 'attempting to add ' + story + " to " + backlog
     }
-    println "persisted: " + params
 
     println 'backlog stories --------------------------'
     for (currentStory in backlog.stories) {
