@@ -6,10 +6,8 @@ class ProjectController {
    def index = { redirect(action:list,params:params) }
    Sprint backlog
    Project project
-   Integer totalBacklogStoryPoints
+   Integer totalBacklogStoryPoints = 0
    def topStories 
-   //Integer totalStories
-   Integer displayTotalStoryPoints
    Integer displayDoneStoryPoints
    Integer displayBacklogStoryPoints
 
@@ -19,6 +17,7 @@ class ProjectController {
    String burndownChartUrl
 
    Boolean showGraphs = true
+   Boolean showSprints = true
 
    // the delete, save and update actions only accept POST requests
    static def allowedMethods = [delete:'POST', save:'POST', update:'POST']
@@ -32,19 +31,26 @@ class ProjectController {
    def show = 
    {
          project = Project.get(params.id)
-         displayTotalStoryPoints = project.findStoryPoints()
-         if(displayTotalStoryPoints == 0)
+         backlog = project.findBacklog() 
+         totalBacklogStoryPoints = backlog.findStoryPoints()
+         moreStories = backlog.stories.size() - STORIES_TO_SHOW_IN_BACKLOG 
+         topStories = backlog.findTopStories(STORIES_TO_SHOW_IN_BACKLOG)
+
+         if(project.findStoryPoints() == 0)
          {
-            totalBacklogStoryPoints = 0
+            // no story points, user needs to add stories to the
+            // backlog first
+            showSprints = false
+         }
+
+         if(project.sprints.size() <= 2)
+         {
+            // we don't really have enough information to care
+            // about graphs yet
             showGraphs = false
             return
          }
 
-         backlog = project.findBacklog() 
-         totalBacklogStoryPoints = backlog.findStoryPoints()
-
-         moreStories = backlog.stories.size() - STORIES_TO_SHOW_IN_BACKLOG 
-         topStories = backlog.findTopStories(STORIES_TO_SHOW_IN_BACKLOG)
          burndownChartUrl = createBurndownChartUrl()
          velocityChartUrl = createVelocityChartUrl()
    }
@@ -71,7 +77,6 @@ class ProjectController {
          def totalStoryPoints = project.findStoryPoints()
 
          println "total story points: ${totalStoryPoints}"
-         //displayTotalStoryPoints = totalStoryPoints
          
          // velocityChartUrl += "chxr=1,0," + top + "&"
          def burndownTop = totalStoryPoints + 10 
@@ -189,13 +194,6 @@ class ProjectController {
         }
     }
 
-/*
-    def create = {
-        def projectInstance = new Project()
-        projectInstance.properties = params
-        return ['projectInstance':projectInstance]
-    }
-    */
 
     def save = {
         def projectInstance = new Project(params)
@@ -224,10 +222,12 @@ class ProjectController {
             projectInstance.save()
 
             flash.message = 
-               "Project <i>${projectInstance}</i> created, click on <b>manage backlog</b> to add stories to the project"
+               "Project <i>${projectInstance}</i> created, click on " + 
+               "<b>backlog</b> to add stories to the project"
             redirect(action:show,id:projectInstance.id)
         }
-        else {
+        else 
+        {
             render(view:'create',model:[projectInstance:projectInstance])
         }
     }

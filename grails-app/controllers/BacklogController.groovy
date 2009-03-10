@@ -88,16 +88,16 @@ class BacklogController
 
     project = Project.get(params.projectId)
     println 'project: ' + project
-
-    backlog = Sprint.findWhere(project: project, number: 0)
+   
+    backlog = project.findBacklog()
     println 'backlog: ' + backlog
 
     def storyInstance = new Story(params)
     storyInstance.sprint = backlog
     if(!storyInstance.points)
-   {
+    {
       storyInstance.points = 0
-   }
+    }
     storyInstance.save(flush: true)
 
     println 'story after saving: ' + storyInstance

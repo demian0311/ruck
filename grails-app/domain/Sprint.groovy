@@ -77,7 +77,7 @@ class Sprint implements Comparable
          outStr += " (closed)"
       }
 
-      outStr += " " + findCompletedStoryPoints() + " completed points"
+      //outStr += " " + findCompletedStoryPoints() + " completed points"
 
       return outStr
    }

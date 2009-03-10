@@ -4,14 +4,11 @@ import Task
 
 class SprintController
 {
-
-  def index = { redirect(action: list, params: params) }
-
   def project
   def sprint
-
-  // sometimes we want the backlog so we can swap stories with it
   def backlog
+  
+  def index = { redirect(action: list, params: params) }
 
   // the delete, save and update actions only accept POST requests
   static def allowedMethods = [delete: 'POST', save: 'POST', update: 'POST']
@@ -22,19 +19,9 @@ class SprintController
   }
 
   def plan = {
-    println '*****************************'
-    println 'params: ' + params
     sprint = Sprint.get(params.id)
-    println 'sprint: ' + sprint
-
     project = sprint.project
-    println 'project: ' + project
-
-    for (currentSprint in project.sprints) {
-      if (currentSprint.name == 'backlog') {
-        backlog = currentSprint
-      }
-    }
+    backlog = project.findBacklog()
   }
 
   def order = {
@@ -72,10 +59,17 @@ class SprintController
 
         // set the ids to the new status
         for (currentId in currParam.value) {
-          println '\t\tchanging status of task with id of ' + currentId + ' to ' + params['newStatus']
+          println "\t\tchanging status of task with id of ${currentId} to ${params['newStatus']}"
           def currTask = Task.get(currentId)
-          currTask.status = params['newStatus']
-          currTask.save()
+          if(currTask)
+         {
+            currTask.status = params['newStatus']
+            currTask.save()
+         }
+         else
+         {
+            println "\t\tcouldn't find a task with id: ${currentId}"
+         }
         }
       }
     }
@@ -132,44 +126,11 @@ class SprintController
 
     println 'uncompletedStories: ' + uncompletedStories
 
-    // move all those stories to the backlog
-    //def backlog = Sprint.findWhere(project: project, number: 0)
-    //println 'found the backlog: ' + backlog
-
-    //for(currUncompletedStory in uncompletedStories)
-    //{
-    //  println 'moving ' + currUncompletedStory + ' to backlog'
-    // backlog.addToStories(currUncompletedStory)
-    //}
-    //backlog.save()
-    // TODO: still need to set this to the top of the backlog
-
     def nextSprint = new Sprint()
     nextSprint.number = sprint.number + 1
 
     project.addToSprints(nextSprint)
     project.save(flush: true)
-
-    //for(currUncompletedStory in uncompletedStories)
-    //{
-    //   println 'moving ' + currUncompletedStory + ' to backlog'
-    //  nextSprint.addToStories(currUncompletedStory)
-    //}
-    //nextSprint.save(flush:true)
-
-    /*
-    def backlogSprint = new Sprint()
-    backlogSprint.name = 'backlog'
-    backlogSprint.goal = 'stories to here before being worked on'
-    backlogSprint.number = 0
-    projectInstance.addToSprints(backlogSprint)
-
-    def sprint1 = new Sprint()
-    sprint1.number = 1 
-    projectInstance.addToSprints(sprint1)
-
-    projectInstance.save()
-    */
 
     def nextSprintResult
     for (currSprint in project.sprints) {
@@ -188,7 +149,7 @@ class SprintController
 
     // move the old stories over to the next sprint
     for (currUncompletedStory in uncompletedStories) {
-      println 'moving ' + currUncompletedStory + ' to backlog'
+      println 'moving ' + currUncompletedStory + ' to next sprint'
       nextSprintResult.addToStories(currUncompletedStory)
     }
     nextSprintResult.save(flush: true)

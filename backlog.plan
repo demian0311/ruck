@@ -39,6 +39,8 @@ x fix 'backlog has points'
 x move a lot of the figuring into the 'project' domain class
 x if the project just started, don't show any of the graphs
 x stories should default to 0 points if no points are entered (currently does npe)
+/ don't show charts unless we're on the 2nd sprint
+/ hide sprints when there are no story points in the project
 @ put story points total in the velocity chart, on top of the bars or something
 @ backlog items should by default be movable, there should be a link to make it editable
 @ i want to edit project data (name, desc)

@@ -37,6 +37,7 @@
 </div>
 </g:if>
 
+<g:if test="${showSprints}">
 <div class="ruck-span-12">
   <fieldset>
       <legend>sprints</legend>
@@ -51,6 +52,7 @@
     </ul>
   </fieldset>
 </div>
+</g:if>
 
 <g:if test="${showGraphs}">
 <div class="ruck-span-11">
