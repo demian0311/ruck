@@ -24,21 +24,39 @@ class SprintController
     backlog = project.findBacklog()
   }
 
-  def order = {
+  def order = 
+  {
+    println 'params: ' + params
     def sprint = Sprint.get(params.id)
     println 'sprint: ' + sprint
 
     def currOrdinal = 0
-    for (currentId in params['sprintGroup[]']) {
+    if(! params['sprintGroup[]'])
+    {
+       return
+    }
+    for (currentId in params['sprintGroup[]'].split(',')) 
+    {
+      // persisted: [id:8, action:order, sprintGroup[]:66, controller:sprint]
+      /*
+      this code is going character by character.
+      so it tries 6, then 6 again.
+
+      if the data is 67 it'll try 6 and then story with id 7
+      */
+
       def story = Story.get(currentId)
       story.ordinal = currOrdinal++
       sprint.addToStories(story)
-      println 'attempting to add ' + story + " to " + sprint
+      println 'story id: ' + currentId
+      println 'attempting to add ' + story + " to " + sprint + " belonging to project " + sprint.project
     }
+    
     println "persisted: " + params
 
     println 'sprint stories --------------------------'
-    for (currentStory in sprint.stories) {
+    for (currentStory in sprint.stories) 
+    {
       println '\t' + currentStory
     }
 

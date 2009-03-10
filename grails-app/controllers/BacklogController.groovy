@@ -45,9 +45,18 @@ class BacklogController
     println 'backlog: ' + backlog
 
     def currOrdinal = 0
-    for (currentId in params['stories[]']) {
+    /*
+    if(! params['stories[]'])
+    {
+      return
+    }
+    */
+
+    //for (currentId in params['stories[]'].split(',')) 
+    for (currentId in params['stories[]']) 
+    {
       def story = Story.get(currentId)
-      story.ordinal = currOrdinal++
+      story.ordinal = currOrdinal+
       backlog.addToStories(story)
       println 'attempting to add ' + story + " to " + backlog
     }
