@@ -53,8 +53,8 @@ class BacklogController
       return
     }
 
-    //for (currentId in params['stories[]']) 
-    for (currentId in params['stories[]'].split(',')) 
+    //for (currentId in params['stories[]'].split(',')) didn't work in backlog
+    for (currentId in params['stories[]']) 
     {
       def story = Story.get(currentId)
       story.ordinal = currOrdinal

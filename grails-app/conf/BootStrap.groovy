@@ -19,7 +19,7 @@ class BootStrap {
          p.save()
 
          // create stories for the backlog 
-         (1..47).each
+         (1..12).each
          {
             Story story = new Story()
             story.points = it % 5 
