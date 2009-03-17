@@ -35,7 +35,8 @@ class SprintController
     {
        return
     }
-    for (currentId in params['sprintGroup[]'].split(',')) 
+    //for (currentId in params['sprintGroup[]'].split(',')) 
+    for (currentId in params['sprintGroup[]']) 
     {
       // persisted: [id:8, action:order, sprintGroup[]:66, controller:sprint]
       /*
