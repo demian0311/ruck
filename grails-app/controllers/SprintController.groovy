@@ -35,6 +35,7 @@ class SprintController
     {
        return
     }
+    // - we need the commented out version when planning your sprint
     //for (currentId in params['sprintGroup[]'].split(',')) 
     for (currentId in params['sprintGroup[]']) 
     {
