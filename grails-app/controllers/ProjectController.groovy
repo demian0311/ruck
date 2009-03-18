@@ -228,7 +228,8 @@ class ProjectController {
         }
         else 
         {
-            render(view:'create',model:[projectInstance:projectInstance])
+            flash.message = "couldn't create project"
+            redirect(action:list)
         }
     }
 }

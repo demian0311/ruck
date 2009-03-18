@@ -41,12 +41,14 @@ x if the project just started, don't show any of the graphs
 x stories should default to 0 points if no points are entered (currently does npe)
 / don't show charts unless we're on the 2nd sprint
 / hide sprints when there are no story points in the project
-@ put story points total in the velocity chart, on top of the bars or something
-@ backlog items should by default be movable, there should be a link to make it editable
-@ i want to edit project data (name, desc)
+x backlog items should by default be movable, there should be a link to make it editable
 @ system should un-intrusively correct story points (round up, down?)
 @ i should know when i'm using story points and hours (just verbage on screen)
    - this comes into play between stories and tasks, eliminate ambiguity
+x make zebra-stripe darker for sprint show
+
+----- the line -----
+@ i want to edit project data (name, desc)
 @ add more data to the project screen
    @ percent completion
    @ total backlog points
@@ -55,10 +57,7 @@ x stories should default to 0 points if no points are entered (currently does np
    @ sprint max
    @ sprint min
 @ show sprint points in a tabular format
-@ make zebra-stripe darker for sprint show
-@ fix title for sprint show
-
------ the line -----
+@ put story points total in the velocity chart, on top of the bars or something
 @ urls should be of the format: <project>/<sprint>/<story>/<task>
    - example/0 would be the backlog for the example project
    - example/3/as-a-user-i-want-to-login/create-database
