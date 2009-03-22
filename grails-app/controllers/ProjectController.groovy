@@ -109,7 +109,14 @@ class ProjectController {
             }
          }
 
-         dataSet = dataSet[0..(dataSet.size() - 4)]
+         // if ends in , then remove
+         
+         //if(dataSet[dataSet.size()] == ",")
+         //{
+         //   dataSet = dataSet[0..(dataSet.size() -1)]
+         //}
+
+         //dataSet = dataSet[0..(dataSet.size() - 4)]
          println "dataSet: ${dataSet}"
          burndownChartUrl += "chd=t:"
          burndownChartUrl += dataSet + "&"
