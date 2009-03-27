@@ -32,7 +32,9 @@
 <div class="ruck-span-11">
   <fieldset>
    <legend>burndown</legend>
-   <img src="${request.contextPath}/chart?${burndownChartUrl}"/>
+   <img 
+      width="400" height="200" 
+      src="${request.contextPath}/chart?${burndownChartUrl}"/>
   </fieldset>
 </div>
 </g:if>
@@ -58,7 +60,9 @@
 <div class="ruck-span-11">
   <fieldset>
       <legend>velocity</legend>
-      <img src="${request.contextPath}/chart?${velocityChartUrl}"/>
+      <img 
+         width="400" height="200" 
+         src="${request.contextPath}/chart?${velocityChartUrl}"/>
   </fieldset>
 </div>
 </g:if>

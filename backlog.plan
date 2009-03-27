@@ -42,12 +42,14 @@ x stories should default to 0 points if no points are entered (currently does np
 / don't show charts unless we're on the 2nd sprint
 / hide sprints when there are no story points in the project
 x backlog items should by default be movable, there should be a link to make it editable
-@ system should un-intrusively correct story points (round up, down?)
-@ i should know when i'm using story points and hours (just verbage on screen)
-   - this comes into play between stories and tasks, eliminate ambiguity
 x make zebra-stripe darker for sprint show
+x charts should have their dimensions in code so page will render faster
+@ system should un-intrusively correct story points (round up, down?)
+@ make sure inline editing of the stories will work
+@ try running it under mysql
 
 ----- the line -----
+@ i should know when i'm using story points and hours (just verbage on screen)
 @ i want to edit project data (name, desc)
 @ add more data to the project screen
    @ percent completion

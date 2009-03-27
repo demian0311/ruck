@@ -33,8 +33,10 @@
       </ul>
 
 <g:form action="saveTask" method="post">
-   <input type="text" tabindex="1" size="1" id="hoursEstimate" name="hoursEstimate" class="ruck-text" value="${fieldValue(bean: taskInstance, field: 'hoursEstimate')}"/>
-   <input type="text" tabindex="2" size="75" id="name" name="name" class="ruck-text" value="${fieldValue(bean: taskInstance, field: 'name')}"/>
+   <input 
+      type="text" tabindex="1" size="2" id="hoursEstimate" name="hoursEstimate" class="ruck-text" value="${fieldValue(bean: taskInstance, field: 'hoursEstimate')}"/>
+   <input 
+      type="text" tabindex="2" size="75" id="name" name="name" class="ruck-text" value="${fieldValue(bean: taskInstance, field: 'name')}"/>
     <input type="hidden" name="story.id" value="<%=storyInstance.id%>"/>
     <button type="submit" class="positive"><img src="${createLinkTo(dir: 'images/icons', file: 'tick.png')}" alt=""/>add</button>
 </g:form>

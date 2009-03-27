@@ -29,8 +29,10 @@
       </ul>
 
 <g:form action="save" method="post">
-    <input class="ruck-text" type="text" tabindex="1" size="1" id="points" name="points" class="ruck-text"/> 
-    <input type="text" tabindex="2" size="75" id="description" name="description" class="ruck-text"/>
+    <input class="ruck-text" 
+      type="text" tabindex="1" size="2" id="points" name="points" class="ruck-text"/> 
+    <input 
+      type="text" tabindex="2" size="75" id="description" name="description" class="ruck-text"/>
     <input type="hidden" name="ordinal" value="<%=numStories + 1%>"/>
     <input type="hidden" name="projectId" value="<%=project.id%>"/>
     <input type="hidden" name="sprint" value="<%=backlog.id%>"/>
