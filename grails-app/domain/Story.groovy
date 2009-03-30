@@ -13,7 +13,29 @@ class Story implements Comparable
       ordinal()
    }
 
+   private def validPoints = [0,1,2,3,5,8,13,21,33,54,87,100]
 
+   void setPoints(Integer pointsIn)
+   {
+      //print "we're in demians new setter"
+      if(validPoints.contains(pointsIn))
+      {
+         points = pointsIn
+         return
+      }
+
+      validPoints.each
+      {
+         println "${pointsIn} <= ${it}"
+         if(points <= it)
+         {
+            points = it
+         }
+         return
+      }
+
+      points = 0
+   }
 
 
    /**

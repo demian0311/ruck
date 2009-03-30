@@ -44,7 +44,7 @@ x stories should default to 0 points if no points are entered (currently does np
 x backlog items should by default be movable, there should be a link to make it editable
 x make zebra-stripe darker for sprint show
 x charts should have their dimensions in code so page will render faster
-@ system should un-intrusively correct story points (round up, down?)
+/ system should un-intrusively correct story points (round up, down?)
 @ make sure inline editing of the stories will work
 @ try running it under mysql
 
