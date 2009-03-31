@@ -17,23 +17,11 @@ class Story implements Comparable
 
    void setPoints(Integer pointsIn)
    {
-      //print "we're in demians new setter"
       if(validPoints.contains(pointsIn))
       {
          points = pointsIn
          return
       }
-
-      validPoints.each
-      {
-         println "${pointsIn} <= ${it}"
-         if(points <= it)
-         {
-            points = it
-         }
-         return
-      }
-
       points = 0
    }
 

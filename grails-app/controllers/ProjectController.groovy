@@ -157,16 +157,18 @@ class ProjectController {
          println "${it} - " + currVelocity 
          def adjustedVelocity = currVelocity * multiplier
 
-         sprintCount--
-         if(sprintCount > 0)
+         if(sprintCount-- > 0)
          {
             dataSet = adjustedVelocity + "," + dataSet 
          }
       }
-      velocityChartUrl += dataSet
-      def lastPosition = velocityChartUrl.size() - 2 
+      velocityChartUrl += dataSet[0..(dataSet.size()-2)]
+      //def lastPosition = velocityChartUrl.size() - 2 
+      //velocityChartUrl = velocityChartUrl[0..lastPosition]
 
-      velocityChartUrl = velocityChartUrl[0..lastPosition]
+
+
+      println "velocityChartUrl: ${velocityChartUrl}"
       return velocityChartUrl
     }
 

@@ -36,6 +36,7 @@
     <input type="hidden" name="ordinal" value="<%=numStories + 1%>"/>
     <input type="hidden" name="projectId" value="<%=project.id%>"/>
     <input type="hidden" name="sprint" value="<%=backlog.id%>"/>
+
     <button type="submit" tabindex="3" class="positive"><img src="${createLinkTo(dir: 'images/icons', file: 'tick.png')}" alt="add"/>add</button>
 </g:form>
 
@@ -46,7 +47,8 @@
       Story points are unitless but they convey the relative
       complexity of a story.  Points come from developers,
       priorities come from product owners.<br/><br/>
-        The <strong>second field is the story</strong>.  Until you get into working
+        The <strong>second field is the story</strong>.  
+        Until you get into working
       on a sprint, stories are the unit of work.
       For now just come up with lots of stories that will make up
       a system you want to ship.  You can add stories later and

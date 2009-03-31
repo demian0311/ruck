@@ -39,16 +39,17 @@ x fix 'backlog has points'
 x move a lot of the figuring into the 'project' domain class
 x if the project just started, don't show any of the graphs
 x stories should default to 0 points if no points are entered (currently does npe)
-/ don't show charts unless we're on the 2nd sprint
-/ hide sprints when there are no story points in the project
 x backlog items should by default be movable, there should be a link to make it editable
 x make zebra-stripe darker for sprint show
 x charts should have their dimensions in code so page will render faster
-/ system should un-intrusively correct story points (round up, down?)
+x system should set bad story points to zero 
+/ don't show charts unless we're on the 2nd sprint
+/ hide sprints when there are no story points in the project
 @ make sure inline editing of the stories will work
 @ try running it under mysql
 
 ----- the line -----
+@ system should warn about bad story point numbers in javascript/ form
 @ i should know when i'm using story points and hours (just verbage on screen)
 @ i want to edit project data (name, desc)
 @ add more data to the project screen
