@@ -128,22 +128,33 @@ class ProjectController {
       }
       velocityChartUrl += "&"
 
+     //def burndownTop = totalStoryPoints + 10 
       def top = project.findMaxVelocity() + 2
+      println "top >> ${top}"
+
       def multiplier = (100.div(top)).round(new MathContext(1))
+      println "multiplier >> ${multiplier}"
+
+    //def Multiplier = (100.div(Top)).round(new MathContext(1))
 
       velocityChartUrl += "chxr=1,0," + top + "&"
       velocityChartUrl += "chd=t:"
 
       def dataSet = "" 
       def sprintCount = project.sprints.size()
+      def firstSprint = true
       project.sprints.each
       {
-         def currVelocity = it.findCompletedStoryPoints()
-         println "${it} - " + currVelocity 
-         def adjustedVelocity = currVelocity * multiplier
-
-         if(sprintCount-- > 0)
+         if(firstSprint)
          {
+            firstSprint = false
+         }
+         else
+         {
+            def currVelocity = it.findCompletedStoryPoints()
+            println "]]] ${it} - ${currVelocity}"
+            def adjustedVelocity = currVelocity * multiplier
+            println "\t]]] adjusted:  ${adjustedVelocity}"
             dataSet = adjustedVelocity + "," + dataSet 
          }
       }
