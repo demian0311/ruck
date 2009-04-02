@@ -92,42 +92,27 @@ class ProjectController {
          // are not done
          def firstSprint = true
          totalStoryPoints = 0
-         for(currSprint in project.sprints)
+
+         //(currSprint in project.sprints)
+         project.sprints.each
          {
             if(firstSprint)
             {
                firstSprint = false
-               // this is stupid
             }
             else
             {
-               currPoints = currPoints - currSprint.findStoryPoints()
+               currPoints = currPoints - it.findStoryPoints()
                totalStoryPoints += currPoints
-               def adjustedPoints = currPoints * burndownMultiplier 
-               println ">>> ${currPoints} -> ${adjustedPoints}" 
+               //def adjustedPoints = currPoints * burndownMultiplier 
                dataSet = dataSet + "," + (currPoints * burndownMultiplier)
             }
          }
 
-         // if ends in , then remove
-         
-         //if(dataSet[dataSet.size()] == ",")
-         //{
-         //   dataSet = dataSet[0..(dataSet.size() -1)]
-         //}
-
-         //dataSet = dataSet[0..(dataSet.size() - 4)]
          println "dataSet: ${dataSet}"
-         burndownChartUrl += "chd=t:"
-         burndownChartUrl += dataSet + "&"
-
-         // eastwood doesn't support this yet
-         //burndownChartUrl += "chm=o,ff9900,0,${dataSet}&"
-         def lastPositionBurndown = burndownChartUrl.size() - 3 
-         burndownChartUrl = burndownChartUrl[0..lastPositionBurndown]
+         burndownChartUrl += "chd=t:${dataSet}"
          return burndownChartUrl
    }
-
 
    String createVelocityChartUrl()
    {
@@ -163,10 +148,6 @@ class ProjectController {
          }
       }
       velocityChartUrl += dataSet[0..(dataSet.size()-2)]
-      //def lastPosition = velocityChartUrl.size() - 2 
-      //velocityChartUrl = velocityChartUrl[0..lastPosition]
-
-
 
       println "velocityChartUrl: ${velocityChartUrl}"
       return velocityChartUrl
