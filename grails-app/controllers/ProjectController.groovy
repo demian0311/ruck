@@ -132,7 +132,7 @@ class ProjectController {
       def top = project.findMaxVelocity() + 2
       println "top >> ${top}"
 
-      def multiplier = (100.div(top)).round(new MathContext(1))
+      def multiplier = (100.div(top)).round(new MathContext(0))
       println "multiplier >> ${multiplier}"
 
     //def Multiplier = (100.div(Top)).round(new MathContext(1))
@@ -145,16 +145,15 @@ class ProjectController {
       def firstSprint = true
       project.sprints.each
       {
-         if(firstSprint)
+         if(it.number != 0)
          {
-            firstSprint = false
-         }
-         else
-         {
+            println "]]] it: ${it}"
             def currVelocity = it.findCompletedStoryPoints()
-            println "]]] ${it} - ${currVelocity}"
+            println "]]] currVelocity:       ${currVelocity}"
+            println "]]] multiplier:         ${multiplier}"
             def adjustedVelocity = currVelocity * multiplier
-            println "\t]]] adjusted:  ${adjustedVelocity}"
+
+            println "\t]]] adjustedVelocity: ${adjustedVelocity}"
             dataSet = adjustedVelocity + "," + dataSet 
          }
       }
