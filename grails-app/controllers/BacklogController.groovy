@@ -63,7 +63,8 @@ class BacklogController
     }
 
     println 'backlog stories --------------------------'
-    for (currentStory in backlog.stories) {
+    for (currentStory in backlog.stories) 
+    {
       println '\t' + currentStory
     }
 

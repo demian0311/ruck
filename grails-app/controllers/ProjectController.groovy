@@ -128,14 +128,11 @@ class ProjectController {
       }
       velocityChartUrl += "&"
 
-     //def burndownTop = totalStoryPoints + 10 
       def top = project.findMaxVelocity() + 2
       println "top >> ${top}"
 
       def multiplier = (100.div(top)).round(new MathContext(0))
       println "multiplier >> ${multiplier}"
-
-    //def Multiplier = (100.div(Top)).round(new MathContext(1))
 
       velocityChartUrl += "chxr=1,0," + top + "&"
       velocityChartUrl += "chd=t:"
