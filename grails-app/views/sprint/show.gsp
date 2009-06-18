@@ -104,12 +104,6 @@
   </div>
 </g:each>
 
-<br/><br/>
-<g:if test="${!sprint.closed}">
-   <g:link controller="sprint" action="plan" id="${sprint.id}">add stories from backlog</g:link>
-   <br/>
-   <g:link controller="sprint" action="close" id="${sprint.id}">close this sprint</g:link>
-</g:if>
 
 <g:if test="${!sprint.closed}">
 
@@ -209,6 +203,12 @@
   </g:each>
   });
 </script>
+</g:if>
+
+<br/><br/><br/>
+<g:if test="${!sprint.closed}">
+   <g:link controller="sprint" action="plan" id="${sprint.id}">add stories from backlog</g:link> |
+   <g:link controller="sprint" action="close" id="${sprint.id}">close this sprint</g:link>
 </g:if>
 
 </body>
