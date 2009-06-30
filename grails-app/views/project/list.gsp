@@ -9,6 +9,7 @@
   <a href="/ruck">ruck</a>
 </div>
 
+
 <g:if test="${!projectInstanceList.isEmpty()}">
   <div class="ruck-span-12">
     <fieldset>

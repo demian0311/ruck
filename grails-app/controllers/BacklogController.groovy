@@ -74,16 +74,20 @@ class BacklogController
 
   def list = {
     if (project == null) {
-      project = Project.get(params.id)
+      Long projectId = new Long(params.id)
+      project = Project.get(projectId)
+      println "this is the project: $project"
     }
 
     if (project) {
       backlog = Sprint.findWhere(project: project, number: 0)
 
+      // this should be a method on the project class
       totalStoryPoints = 0
       for (currStory in backlog.stories) {
         totalStoryPoints += currStory.points
       }
+      println "total story points: $totalStoryPoints"
 
       numStories = backlog.stories.size()
     }
@@ -91,6 +95,7 @@ class BacklogController
       flash.message = "select a project to see backlog"
       redirect(controller: 'project', action: 'list')
     }
+    //return ['project':project]
   }
 
   def save = {

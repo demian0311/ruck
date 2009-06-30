@@ -10,6 +10,7 @@ class UrlMappings {
       }
       "/backlog/$id"
       {
+         println '*** going to show the backlog'
          // id is the project id
          controller = "backlog"
          action = "list"
