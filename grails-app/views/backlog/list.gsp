@@ -39,7 +39,7 @@
     <input 
       type="text" tabindex="2" size="75" id="description" name="description" class="ruck-text"/>
     <input type="hidden" name="ordinal" value="<%=numStories + 1%>"/>
-    <input type="hidden" name="projectId" value="<%=project.id%>"/>
+    <input type="hidden" name="id" value="<%=project.id%>"/>
     <input type="hidden" name="sprint" value="<%=backlog.id%>"/>
 
     <button type="submit" tabindex="3" class="positive"><img src="${createLinkTo(dir: 'images/icons', file: 'tick.png')}" alt="add"/>add</button>

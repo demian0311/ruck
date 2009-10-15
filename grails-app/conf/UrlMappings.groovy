@@ -8,6 +8,7 @@ class UrlMappings {
 			 // apply constraints here
 		   }
       }
+      /*
       "/backlog/$id"
       {
          println '*** going to show the backlog'
@@ -19,6 +20,7 @@ class UrlMappings {
 			 // apply constraints here
 		   }
       }
+      */
       /*"/"(controller:"project")*/
 
 	  "500"(view:'/error')

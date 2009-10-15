@@ -106,7 +106,8 @@ class BacklogController
   def save = {
     println 'params: ' + params
 
-    project = Project.get(params.projectId)
+    //project = Project.get(params.projectId)
+    project = Project.get(params.id)
     println 'project: ' + project
    
     backlog = project.findBacklog()
