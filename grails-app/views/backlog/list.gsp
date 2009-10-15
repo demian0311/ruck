@@ -1,7 +1,8 @@
 <html>
 <head>
   <meta name="layout" content="main"/>
-  <script type="text/javascript" src="${createLinkTo(dir: 'js', file: 'ruckbackloginplace.js')}"/>
+  <script type="text/javascript" src="${createLinkTo(dir: 'js', file: 'ruckbackloginplace.js')}">
+  </script>
   <title>${project.name} &raquo; backlog</title>
 </head>
 <body>

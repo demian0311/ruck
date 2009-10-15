@@ -73,6 +73,11 @@ class BacklogController
 
 
   def list = {
+     
+    println "********************"
+    println "PARAMS---- ${params}"
+    println "********************"
+
     if (project == null) {
       Long projectId = new Long(params.id)
       project = Project.get(projectId)
