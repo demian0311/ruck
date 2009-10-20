@@ -1,9 +1,6 @@
-import Project
-import Sprint
-import Story
+import grails.converters.JSON
 
-class BacklogController
-{
+class BacklogController {
   def index = { redirect(action: list, params: params) }
   Sprint backlog
   Project project
@@ -19,7 +16,7 @@ class BacklogController
 
   def changestorypoints = {
     def story = Story.get(params.id)
-    story.points = Integer.parseInt(params.value)
+    story.points = Integer.parseInt(params?.value)
     story.save(flush: true)
 
     render "" + story.points
@@ -31,6 +28,15 @@ class BacklogController
     story.save(flush: true)
 
     render "" + story.description
+  }
+
+  def changestory = {
+    println "Changing story to " + params
+    def story = Story.get(params.id)
+    story.description = params.description
+    story.points = Integer.parseInt(params?.points)
+    story.save(flush: true)
+    render story as JSON
   }
 
   def deletestory = {
@@ -46,16 +52,14 @@ class BacklogController
     println 'backlog: ' + backlog
 
     def currOrdinal = 0
-    if(! params['stories[]'])
-    {
+    if (!params['stories[]']) {
       println 'no stories found to order, returning now'
       render "no stories found to re-order, returning: " + params
       return
     }
 
     //for (currentId in params['stories[]'].split(',')) didn't work in backlog
-    for (currentId in params['stories[]']) 
-    {
+    for (currentId in params['stories[]']) {
       def story = Story.get(currentId)
       story.ordinal = currOrdinal
       backlog.addToStories(story)
@@ -63,8 +67,7 @@ class BacklogController
     }
 
     println 'backlog stories --------------------------'
-    for (currentStory in backlog.stories) 
-    {
+    for (currentStory in backlog.stories) {
       println '\t' + currentStory
     }
 
@@ -73,7 +76,7 @@ class BacklogController
 
 
   def list = {
-     
+
     println "********************"
     println "PARAMS---- ${params}"
     println "********************"
@@ -95,8 +98,7 @@ class BacklogController
       println "total story points: $totalStoryPoints"
 
       numStories = backlog.stories.size()
-    }
-    else {
+    } else {
       flash.message = "select a project to see backlog"
       redirect(controller: 'project', action: 'list')
     }
@@ -109,14 +111,14 @@ class BacklogController
     //project = Project.get(params.projectId)
     project = Project.get(params.id)
     println 'project: ' + project
-   
+
     backlog = project.findBacklog()
     println 'backlog: ' + backlog
 
     def storyInstance = new Story(params)
     storyInstance.sprint = backlog
-    if(!storyInstance.points)
-    {
+    println storyInstance
+    if (!storyInstance.points) {
       storyInstance.points = 0
     }
     storyInstance.save(flush: true)
