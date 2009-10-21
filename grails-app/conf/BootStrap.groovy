@@ -3,28 +3,17 @@ class BootStrap {
      def init = { servletContext ->
          println 'creating a new project'
    
-         //Project p = Project.create('example', 'shows how a project is laid out')
-
-/*
+         
          Project p = new Project()
          p.name = 'example'
          p.description = 'example project' 
          p.save()
 
-         Release r = new Release()
-         r.name = 'initial'
-
-         p.addToReleases(r)
-         */
-
          // create the default backlog
-         /*
          def backlog = new Sprint()
          backlog.name = 'backlog'
          backlog.goal = 'stories go here before assignment to an actual sprint'
          backlog.number = 0
-         */
-
          println 'done creating a new project'
 
 
