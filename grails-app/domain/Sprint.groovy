@@ -38,12 +38,12 @@ class Sprint implements Comparable
 
    Integer findStoryPoints()
    {
-      def storyPoints = 0
-      for (story in stories)
-      {
-         storyPoints += story.points
-      }
-      return storyPoints
+       def storyPoints = 0
+       stories.each
+       {
+           storyPoints += it.points
+       }
+       storyPoints
    }
 
    Integer findCompletedStoryPoints()
@@ -77,9 +77,7 @@ class Sprint implements Comparable
          outStr += " (closed)"
       }
 
-      //outStr += " " + findCompletedStoryPoints() + " completed points"
-
-      return outStr
+      outStr
    }
 
    int compareTo(obj)

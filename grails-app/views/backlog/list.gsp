@@ -13,10 +13,6 @@
   backlog
 </div>
 
-<pre>
-  project: ${project}
-</pre>
-
 <g:if test="${flash.message}">
   <div class="ruck-success">${flash.message}</div>
 </g:if>
