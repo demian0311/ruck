@@ -24,9 +24,12 @@ environments {
 		}
 	}
 	production {
-		dataSource {
-			dbCreate = "update"
-			url = "jdbc:hsqldb:file:prodDb;shutdown=true"
-		}
+            dataSource {
+                driverClassName = "com.mysql.jdbc.Driver"
+                dbCreate =  "update"           // "create"
+                username = "ruck"
+                password = "ruck"
+                url = "jdbc:mysql://localhost/ruck"
+            }
 	}
 }
