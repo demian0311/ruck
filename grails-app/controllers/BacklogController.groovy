@@ -46,6 +46,7 @@ class BacklogController {
     redirect(controller: 'backlog', action: 'list', id: backlogId)
   }
 
+  /* this method changes the ordering of the stories in the backlog */
   def order = {
     def backlog = Sprint.get(params.id)
     println 'params: ' + params
@@ -58,13 +59,21 @@ class BacklogController {
       return
     }
 
-    //for (currentId in params['stories[]'].split(',')) didn't work in backlog
+    println 'fixing order of stories now---'
     for (currentId in params['stories[]']) {
       def story = Story.get(currentId)
-      story.ordinal = currOrdinal
-      backlog.addToStories(story)
-      println 'attempting to add ' + story + " to " + backlog
+
+      story.ordinal = ++currOrdinal
+
+      // new
+      //story.save()
+
+      println '\tattempting to add ' + story + " to " + backlog
+      //backlog.addToStories(story)
     }
+
+    // new
+    //backlog.save()
 
     println 'backlog stories --------------------------'
     for (currentStory in backlog.stories) {
@@ -98,11 +107,12 @@ class BacklogController {
       println "total story points: $totalStoryPoints"
 
       numStories = backlog.stories.size()
-    } else {
+    } 
+    else
+    {
       flash.message = "select a project to see backlog"
       redirect(controller: 'project', action: 'list')
     }
-    //return ['project':project]
   }
 
   def save = {

@@ -9,7 +9,7 @@ class Story implements Comparable {
   static constraints = {
     points(nullable: true)
     description(blank: false, unique: 'sprint')
-    ordinal()
+    ordinal(unique: 'sprint')
   }
 
   private def validPoints = [0, 1, 2, 3, 5, 8, 13, 21, 33, 54, 87, 100]

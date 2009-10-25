@@ -13,6 +13,12 @@
   backlog
 </div>
 
+  <pre>
+numStories: <%=numStories%>
+totalStoryPoints: <%=totalStoryPoints%>
+project: <%=project%>
+  </pre>
+
 <g:if test="${flash.message}">
   <div class="ruck-success">${flash.message}</div>
 </g:if>
@@ -69,7 +75,7 @@
       method : 'post',
       parameters : Sortable.serialize('stories')
     };
-    new Ajax.Request('order/${backlog.id}', options);
+    new Ajax.Request('../order/${backlog.id}', options);
   }
 
   Event.observe(window, 'load', function() {

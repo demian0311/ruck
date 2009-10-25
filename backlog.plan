@@ -1,8 +1,13 @@
-
-x disappearing stories:
+@ disappearing stories:
    - add lots of stories, don't re-order any
    - add some to the first sprint
    - go back to the project, observe most of the stories gone from the backlog
+   @ seems to happen after scoping out the first sprint
+      - the screen where you drag stories from backlog to the first sprint
+         - when you drag stories into the sprint
+         - when you re-order stories on that screen 
+            (just like you would on the backlog screen)
+      - after that the stories lose their ordinal
 ---
 x if there are no tasks defined for a story then i want a reminder to go add tasks
 x i should be able to update the backlog
