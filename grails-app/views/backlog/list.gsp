@@ -28,7 +28,7 @@
           </li>
         </g:each>
       </ul>
-
+	<hr/>
 <g:form action="save" method="post">
     <input class="ruck-text" type="text" tabindex="1" size="2" id="points" name="points" />
     <input type="text" tabindex="2" size="75" id="description" name="description" class="ruck-text"/>
