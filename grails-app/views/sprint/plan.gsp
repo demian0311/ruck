@@ -22,7 +22,7 @@
     </ul>
   </fieldset>
 </div>
-<div class="ruck-span-12 ruck-last">
+<div class="ruck-span-11 ruck-last">
   <fieldset>
     <legend>${sprint} has <span id="total">0</span> points</legend>
     <ul id="sprintGroup" class="story">
