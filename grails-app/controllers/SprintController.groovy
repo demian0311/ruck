@@ -1,13 +1,8 @@
-import Sprint
-import Story
-import Task
-
-class SprintController
-{
+class SprintController {
   def project
   def sprint
   def backlog
-  
+
   def index = { redirect(action: list, params: params) }
 
   // the delete, save and update actions only accept POST requests
@@ -24,21 +19,19 @@ class SprintController
     backlog = project.findBacklog()
   }
 
-  def order = 
+  def order =
   {
     println 'params: ' + params
-    def sprint = Sprint.get(params.id)
+    sprint = Sprint.get(params.id)
     println 'sprint: ' + sprint
 
     def currOrdinal = 0
-    if(! params['sprintGroup[]'])
-    {
-       return
+    if (!params['sprintGroup[]']) {
+      return
     }
     // - we need the commented out version when planning your sprint
     //for (currentId in params['sprintGroup[]'].split(',')) 
-    for (currentId in params['sprintGroup[]']) 
-    {
+    for (currentId in params['sprintGroup[]']) {
       // persisted: [id:8, action:order, sprintGroup[]:66, controller:sprint]
       /*
       this code is going character by character.
@@ -53,12 +46,11 @@ class SprintController
       println 'story id: ' + currentId
       println 'attempting to add ' + story + " to " + sprint + " belonging to project " + sprint.project
     }
-    
+
     println "persisted: " + params
 
     println 'sprint stories --------------------------'
-    for (currentStory in sprint.stories) 
-    {
+    for (currentStory in sprint.stories) {
       println '\t' + currentStory
     }
 
@@ -78,18 +70,21 @@ class SprintController
         println '\tfound group ' + currParam
 
         // set the ids to the new status
+        def valuesToChange = []
+        if (!currParam.value.toString().contains(",")) {
+          valuesToChange.add(currParam.value)
+        } else {valuesToChange = currParam.value}
+
         for (currentId in currParam.value) {
+          println currParam.value
           println "\t\tchanging status of task with id of ${currentId} to ${params['newStatus']}"
           def currTask = Task.get(currentId)
-          if(currTask)
-         {
+          if (currTask) {
             currTask.status = params['newStatus']
             currTask.save()
-         }
-         else
-         {
+          } else {
             println "\t\tcouldn't find a task with id: ${currentId}"
-         }
+          }
         }
       }
     }
@@ -184,8 +179,7 @@ class SprintController
     if (!sprintInstance) {
       flash.message = "Sprint not found with id ${params.id}"
       redirect(action: list)
-    }
-    else {
+    } else {
       return [sprintInstance: sprintInstance]
     }
   }
@@ -197,12 +191,10 @@ class SprintController
       if (!sprintInstance.hasErrors() && sprintInstance.save()) {
         flash.message = "Sprint ${params.id} updated"
         redirect(action: show, id: sprintInstance.id)
-      }
-      else {
+      } else {
         render(view: 'edit', model: [sprintInstance: sprintInstance])
       }
-    }
-    else {
+    } else {
       flash.message = "Sprint not found with id ${params.id}"
       redirect(action: edit, id: params.id)
     }
@@ -219,8 +211,7 @@ class SprintController
     if (!sprintInstance.hasErrors() && sprintInstance.save()) {
       flash.message = "Sprint ${sprintInstance.id} created"
       redirect(action: show, id: sprintInstance.id)
-    }
-    else {
+    } else {
       render(view: 'create', model: [sprintInstance: sprintInstance])
     }
   }
