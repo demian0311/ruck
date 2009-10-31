@@ -72,11 +72,10 @@ class SprintController {
         // set the ids to the new status
         def valuesToChange = []
         if (!currParam.value.toString().contains(",")) {
-          valuesToChange.add(currParam.value)
+          valuesToChange.add(currParam.value as Integer)
         } else {valuesToChange = currParam.value}
 
-        for (currentId in currParam.value) {
-          println currParam.value
+        for (currentId in valuesToChange) {
           println "\t\tchanging status of task with id of ${currentId} to ${params['newStatus']}"
           def currTask = Task.get(currentId)
           if (currTask) {
