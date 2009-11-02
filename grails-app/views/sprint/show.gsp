@@ -17,19 +17,19 @@
 
 <div class="ruck-span-24">
   <div class="ruck-span-7 ruck-colborder">
-    <h3>user story</h3>
+    <h3 class="centered">user story</h3>
   </div>
   <div class="ruck-span-4">
-    <h3>not started</h3>
+    <h3 class="centered">not started</h3>
   </div>
   <div class="ruck-span-4">
-    <h3>working</h3>
+    <h3 class="centered">working</h3>
   </div>
   <div class="ruck-span-4">
-    <h3>verification</h3>
+    <h3 class="centered">verification</h3>
   </div>
   <div class="ruck-span-4 ruck-last">
-    <h3>done</h3>
+    <h3 class="centered">done</h3>
   </div>
 </div>
 
