@@ -28,19 +28,6 @@ class StoryController {
     params.id = story.id
 
     redirect(controller: 'story', action: 'show', id: story.id)
-    /*
-    if(taskInstance) {
-        taskInstance.delete()
-        flash.message = "Task ${params.id} deleted"
-        redirect(action:show)
-    }
-    */
-    /*
-    else {
-        flash.message = "Task not found with id ${params.id}"
-        redirect(action:show)
-    }
-    */
   }
 
   def delete = {

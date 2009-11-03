@@ -19,6 +19,7 @@ class SprintController {
     backlog = project.findBacklog()
   }
 
+  /* this method re-orders stories in a sprint */
   def order =
   {
     println 'params: ' + params
