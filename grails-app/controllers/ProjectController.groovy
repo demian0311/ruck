@@ -36,7 +36,8 @@ class ProjectController {
          moreStories = backlog.stories.size() - STORIES_TO_SHOW_IN_BACKLOG 
          topStories = backlog.findTopStories(STORIES_TO_SHOW_IN_BACKLOG)
 
-         if(project.findStoryPoints() == 0)
+         //if(project.findStoryPoints() == 0)
+         if(backlog.stories.size() == 0 || project.sprints.size() >= 2)
          {
             // no story points, user needs to add stories to the
             // backlog first
@@ -205,16 +206,25 @@ class ProjectController {
         }
 
         if(!projectInstance.hasErrors() && projectInstance.save()) {
-            // now create a default backlog 
+            println "project ${projectInstance.name} saved"
+
             def backlogSprint = new Sprint()
             backlogSprint.name = 'backlog'
             backlogSprint.goal = 'stories to here before being worked on'
             backlogSprint.number = 0
             projectInstance.addToSprints(backlogSprint)
+            println "backlog for project ${projectInstance.name} saved"
 
             def sprint1 = new Sprint()
-            sprint1.number = 1 
+            sprint1.number = 1
+
+            if(sprint1.hasErrors())
+            {
+                println "there were errors with the first sprint"
+            }
+
             projectInstance.addToSprints(sprint1)
+            println "first sprint saved for project ${projectInstance.name} saved"
 
             projectInstance.save()
 
