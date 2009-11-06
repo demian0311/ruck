@@ -1,5 +1,6 @@
 div#navigation {min-width:940px;width:100%;padding-left:10px;background:#E5ECF9; text-align: left; margin-top: 10px; margin-bottom: 20px; font-size:1.5em;}
-div.evenRow{background:#eeeeee;}
+/*div.evenRow{background:#eeeeee;}*/
+div.evenRow{background:#f8f8f8;}
 div.oddRow{background:#ffffff;}
 #footer {float:left;min-width:940px;width:100%;padding-left:10px;background:#E5ECF9; text-align: right; margin-top: 10px; margin-bottom: 20px;}
 ul.story {margin: 0;padding: 0;list-style-type:none;}

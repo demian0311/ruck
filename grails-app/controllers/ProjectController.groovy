@@ -37,8 +37,12 @@ class ProjectController {
          topStories = backlog.findTopStories(STORIES_TO_SHOW_IN_BACKLOG)
 
          //if(project.findStoryPoints() == 0)
-         if(backlog.stories.size() == 0 || project.sprints.size() >= 2)
+         //if(backlog.stories.size() == 0 || project.sprints.size() >= 2)
+         if(backlog.findStoryPoints() == 0)
          {
+            println "there are no stories in the backlog so we won't display the sprints"
+            println "backlog.stories.size() : ${backlog.stories.size()}"
+            println "project.sprints.size() : ${project.sprints.size()}"
             // no story points, user needs to add stories to the
             // backlog first
             showSprints = false

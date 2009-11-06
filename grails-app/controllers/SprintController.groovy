@@ -22,16 +22,17 @@ class SprintController {
   /* this method re-orders stories in a sprint */
   def order =
   {
-    println 'params: ' + params
     sprint = Sprint.get(params.id)
     println 'sprint: ' + sprint
+    println 'params: ' + params
 
     def currOrdinal = 0
     if (!params['sprintGroup[]']) {
+      println 'no stories found to order, returning now'
+      render "no stories found to re-order, returning: " + params
       return
     }
-    // - we need the commented out version when planning your sprint
-    //for (currentId in params['sprintGroup[]'].split(',')) 
+
     for (currentId in params['sprintGroup[]']) {
       // persisted: [id:8, action:order, sprintGroup[]:66, controller:sprint]
       /*
@@ -41,7 +42,12 @@ class SprintController {
       if the data is 67 it'll try 6 and then story with id 7
       */
 
+      println "currentId is ${currentId}"
+
       def story = Story.get(currentId)
+
+      println "story is ${story}"
+
       story.ordinal = currOrdinal++
       sprint.addToStories(story)
       println 'story id: ' + currentId

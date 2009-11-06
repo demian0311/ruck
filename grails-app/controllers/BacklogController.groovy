@@ -47,8 +47,12 @@ class BacklogController {
   }
 
   /* this method changes the ordering of the stories in the backlog */
-  def order = {
-    def backlog = Sprint.get(params.id)
+  def order =
+  {
+    // do some checking here to make sure that the story is owned by the
+    // same sprint we think it should be associated with
+
+    backlog = Sprint.get(params.id)
     println 'params: ' + params
     println 'backlog: ' + backlog
 
@@ -61,7 +65,10 @@ class BacklogController {
 
     println 'fixing order of stories now---'
     for (currentId in params['stories[]']) {
+      println "ordering story id: ${currentId}"
+
       def story = Story.get(currentId)
+      println "story found ${story}"
 
       story.ordinal = ++currOrdinal
 
@@ -69,11 +76,7 @@ class BacklogController {
       //story.save()
 
       println '\tattempting to add ' + story + " to " + backlog
-      //backlog.addToStories(story)
     }
-
-    // new
-    //backlog.save()
 
     println 'backlog stories --------------------------'
     for (currentStory in backlog.stories) {
