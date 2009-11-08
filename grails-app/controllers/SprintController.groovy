@@ -10,7 +10,7 @@ class SprintController {
 
   def list = {
     if (!params.max) params.max = 10
-    [sprintInstanceList: Sprint.list(params)]
+    [sprintInstanceList: Sprint.list(params)]f
   }
 
   def plan = {
@@ -23,17 +23,30 @@ class SprintController {
   def order =
   {
     sprint = Sprint.get(params.id)
-    println 'sprint: ' + sprint
-    println 'params: ' + params
+    log.debug  'sprint: ' + sprint
+    log.debug  'params: ' + params
 
     def currOrdinal = 0
     if (!params['sprintGroup[]']) {
-      println 'no stories found to order, returning now'
+      log.debug  'no stories found to order, returning now'
       render "no stories found to re-order, returning: " + params
       return
     }
 
-    for (currentId in params['sprintGroup[]']) {
+                // set the ids to the new status
+    def valuesToChange = []
+    if (!params['sprintGroup[]'].toString().contains(","))
+    {
+        valuesToChange.add(params['sprintGroup[]'] as Integer)
+    }
+    else
+    {
+        valuesToChange = params['sprintGroup[]']
+    }
+
+    for (currentId in valuesToChange)
+    {
+//    for (currentId in params['sprintGroup[]']) {
       // persisted: [id:8, action:order, sprintGroup[]:66, controller:sprint]
       /*
       this code is going character by character.
@@ -42,39 +55,39 @@ class SprintController {
       if the data is 67 it'll try 6 and then story with id 7
       */
 
-      println "currentId is ${currentId}"
+      log.debug  "currentId is ${currentId}"
 
       def story = Story.get(currentId)
 
-      println "story is ${story}"
+      log.debug  "story is ${story}"
 
       story.ordinal = currOrdinal++
       sprint.addToStories(story)
-      println 'story id: ' + currentId
-      println 'attempting to add ' + story + " to " + sprint + " belonging to project " + sprint.project
+      log.debug  'story id: ' + currentId
+      log.debug  'attempting to add ' + story + " to " + sprint + " belonging to project " + sprint.project
     }
 
-    println "persisted: " + params
+    log.debug  "persisted: " + params
 
-    println 'sprint stories --------------------------'
+    log.debug  'sprint stories --------------------------'
     for (currentStory in sprint.stories) {
-      println '\t' + currentStory
+      log.debug  '\t' + currentStory
     }
 
     render "persisted: " + params
   }
 
   def moveTask = {
-    println '*****************************'
-    println '* MOVE TASK                 *'
-    println '* params: ' + params
-    println '*****************************'
+    log.debug  '*****************************'
+    log.debug '* MOVE TASK                 *'
+    log.debug  '* params: ' + params
+    log.debug  '*****************************'
 
     // need to find the ids
     for (currParam in params) {
-      println 'currParam: ' + currParam
+      log.debug  'currParam: ' + currParam
       if (currParam.key.indexOf('Group_') != -1) {
-        println '\tfound group ' + currParam
+        log.debug  '\tfound group ' + currParam
 
         // set the ids to the new status
         def valuesToChange = []
@@ -83,13 +96,13 @@ class SprintController {
         } else {valuesToChange = currParam.value}
 
         for (currentId in valuesToChange) {
-          println "\t\tchanging status of task with id of ${currentId} to ${params['newStatus']}"
+          log.debug  "\t\tchanging status of task with id of ${currentId} to ${params['newStatus']}"
           def currTask = Task.get(currentId)
           if (currTask) {
             currTask.status = params['newStatus']
             currTask.save()
           } else {
-            println "\t\tcouldn't find a task with id: ${currentId}"
+            log.debug  "\t\tcouldn't find a task with id: ${currentId}"
           }
         }
       }
@@ -99,11 +112,11 @@ class SprintController {
   }
 
   def show = {
-    println '*****************************'
-    println 'params: ' + params
+    log.debug  '*****************************'
+    log.debug  'params: ' + params
     sprint = Sprint.get(params.id)
-    println 'sprint: ' + sprint
-    println 'sprint.stories.isEmpty(): ' + sprint.stories.isEmpty()
+    log.debug  'sprint: ' + sprint
+    log.debug  'sprint.stories.isEmpty(): ' + sprint.stories.isEmpty()
 
     if (!sprint) {
       flash.message = "Sprint not found with id ${params.id}"
@@ -117,24 +130,24 @@ class SprintController {
 
 
   def close = {
-    println '*****************************'
-    println 'params: ' + params
+    log.debug  '*****************************'
+    log.debug  'params: ' + params
     sprint = Sprint.get(params.id)
     sprint.closed = true
     sprint.save(flush: true)
 
     project = sprint.project
 
-    println 'sprint: ' + sprint
-    println 'project: ' + project
+    log.debug  'sprint: ' + sprint
+    log.debug  'project: ' + project
 
     // find any stories that have tasks that are not completed
     def uncompletedStories = []
     for (currStory in sprint.stories) {
-      println 'checking story: ' + currStory
+      log.debug  'checking story: ' + currStory
       def needToAddStory = false
       for (currTask in currStory.tasks) {
-        println '\tchecking task: ' + currTask
+        log.debug  '\tchecking task: ' + currTask
         if (currTask.status != 'done') {
           needToAddStory = true
         }
@@ -145,7 +158,7 @@ class SprintController {
       }
     }
 
-    println 'uncompletedStories: ' + uncompletedStories
+    log.debug  'uncompletedStories: ' + uncompletedStories
 
     def nextSprint = new Sprint()
     nextSprint.number = sprint.number + 1
@@ -155,22 +168,22 @@ class SprintController {
 
     def nextSprintResult
     for (currSprint in project.sprints) {
-      println '\tcurrSprint: ' + currSprint
-      println '\tcurrSprint.id: ' + currSprint.id
+      log.debug  '\tcurrSprint: ' + currSprint
+      log.debug  '\tcurrSprint.id: ' + currSprint.id
       if (currSprint.number == nextSprint.number) {
         nextSprintResult = currSprint
       }
     }
-    println 'the next sprint:     ' + nextSprintResult
-    println 'nextSprintResult.id: ' + nextSprintResult.id
+    log.debug  'the next sprint:     ' + nextSprintResult
+    log.debug  'nextSprintResult.id: ' + nextSprintResult.id
 
     if (nextSprintResult.id == null) {
-      println 'the new sprint id is null'
+      log.debug  'the new sprint id is null'
     }
 
     // move the old stories over to the next sprint
     for (currUncompletedStory in uncompletedStories) {
-      println 'moving ' + currUncompletedStory + ' to next sprint'
+      log.debug  'moving ' + currUncompletedStory + ' to next sprint'
       nextSprintResult.addToStories(currUncompletedStory)
     }
     nextSprintResult.save(flush: true)

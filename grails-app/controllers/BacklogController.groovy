@@ -31,7 +31,7 @@ class BacklogController {
   }
 
   def changestory = {
-    println "Changing story to " + params
+    log.debug "Changing story to " + params
     def story = Story.get(params.id)
     story.description = params.description
     story.points = Integer.parseInt(params?.points)
@@ -53,34 +53,46 @@ class BacklogController {
     // same sprint we think it should be associated with
 
     backlog = Sprint.get(params.id)
-    println 'params: ' + params
-    println 'backlog: ' + backlog
+    log.debug  'params: ' + params
+    log.debug  'backlog: ' + backlog
 
     def currOrdinal = 0
     if (!params['stories[]']) {
-      println 'no stories found to order, returning now'
+      log.debug  'no stories found to order, returning now'
       render "no stories found to re-order, returning: " + params
       return
     }
+    
+                    // set the ids to the new status
+    def valuesToChange = []
+    if (!params['stories[]'].toString().contains(","))
+    {
+        valuesToChange.add(params['stories[]'] as Integer)
+    }
+    else
+    {
+        valuesToChange = params['stories[]']
+    }
 
-    println 'fixing order of stories now---'
-    for (currentId in params['stories[]']) {
-      println "ordering story id: ${currentId}"
+    //log.debug  'fixing order of stories now---'
+    //for (currentId in params['stories[]']) {
+    for (currentId in valuesToChange)
+    {
+      log.debug  "ordering story id: ${currentId}"
 
       def story = Story.get(currentId)
-      println "story found ${story}"
-
+      log.debug "story found ${story}"
       story.ordinal = ++currOrdinal
 
       // new
       //story.save()
 
-      println '\tattempting to add ' + story + " to " + backlog
+      log.debug  '\tattempting to add ' + story + " to " + backlog
     }
 
-    println 'backlog stories --------------------------'
+    log.debug  'backlog stories --------------------------'
     for (currentStory in backlog.stories) {
-      println '\t' + currentStory
+      log.debug  '\t' + currentStory
     }
 
     render "persisted: " + params
@@ -89,14 +101,14 @@ class BacklogController {
 
   def list = {
 
-    println "********************"
-    println "PARAMS---- ${params}"
-    println "********************"
+    log.debug  "********************"
+    log.debug  "PARAMS---- ${params}"
+    log.debug  "********************"
 
     if (project == null) {
       Long projectId = new Long(params.id)
       project = Project.get(projectId)
-      println "this is the project: $project"
+      log.debug  "this is the project: $project"
     }
 
     if (project) {
@@ -107,7 +119,7 @@ class BacklogController {
       for (currStory in backlog.stories) {
         totalStoryPoints += currStory.points
       }
-      println "total story points: $totalStoryPoints"
+      log.debug  "total story points: $totalStoryPoints"
 
       numStories = backlog.stories.size()
     } 
@@ -119,24 +131,24 @@ class BacklogController {
   }
 
   def save = {
-    println 'params: ' + params
+    log.debug  'params: ' + params
 
     //project = Project.get(params.projectId)
     project = Project.get(params.id)
-    println 'project: ' + project
+    log.debug  'project: ' + project
 
     backlog = project.findBacklog()
-    println 'backlog: ' + backlog
+    log.debug  'backlog: ' + backlog
 
     def storyInstance = new Story(params)
     storyInstance.sprint = backlog
-    println storyInstance
+    log.debug  storyInstance
     if (!storyInstance.points) {
       storyInstance.points = 0
     }
     storyInstance.save(flush: true)
 
-    println 'story after saving: ' + storyInstance
+    log.debug  'story after saving: ' + storyInstance
 
     redirect(controller: 'backlog', action: 'list', id: project.id)
   }
