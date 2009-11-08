@@ -40,9 +40,9 @@ class ProjectController {
          //if(backlog.stories.size() == 0 || project.sprints.size() >= 2)
          if(backlog.findStoryPoints() == 0)
          {
-            println "there are no stories in the backlog so we won't display the sprints"
-            println "backlog.stories.size() : ${backlog.stories.size()}"
-            println "project.sprints.size() : ${project.sprints.size()}"
+            log.debug "there are no stories in the backlog so we won't display the sprints"
+            log.debug "backlog.stories.size() : ${backlog.stories.size()}"
+            log.debug "project.sprints.size() : ${project.sprints.size()}"
             // no story points, user needs to add stories to the
             // backlog first
             showSprints = false
@@ -81,7 +81,7 @@ class ProjectController {
          // figure out total story points in the entire project
          def totalStoryPoints = project.findStoryPoints()
 
-         println "total story points: ${totalStoryPoints}"
+         log.debug "total story points: ${totalStoryPoints}"
          
          // velocityChartUrl += "chxr=1,0," + top + "&"
          def burndownTop = totalStoryPoints + 10 
@@ -114,7 +114,7 @@ class ProjectController {
             }
          }
 
-         println "dataSet: ${dataSet}"
+         log.debug "dataSet: ${dataSet}"
          burndownChartUrl += "chd=t:${dataSet}"
          return burndownChartUrl
    }
@@ -134,10 +134,10 @@ class ProjectController {
       velocityChartUrl += "&"
 
       def top = project.findMaxVelocity() + 2
-      println "top >> ${top}"
+      log.debug "top >> ${top}"
 
       def multiplier = (100.div(top)).round(new MathContext(0))
-      println "multiplier >> ${multiplier}"
+      log.debug "multiplier >> ${multiplier}"
 
       velocityChartUrl += "chxr=1,0," + top + "&"
       velocityChartUrl += "chd=t:"
@@ -149,19 +149,19 @@ class ProjectController {
       {
          if(it.number != 0)
          {
-            println "]]] it: ${it}"
+            log.debug "]]] it: ${it}"
             def currVelocity = it.findCompletedStoryPoints()
-            println "]]] currVelocity:       ${currVelocity}"
-            println "]]] multiplier:         ${multiplier}"
+            log.debug "]]] currVelocity:       ${currVelocity}"
+            log.debug "]]] multiplier:         ${multiplier}"
             def adjustedVelocity = currVelocity * multiplier
 
-            println "\t]]] adjustedVelocity: ${adjustedVelocity}"
+            log.debug "\t]]] adjustedVelocity: ${adjustedVelocity}"
             dataSet = adjustedVelocity + "," + dataSet 
          }
       }
       velocityChartUrl += dataSet[0..(dataSet.size()-2)]
 
-      println "velocityChartUrl: ${velocityChartUrl}"
+      log.debug "velocityChartUrl: ${velocityChartUrl}"
       return velocityChartUrl
     }
 
@@ -210,25 +210,25 @@ class ProjectController {
         }
 
         if(!projectInstance.hasErrors() && projectInstance.save()) {
-            println "project ${projectInstance.name} saved"
+            log.debug "project ${projectInstance.name} saved"
 
             def backlogSprint = new Sprint()
             backlogSprint.name = 'backlog'
             backlogSprint.goal = 'stories to here before being worked on'
             backlogSprint.number = 0
             projectInstance.addToSprints(backlogSprint)
-            println "backlog for project ${projectInstance.name} saved"
+            log.debug "backlog for project ${projectInstance.name} saved"
 
             def sprint1 = new Sprint()
             sprint1.number = 1
 
             if(sprint1.hasErrors())
             {
-                println "there were errors with the first sprint"
+                log.debug "there were errors with the first sprint"
             }
 
             projectInstance.addToSprints(sprint1)
-            println "first sprint saved for project ${projectInstance.name} saved"
+            log.debug "first sprint saved for project ${projectInstance.name} saved"
 
             projectInstance.save()
 

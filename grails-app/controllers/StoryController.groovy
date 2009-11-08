@@ -79,18 +79,18 @@ class StoryController {
 
   def saveTask =
   {
-    println '**********************************************'
-    println 'params: ' + params
-    println '**********************************************'
+    log.debug '**********************************************'
+    log.debug 'params: ' + params
+    log.debug '**********************************************'
     storyInstance = Story.get(params.story.id)
 
     def task = new Task(params)
     task.status = 'not started'
     if (!task.hasErrors() && task.save()) {
-      println 'should have saved'
+      log.debug 'should have saved'
       redirect(controller: 'story', action: 'show', id: params.story.id)
     } else {
-      println 'there were errors'
+      log.debug 'there were errors'
       redirect(controller: 'story', action: 'show', id: params.story.id)
     }
   }
