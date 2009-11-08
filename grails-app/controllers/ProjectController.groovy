@@ -156,6 +156,10 @@ class ProjectController {
             def adjustedVelocity = currVelocity * multiplier
 
             log.debug "\t]]] adjustedVelocity: ${adjustedVelocity}"
+            if(adjustedVelocity.toString().contains("0E"))
+            {
+                adjustedVelocity = 0
+            }
             dataSet = adjustedVelocity + "," + dataSet 
          }
       }
