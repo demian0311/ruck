@@ -141,6 +141,8 @@ class BacklogController {
     log.debug  'backlog: ' + backlog
 
     def storyInstance = new Story(params)
+	// make sure we have a good ordinal
+	while(Story.findByOrdinal(storyInstance.ordinal)) {storyInstance.ordinal = storyInstance.ordinal + 1}
     storyInstance.sprint = backlog
     log.debug  storyInstance
     if (!storyInstance.points) {
