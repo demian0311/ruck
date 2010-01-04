@@ -153,6 +153,11 @@ class SprintController {
         }
       }
 
+      if(currStory.tasks.size() == 0)
+      {
+         needToAddStory = true
+      }
+
       if (needToAddStory) {
         uncompletedStories.add(currStory)
       }
