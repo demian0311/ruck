@@ -121,7 +121,13 @@ class SprintController {
 	} else if (params.projectId){
 		def project = Project.get(params.projectId)
 		if(project) {
-			sprint = Sprint.findByClosedAndProject("false", project)
+			def s = Sprint.findAllByClosedAndProject("false", project)
+			if(s) {
+				s.each{
+					if(!it.name?.contains("backlog"))
+						sprint = it
+				}
+			}
 		}
 	}
 
