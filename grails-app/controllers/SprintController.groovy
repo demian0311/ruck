@@ -10,7 +10,7 @@ class SprintController {
 
   def list = {
     if (!params.max) params.max = 10
-    [sprintInstanceList: Sprint.list(params)]f
+    [sprintInstanceList: Sprint.list(params)]
   }
 
   def plan = {
@@ -33,7 +33,7 @@ class SprintController {
       return
     }
 
-                // set the ids to the new status
+	// set the ids to the new status
     def valuesToChange = []
     if (!params['sprintGroup[]'].toString().contains(","))
     {
@@ -114,9 +114,16 @@ class SprintController {
   def show = {
     log.debug  '*****************************'
     log.debug  'params: ' + params
-    sprint = Sprint.get(params.id)
-    log.debug  'sprint: ' + sprint
-    log.debug  'sprint.stories.isEmpty(): ' + sprint.stories.isEmpty()
+	if(params.id) {
+    	sprint = Sprint.get(params.id)
+    	log.debug  'sprint: ' + sprint
+    	log.debug  'sprint.stories.isEmpty(): ' + sprint.stories.isEmpty()
+	} else if (params.projectId){
+		def project = Project.get(params.projectId)
+		if(project) {
+			sprint = Sprint.findByClosedAndProject("false", project)
+		}
+	}
 
     if (!sprint) {
       flash.message = "Sprint not found with id ${params.id}"
