@@ -77,6 +77,9 @@ class Sprint implements Comparable
          outStr += " (closed)"
       }
 
+      // add the total points to the end of the sprint
+      outStr += " - " + findCompletedStoryPoints()
+
       outStr
    }
 
