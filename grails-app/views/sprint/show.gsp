@@ -40,7 +40,7 @@
       <ul class="storyTitle">
         <li class="storyTitle" id="${currStory.id}">
           <g:if test="${!sprint.closed}">
-            <g:link controller="story" action="show" id="${currStory.id}">${currStory.description}</g:link>
+            <g:link controller="story" action="show" id="${currStory.id}">(${currStory.points}) ${currStory.description}</g:link>
           </g:if>
           <g:if test="${sprint.closed}">${currStory.description}</g:if>
 

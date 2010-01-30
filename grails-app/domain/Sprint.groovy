@@ -69,7 +69,7 @@ class Sprint implements Comparable
       }
       else
       {
-         outStr += 'sprint #' + number
+         outStr += 'Sprint #' + number
       }
 
       if(closed)
@@ -78,7 +78,7 @@ class Sprint implements Comparable
       }
 
       // add the total points to the end of the sprint
-      outStr += " - " + findCompletedStoryPoints()
+      outStr += " - " + findCompletedStoryPoints() + " points finished."
 
       outStr
    }
