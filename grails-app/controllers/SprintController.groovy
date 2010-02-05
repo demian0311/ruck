@@ -8,16 +8,31 @@ class SprintController {
   // the delete, save and update actions only accept POST requests
   static def allowedMethods = [delete: 'POST', save: 'POST', update: 'POST']
 
-  def list = {
-    if (!params.max) params.max = 10
-    [sprintInstanceList: Sprint.list(params)]
-  }
+   def list = 
+   {
+      log.debug  'params: ' + params
 
-  def plan = {
-    sprint = Sprint.get(params.id)
-    project = sprint.project
-    backlog = project.findBacklog()
-  }
+      project = Project.get(params.id)
+
+      def sprintsOut = [] 
+      project.sprints.each
+      {
+         if(it.name != 'backlog')
+         {
+            sprintsOut.add(it)
+         }
+
+      }
+
+      [sprintInstanceList: sprintsOut, projectInstance: project]
+   }
+
+   def plan = 
+   {
+      sprint = Sprint.get(params.id)
+      project = sprint.project
+      backlog = project.findBacklog()
+   }
 
   /* this method re-orders stories in a sprint */
   def order =
