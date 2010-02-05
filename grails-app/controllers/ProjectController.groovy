@@ -7,12 +7,17 @@ class ProjectController {
    Sprint backlog
    Project project
    Integer totalBacklogStoryPoints = 0
-   def topStories 
    Integer displayDoneStoryPoints
    Integer displayBacklogStoryPoints
 
+   def topStories 
    Integer moreStories
    private def STORIES_TO_SHOW_IN_BACKLOG = 5 
+
+   def topSprints = []
+   Integer moreSprints
+   private def SPRINTS_TO_SHOW_IN_BACKLOG = 5
+
    String velocityChartUrl
    String burndownChartUrl
 
@@ -26,6 +31,37 @@ class ProjectController {
    {
       if(!params.max) params.max = 10
       [ projectInstanceList: Project.list( params ) ]
+   }
+
+   def showText = 
+   {
+      project = Project.get(params.id)
+
+      def outStr = project.toString() + "\n"
+      outStr += "========================================================\n"
+
+      project.sprints.each
+      { currSprint ->
+         outStr += "${currSprint}\n"
+
+         if(params.level == 'story' || params.level == 'task')
+         {
+            currSprint.stories.each
+            { currStory ->
+               outStr += "\t${currStory} [${currStory.status}]\n"
+
+               if(params.level == 'task')
+               {
+                  currStory.tasks.each
+                  { currTask ->
+                     outStr += "\t\t${currTask} [${currTask.status}]\n"
+                  }
+               }
+            }
+         }
+      }
+
+      render(text:outStr,contentType:"text",encoding:"UTF-8")
    }
 
    def show = 
@@ -54,6 +90,19 @@ class ProjectController {
             // about graphs yet
             showGraphs = false
             return
+         }
+
+         // got to take off an extra '1' for the backlog
+         moreSprints = project.sprints.size() - SPRINTS_TO_SHOW_IN_BACKLOG - 1
+
+         def sprintCount = 0
+         project.sprints.each
+         {
+            sprintCount++
+            if(sprintCount <= SPRINTS_TO_SHOW_IN_BACKLOG)
+            {
+               topSprints.add(it)
+            }
          }
 
          burndownChartUrl = createBurndownChartUrl()

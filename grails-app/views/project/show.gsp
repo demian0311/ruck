@@ -42,15 +42,24 @@
 <g:if test="${showSprints}">
 <div class="ruck-span-12">
   <fieldset>
-      <legend>sprints</legend>
+      <legend><g:link controller="sprint" action="list" id="${project.id}">sprints</g:link></legend>
     <ul>
-      <g:each var="s" in="${project.sprints}">
+      <!--g:each var="s" in="${project.sprints}"-->
+      <g:each var="s" in="${topSprints}">
         <g:if test="${s.number != 0}">
           <li>
             <g:link controller="sprint" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link>
           </li>
         </g:if>
       </g:each>
+
+
+    <g:if test="${moreSprints > 0}">
+      <li><g:link controller="sprint" action="list" id="${project.id}">...and ${moreSprints} more</g:link></li>
+    </g:if>
+
+
+
     </ul>
   </fieldset>
 </div>
@@ -68,5 +77,13 @@
 </g:if>
 
 <hr class="ruck-space"/>
+
+<g:link 
+   controller="project" 
+   action="showText" 
+   id="${project.id}" 
+   params="[level:'task']">txt</g:link>
+
+
 </body>
 </html>

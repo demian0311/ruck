@@ -203,9 +203,11 @@
 </g:if>
 
 <br/><br/><br/>
+<br/><br/><br/>
 <g:if test="${!sprint.closed}">
   <g:link controller="sprint" action="plan" id="${sprint.id}">add stories from backlog</g:link> |
-  <g:link controller="sprint" action="close" id="${sprint.id}">close this sprint</g:link>
+  <g:link controller="sprint" action="close" id="${sprint.id}">close this sprint</g:link> |
+  <g:link controller="sprint" action="show" id="${sprint.id}" params="[status:'all',showTasks:'1']">txt</g:link>
 </g:if>
 
 </body>

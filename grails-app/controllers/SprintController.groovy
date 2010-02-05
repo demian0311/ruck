@@ -137,13 +137,26 @@ class SprintController {
       
       sprint.stories.each
       { currStory ->
-         if(currStory.status == params.status)
+         if((currStory.status == params.status) || (params.status == "all"))
          {
-            outStr += "\t($currStory.points) ${currStory.description}\n"
 
-            currStory.tasks.each
+            outStr += "\t($currStory.points) ${currStory.description}"
+
+            if(params.status == "all")
             {
-               outStr += "\t\t${it}\n"
+               outStr += " is in status ${currStory.status}\n"
+            }
+            else
+            {
+               outStr += "\n"
+            }
+
+            if(params.showTasks == '1')
+            {
+               currStory.tasks.each
+               {
+                  outStr += "\t\t${it}\n"
+               }
             }
          }
       }
