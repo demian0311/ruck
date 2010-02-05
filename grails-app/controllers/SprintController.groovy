@@ -131,6 +131,26 @@ class SprintController {
 		}
 	}
 
+   if(params.status)
+   {
+      def outStr = sprint.toString() + "\n"
+      
+      sprint.stories.each
+      { currStory ->
+         if(currStory.status == params.status)
+         {
+            outStr += "\t($currStory.points) ${currStory.description}\n"
+
+            currStory.tasks.each
+            {
+               outStr += "\t\t${it}\n"
+            }
+         }
+      }
+
+      render(text:outStr,contentType:"text",encoding:"UTF-8")
+   }
+
     if (!sprint) {
       flash.message = "Sprint not found with id ${params.id}"
       redirect(action: list)
@@ -140,7 +160,6 @@ class SprintController {
       redirect(action: plan, id: sprint.id)
     }
   }
-
 
   def close = {
     log.debug  '*****************************'
