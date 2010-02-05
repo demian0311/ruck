@@ -1,8 +1,8 @@
-div#navigation {min-width:940px;width:100%;padding-left:10px;background:#E5ECF9; text-align: left; margin-top: 10px; margin-bottom: 20px; font-size:1.5em;}
+div#navigation {padding-left:10px;background:#E5ECF9; text-align: left; margin-top: 10px; margin-bottom: 20px; font-size:1.5em;}
 /*div.evenRow{background:#eeeeee;}*/
 div.evenRow{background:#f8f8f8;}
 div.oddRow{background:#ffffff;}
-#footer {float:left;min-width:940px;width:100%;padding-left:10px;background:#E5ECF9; text-align: right; margin-top: 10px; margin-bottom: 20px;}
+#footer {float:left;width:100%;background:#E5ECF9; text-align: right; margin-top: 10px; margin-bottom: 20px;}
 ul.story {margin: 0;padding: 0;list-style-type:none;}
 li.story {background:#eeeeff;margin:2px;padding-left:5px;border: 1px solid #ddddee}
 ul.storyTitle{margin:0;padding:0;list-style-type:none;}
