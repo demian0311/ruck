@@ -75,10 +75,10 @@ caption {background:#eee;}
 .ruck-bottom {margin-bottom:0;padding-bottom:0;}
 
 /* grid.css */
-.ruck-container {min-width:1200px;width:90%;margin:0 auto;}
+.ruck-container {min-width:940px;width:90%;margin:0 auto;}
 .block {overflow:hidden;}
 .ruck-showgrid {background:url(grid.png);}
-.ruck-column, div.ruck-span-1, div.ruck-span-2, div.ruck-span-3, div.ruck-span-4, div.ruck-span-5, div.ruck-span-6, div.ruck-span-7, div.ruck-span-8, div.ruck-span-9, div.ruck-span-10, div.ruck-span-11, div.ruck-span-12, div.ruck-span-13, div.ruck-span-14, div.ruck-span-15, div.ruck-span-16, div.ruck-span-17, div.ruck-span-18, div.ruck-span-19, div.ruck-span-20, div.ruck-span-21, div.ruck-span-22, div.ruck-span-23, div.ruck-span-24 {float:left;margin-right:10px;}
+.ruck-column, div.ruck-span-1, div.ruck-span-2, div.ruck-span-3, div.ruck-span-4, div.ruck-span-5, div.ruck-span-6, div.ruck-span-7, div.ruck-span-8, div.ruck-span-9, div.ruck-span-10, div.ruck-span-11, div.ruck-span-12, div.ruck-span-13, div.ruck-span-14, div.ruck-span-15, div.ruck-span-16, div.ruck-span-17, div.ruck-span-18, div.ruck-span-19, div.ruck-span-20, div.ruck-span-21, div.ruck-span-22, div.ruck-span-23, div.ruck-span-24 {float:left;}
 .ruck-last, div.ruck-last {margin-right:0;}
 .ruck-span-1 { width: 4%; }
 .ruck-span-2 { width: 8%; }

@@ -13,7 +13,7 @@
 </div>
 
 <div class="ruck-span-12">
-  <fieldset>
+  <fieldset style="margin-right:10px;">
     <legend>${backlog}</legend>
     <ul id="stories" class="story">
       <g:each var="currStory" in="${backlog.stories}">
@@ -22,8 +22,8 @@
     </ul>
   </fieldset>
 </div>
-<div class="ruck-span-11 ruck-last">
-  <fieldset>
+<div class="ruck-span-12 ruck-last">
+  <fieldset style="margin-left:10px;">
     <legend>${sprint} has <span id="total">0</span> points</legend>
     <ul id="sprintGroup" class="story">
       <g:each var="currStory" in="${sprint.stories}">
