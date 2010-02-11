@@ -9,10 +9,9 @@
   <a href="/ruck">ruck</a>
 </div>
 
-
 <g:if test="${!projectInstanceList.isEmpty()}">
   <div class="ruck-span-12">
-    <fieldset>
+    <fieldset style="margin-right: 10px;">
       <legend>Pick an Existing Project</legend>
       <g:if test="${flash.message}">
         <div class="ruck-notice">${flash.message}</div>
@@ -29,7 +28,7 @@
 </g:if><% // there are some projects %>
 
 <div class="ruck-span-12 ruck-last">
-  <fieldset>
+  <fieldset style="margin-left: 10px;">
     <legend>Create a New Project</legend>
     <g:hasErrors bean="${projectInstance}">
       <div class="ruck-error"><g:renderErrors bean="${projectInstance}" as="list"/></div>

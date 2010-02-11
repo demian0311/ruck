@@ -15,7 +15,7 @@
 </g:if>
 
 <div class="ruck-span-12">
-  <fieldset>
+  <fieldset style="margin-right: 10px;">
    <legend><g:link controller="backlog" id="${project.id}">backlog</g:link> has ${totalBacklogStoryPoints} points</legend>
     <ul>
       <g:each var="currStory" in="${topStories}">
@@ -30,7 +30,7 @@
 
 <g:if test="${showGraphs}">
 <div class="ruck-span-11">
-  <fieldset>
+  <fieldset style="margin-left: 10px;">
    <legend>burndown</legend>
    <img 
       width="400" height="200" 
@@ -41,7 +41,7 @@
 
 <g:if test="${showSprints}">
 <div class="ruck-span-12">
-  <fieldset>
+  <fieldset style="margin-right: 10px;">
       <legend><g:link controller="sprint" action="list" id="${project.id}">sprints</g:link></legend>
     <ul>
       <!--g:each var="s" in="${project.sprints}"-->
@@ -67,7 +67,7 @@
 
 <g:if test="${showGraphs}">
 <div class="ruck-span-11">
-  <fieldset>
+  <fieldset style="margin-left: 10px;">
       <legend>velocity</legend>
       <img 
          width="400" height="200" 
