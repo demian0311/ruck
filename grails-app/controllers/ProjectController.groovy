@@ -30,7 +30,7 @@ class ProjectController {
    def list = 
    {
       if(!params.max) params.max = 10
-      [ projectInstanceList: Project.list( params ) ]
+      [ projectInstanceList: Project.list( params ), personList: User.list(params) ]
    }
 
    def showText = 

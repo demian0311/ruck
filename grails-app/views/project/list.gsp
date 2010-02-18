@@ -9,10 +9,14 @@
   <a href="/ruck">ruck</a>
 </div>
 
+<g:hasErrors bean="${projectInstance}">
+<div class="ruck-error"><g:renderErrors bean="${projectInstance}" as="list"/></div>
+</g:hasErrors>
+
 <g:if test="${!projectInstanceList.isEmpty()}">
   <div class="ruck-span-12">
     <fieldset style="margin-right: 10px;">
-      <legend>Pick an Existing Project</legend>
+      <legend>projects</legend>
       <g:if test="${flash.message}">
         <div class="ruck-notice">${flash.message}</div>
       </g:if>
@@ -22,28 +26,28 @@
             <g:link action="show" id="${projectInstance.id}">${projectInstance}</g:link>
           </li>
         </g:each>
+
+      <g:form action="save" method="post">
+        <li>
+          <input type="text" name="name" id="name" class="ruck-text" size="10" value="${fieldValue(bean: projectInstance, field: 'name')}"/>
+          -
+          <input type="text" class="ruck-text" id="description" name="description" size="20" value="${fieldValue(bean: projectInstance, field: 'description')}"/>
+          <input type="submit" name="new"/>
+    </g:form>
       </ul>
+
     </fieldset>
   </div>
 </g:if><% // there are some projects %>
 
 <div class="ruck-span-12 ruck-last">
   <fieldset style="margin-left: 10px;">
-    <legend>Create a New Project</legend>
-    <g:hasErrors bean="${projectInstance}">
-      <div class="ruck-error"><g:renderErrors bean="${projectInstance}" as="list"/></div>
-    </g:hasErrors>
-    <g:form action="save" method="post">
-      <p>
-        <label for="name">Project name</label> <br/>
-        <input type="text" name="name" id="name" class="ruck-text" size="30" value="${fieldValue(bean: projectInstance, field: 'name')}"/>
-      </p>
-      <p>
-        <label for="description">Description</label><br/>
-        <input type="text" class="ruck-text" id="description" name="description" size="30" value="${fieldValue(bean: projectInstance, field: 'description')}"/>
-      </p>
-      <button type="submit" class="positive"><img src="${createLinkTo(dir: 'images/icons', file: 'tick.png')}" alt=""/>create project</button>
-    </g:form>
+    <legend>users</legend>
+    <ul>
+      <g:each in="${personList}" var="userInstance">
+        <li><g:link controller="user" action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: 'username')}</g:link>
+      </g:each>
+    </ul>
   </fieldset>
 </div>
 </body>

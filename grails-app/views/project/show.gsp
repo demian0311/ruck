@@ -31,7 +31,7 @@
 <g:if test="${showGraphs}">
 <div class="ruck-span-11">
   <fieldset style="margin-left: 10px;">
-   <legend>burndown</legend>
+   <legend>project burndown</legend>
    <img 
       width="400" height="200" 
       src="${request.contextPath}/chart?${burndownChartUrl}"/>
