@@ -13,7 +13,6 @@
 <div class="ruck-error"><g:renderErrors bean="${projectInstance}" as="list"/></div>
 </g:hasErrors>
 
-<g:if test="${!projectInstanceList.isEmpty()}">
   <div class="ruck-span-12">
     <fieldset style="margin-right: 10px;">
       <legend>projects</legend>
@@ -32,17 +31,16 @@
           <input type="text" name="name" id="name" class="ruck-text" size="10" value="${fieldValue(bean: projectInstance, field: 'name')}"/>
           -
           <input type="text" class="ruck-text" id="description" name="description" size="20" value="${fieldValue(bean: projectInstance, field: 'description')}"/>
-          <input type="submit" name="new"/>
+          <input type="submit" value="create new project"/>
     </g:form>
       </ul>
 
     </fieldset>
   </div>
-</g:if><% // there are some projects %>
 
 <div class="ruck-span-12 ruck-last">
   <fieldset style="margin-left: 10px;">
-    <legend>users</legend>
+    <legend><g:link controller="user" action="list">users</g:link></legend>
     <ul>
       <g:each in="${personList}" var="userInstance">
         <li><g:link controller="user" action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: 'username')}</g:link>
