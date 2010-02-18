@@ -30,4 +30,14 @@ class User {
 		password(blank: false)
 		enabled()
 	}
+
+        String toString()
+        {
+            def out = username
+            if(!enabled)
+            {
+                out += " - disabled"
+            }
+            out
+        }
 }

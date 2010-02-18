@@ -14,6 +14,8 @@
   <div class="ruck-success">${flash.message}</div>
 </g:if>
 
+<div class="ruck-span-24">
+
 <div class="ruck-span-12">
   <fieldset style="margin-right: 10px;">
    <legend><g:link controller="backlog" id="${project.id}">backlog</g:link> has ${totalBacklogStoryPoints} points</legend>
@@ -84,6 +86,7 @@
    id="${project.id}" 
    params="[level:'task']">txt</g:link>
 
+</div>
 
 </body>
 </html>
