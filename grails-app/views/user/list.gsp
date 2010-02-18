@@ -2,12 +2,12 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="layout" content="main"/>
-  <title>users</title>
+  <title>user</title>
 </head>
 <body>
 
 <div id="navigation">
-  <a href="/ruck">ruck</a> &raquo; users
+  <a href="/ruck">ruck</a> &raquo; user
 </div>
 
 <div class="body">
@@ -20,7 +20,7 @@
     <li><g:link action="show" id="${userInstance.id}">${userInstance}</g:link></li>
       </g:each>
   </ul>
-<g:link class="create" action="create">New User</g:link>
+<g:link class="create" action="create">create</g:link> a new user
 
 </div>
 </body>

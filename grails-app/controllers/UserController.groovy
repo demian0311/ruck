@@ -124,7 +124,8 @@ class UserController {
 		person.password = authenticateService.encodePassword(params.password)
 		if (person.save()) {
 			addRoles(person)
-			redirect action: show, id: person.id
+                        flash.message = "now add roles for ${person.username}"
+			redirect action: edit, id: person.id
 		}
 		else {
 			render view: 'create', model: [authorityList: Role.list(), person: person]
