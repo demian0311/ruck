@@ -63,7 +63,7 @@ class BacklogController {
       return
     }
     
-                    // set the ids to the new status
+    // set the ids to the new status
     def valuesToChange = []
     if (!params['stories[]'].toString().contains(","))
     {
@@ -74,8 +74,6 @@ class BacklogController {
         valuesToChange = params['stories[]']
     }
 
-    //log.debug  'fixing order of stories now---'
-    //for (currentId in params['stories[]']) {
     for (currentId in valuesToChange)
     {
       log.debug  "ordering story id: ${currentId}"
@@ -89,6 +87,8 @@ class BacklogController {
 
       log.debug  '\tattempting to add ' + story + " to " + backlog
     }
+
+    //backlog.cleanStoryOrdinals()
 
     log.debug  'backlog stories --------------------------'
     for (currentStory in backlog.stories) {
@@ -154,5 +154,4 @@ class BacklogController {
 
     redirect(controller: 'backlog', action: 'list', id: project.id)
   }
-
 }

@@ -87,4 +87,31 @@ class Sprint implements Comparable
    {
       number.compareTo(obj.number) * (-1)
    }
+
+//   int nextStoryOrdinal()
+//   {
+//       def highestOrdinal = 0
+//       for(story in stories)
+//       {
+//           if(highestOrdinal < story.ordinal)
+//           {
+//               highestOrdinal = story.ordinal
+//           }
+//       }
+//       return highestOrdinal++
+//   }
+//
+//   void cleanStoryOrdinals()
+//   {
+//      def foundOrdinals = []
+//      for (story in stories)
+//      {
+//          if(foundOrdinals.contains(story.ordinal))
+//          {
+//              story.ordinal = nextStoryOrdinal()
+//          }
+//
+//          foundOrdinals.append(story.ordinal)
+//      }
+//   }
 }
