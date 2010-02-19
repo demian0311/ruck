@@ -86,7 +86,6 @@
    id="${project.id}" 
    params="[level:'task']">txt</g:link>
 
-</div>
 
 </body>
 </html>

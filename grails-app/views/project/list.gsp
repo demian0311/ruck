@@ -25,6 +25,7 @@
             <g:link action="show" id="${projectInstance.id}">${projectInstance}</g:link>
           </li>
         </g:each>
+<g:ifAllGranted role="ROLE_ADMINISTRATOR">
 
       <g:form action="save" method="post">
         <li>
@@ -33,12 +34,14 @@
           <input type="text" class="ruck-text" id="description" name="description" size="20" value="${fieldValue(bean: projectInstance, field: 'description')}"/>
           <input type="submit" value="create new project"/>
     </g:form>
+</g:ifAllGranted>
+
       </ul>
 
     </fieldset>
   </div>
 
-
+<g:ifAllGranted role="ROLE_ADMINISTRATOR">
 <div class="ruck-span-12 ruck-last">
   <fieldset style="margin-left: 10px;">
     <legend><g:link controller="user" action="list">users</g:link></legend>
@@ -48,7 +51,9 @@
       </g:each>
     </ul>
   </fieldset>
-
 </div>
+
+</g:ifAllGranted>
+
 </body>
 </html>
