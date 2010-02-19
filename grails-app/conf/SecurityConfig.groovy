@@ -11,6 +11,8 @@ security {
 
   useRequestMapDomainClass = false
 
+  security.defaultRole = "ROLE_OBSERVER"
+
 
   requestMapString = '''
         CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON

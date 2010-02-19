@@ -14,5 +14,4 @@ class TaskNote
    {
       return content
    }
-
 }

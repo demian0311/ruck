@@ -23,7 +23,6 @@ class SprintController {
          {
             sprintsOut.add(it)
          }
-
       }
 
       [sprintInstanceList: sprintsOut, projectInstance: project]
@@ -119,16 +118,17 @@ class SprintController {
             currTask.status = params['newStatus']
             currTask.save()
 
-            // now save a note for the event
+            /* trying to save a note to say who changed the task status
+             * this doesn't work, not sure why
+
             def userPrincipal = authenticateService.principal()
             def username = userPrincipal.getUsername()
-
-            def contentString = "moved to status '${params['newStatus']}' by ${username}"
-            log.debug "***************** ${contentString}"
-
-            def currTaskNote = new TaskNote(task:currTask, content: contentString, createDate: new Date())
+            def contentString = "foo" //moved to status ${params['newStatus']} by ${username}"
+            log.debug "***************** " + contentString
+            def currTaskNote = new TaskNote(task:currTask, content: "foo")
             currTaskNote.save()
-            
+            */
+
           } else {
             log.debug  "\t\tcouldn't find a task with id: ${currentId}"
           }
