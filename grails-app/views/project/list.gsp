@@ -38,15 +38,17 @@
     </fieldset>
   </div>
 
+
 <div class="ruck-span-12 ruck-last">
   <fieldset style="margin-left: 10px;">
     <legend><g:link controller="user" action="list">users</g:link></legend>
     <ul>
       <g:each in="${personList}" var="userInstance">
-        <li><g:link controller="user" action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: 'username')}</g:link>
+        <li><g:link controller="user" action="edit" id="${userInstance.id}">${fieldValue(bean: userInstance, field: 'username')}</g:link>
       </g:each>
     </ul>
   </fieldset>
+
 </div>
 </body>
 </html>

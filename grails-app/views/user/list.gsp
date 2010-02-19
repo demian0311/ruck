@@ -16,11 +16,12 @@
     <div class="message">${flash.message}</div>
   </g:if>
   <ul>
+
   <g:each in="${personList}" var="userInstance">
-    <li><g:link action="show" id="${userInstance.id}">${userInstance}</g:link></li>
+    <li><g:link action="edit" id="${userInstance.id}">${userInstance}</g:link></li>
       </g:each>
   </ul>
-<g:link class="create" action="create">create</g:link> a new user
+  <g:link class="create" action="create">create</g:link> a new user
 
 </div>
 </body>

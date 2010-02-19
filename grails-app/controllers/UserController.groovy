@@ -73,6 +73,8 @@ class UserController {
 		}
 
 		return buildPersonModel(person)
+
+                //redirect action:list
 	}
 
 	/**
@@ -103,7 +105,8 @@ class UserController {
 		if (person.save()) {
 			Role.findAll().each { it.removeFromPeople(person) }
 			addRoles(person)
-			redirect action: show, id: person.id
+//			redirect action: show, id: person.id
+                        redirect action: list
 		}
 		else {
 			render view: 'edit', model: buildPersonModel(person)
@@ -124,8 +127,8 @@ class UserController {
 		person.password = authenticateService.encodePassword(params.password)
 		if (person.save()) {
 			addRoles(person)
-                        flash.message = "now add roles for ${person.username}"
-			redirect action: edit, id: person.id
+                        //flash.message = "now add roles for ${person.username}"
+			redirect action: list//, id: person.id
 		}
 		else {
 			render view: 'create', model: [authorityList: Role.list(), person: person]

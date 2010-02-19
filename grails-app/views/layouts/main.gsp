@@ -19,7 +19,7 @@
 
 <div class="ruck-container">
   <g:layoutBody/>
-  <div id="footer">${new Date()} | <a href="http://github.com/demian0311/ruck/tree/master">ruck</a></div>
+  <div id="footer">${new Date()} | ${request.remoteUser} | <a href="http://github.com/demian0311/ruck/tree/master">ruck</a></div>
 </div>
 </body>
 </html>
