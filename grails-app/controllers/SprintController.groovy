@@ -3,6 +3,8 @@ class SprintController {
   def sprint
   def backlog
 
+  def authenticateService
+
   def index = { redirect(action: list, params: params) }
 
   // the delete, save and update actions only accept POST requests
@@ -116,6 +118,17 @@ class SprintController {
           if (currTask) {
             currTask.status = params['newStatus']
             currTask.save()
+
+            // now save a note for the event
+            def userPrincipal = authenticateService.principal()
+            def username = userPrincipal.getUsername()
+
+            def contentString = "moved to status '${params['newStatus']}' by ${username}"
+            log.debug "***************** ${contentString}"
+
+            def currTaskNote = new TaskNote(task:currTask, content: contentString, createDate: new Date())
+            currTaskNote.save()
+            
           } else {
             log.debug  "\t\tcouldn't find a task with id: ${currentId}"
           }
