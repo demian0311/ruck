@@ -15,9 +15,9 @@
   <div class="ruck-success">${flash.message}</div>
 </g:if>
 
-<div class="ruck-span-24">
-
-<div class="ruck-span-12">
+<table>
+  <tr>
+    <td valign="top">
   <fieldset style="margin-right: 10px;">
    <legend><g:link controller="backlog" id="${project.id}">backlog</g:link> has ${totalBacklogStoryPoints} points</legend>
     <ul>
@@ -29,21 +29,23 @@
     </g:if>
     </ul>
   </fieldset>
-</div>
+    </td>
+
+    <td valign="top">
 
 <g:if test="${showGraphs}">
-<div class="ruck-span-11">
   <fieldset style="margin-left: 10px;">
    <legend>project burndown</legend>
    <img 
       width="400" height="200" 
       src="${request.contextPath}/chart?${burndownChartUrl}"/>
   </fieldset>
-</div>
 </g:if>
 
+</td></tr>
+<tr><td valign="top">
+
 <g:if test="${showSprints}">
-<div class="ruck-span-12">
   <fieldset style="margin-right: 10px;">
       <legend><g:link controller="sprint" action="list" id="${project.id}">sprints</g:link></legend>
     <ul>
@@ -55,29 +57,26 @@
           </li>
         </g:if>
       </g:each>
-
-
     <g:if test="${moreSprints > 0}">
       <li><g:link controller="sprint" action="list" id="${project.id}">...and ${moreSprints} more</g:link></li>
     </g:if>
-
-
-
     </ul>
   </fieldset>
-</div>
 </g:if>
 
+</td><td valign="top">
+
+
 <g:if test="${showGraphs}">
-<div class="ruck-span-11">
   <fieldset style="margin-left: 10px;">
       <legend>velocity</legend>
       <img 
          width="400" height="200" 
          src="${request.contextPath}/chart?${velocityChartUrl}"/>
   </fieldset>
-</div>
 </g:if>
+
+</td></tr></table>
 
 <hr class="ruck-space"/>
 
