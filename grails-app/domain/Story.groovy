@@ -14,11 +14,19 @@ class Story implements Comparable {
 
   private def validPoints = [0, 1, 2, 3, 5, 8, 13, 21, 33, 54, 87, 100]
 
-  void setPoints(Integer pointsIn) {
-    // round points up
-    while (!validPoints.contains(pointsIn)) {
-      pointsIn++
+  void setPoints(Integer pointsIn) 
+  {
+//    if(pointsIn > 100)
+//    {
+//        pointsIn = 100
+//        return
+//    }
+
+    while (!validPoints.contains(pointsIn))
+    {
+        pointsIn++
     }
+
     points = pointsIn
   }
 

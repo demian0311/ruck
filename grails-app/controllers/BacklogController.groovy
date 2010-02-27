@@ -81,6 +81,8 @@ class BacklogController {
       def story = Story.get(currentId)
       log.debug "story found ${story}"
       story.ordinal = ++currOrdinal
+      story.sprint = backlog // if we're ordering it in the backlog it must belong
+      story.save()
 
       // new
       //story.save()
