@@ -142,13 +142,17 @@ class BacklogController {
       {
          storyInstance.ordinal = storyInstance.ordinal + 1
       }
-      storyInstance.sprint = backlog
-      log.debug  storyInstance
-      if (!storyInstance.points) 
+      Sprint backlog = Sprint.findWhere(project: project, number: 0)
+      backlog.addToStories(storyInstance)
+
+      if(!storyInstance.save(flush: true))
       {
-         storyInstance.points = 0
+         log.debug("was unable to save story...")
+         storyInstance.errors.each
+         {
+            log.debug(it)
+         }
       }
-      storyInstance.save(flush: true)
       log.debug  'story after saving: ' + storyInstance
 
       redirect(controller: 'backlog', action: 'list', id: project.id)
