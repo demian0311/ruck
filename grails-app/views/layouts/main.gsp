@@ -20,9 +20,12 @@
 <div class="ruck-container">
   <g:layoutBody/>
   <div id="footer">
-    ${loggedInUserInfo(field:'username')} |
     ${new Date()} |
-    <a href="http://github.com/demian0311/ruck/tree/master">ruck</a></div>
+    <a href="http://github.com/demian0311/ruck/tree/master">ruck</a> |
+    <g:ifLoggedIn><g:loggedInUser/><a href="">logout</a></g:ifLoggedIn>
+    <g:ifNotLoggedIn><a href="">login</a></g:ifNotLoggedIn>
+  </div>
+
 </div>
 </body>
 </html>

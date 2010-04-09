@@ -11,7 +11,7 @@ security {
 
   useRequestMapDomainClass = false
 
-  security.defaultRole = "ROLE_OBSERVER"
+  //security.defaultRole = "ROLE_OBSERVER"
 
 
   requestMapString = '''
@@ -22,6 +22,5 @@ security {
 		/js/**=IS_AUTHENTICATED_ANONYMOUSLY
 		/images/**=IS_AUTHENTICATED_ANONYMOUSLY
 		/login/**=IS_AUTHENTICATED_ANONYMOUSLY
-        /**=IS_AUTHENTICATED_ANONYMOUSLY
 	   '''
 }

@@ -41,7 +41,7 @@
     </fieldset>
   </div>
 
-<g:ifAllGranted role="ROLE_ADMINISTRATOR">
+<g:ifUserHasRole role="ROLE_ADMINISTRATOR">
 <div class="ruck-span-12 ruck-last">
   <fieldset style="margin-left: 10px;">
     <legend><g:link controller="user" action="list">users</g:link></legend>
@@ -52,8 +52,6 @@
     </ul>
   </fieldset>
 </div>
-
-</g:ifAllGranted>
-
+</g:ifUserHasRole>
 </body>
 </html>
