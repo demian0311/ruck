@@ -49,9 +49,6 @@ class BacklogController {
   /* this method changes the ordering of the stories in the backlog */
   def order =
   {
-    // do some checking here to make sure that the story is owned by the
-    // same sprint we think it should be associated with
-
     backlog = Sprint.get(params.id)
     log.debug  'params: ' + params
     log.debug  'backlog: ' + backlog
@@ -81,11 +78,10 @@ class BacklogController {
       def story = Story.get(currentId)
       log.debug "story found ${story}"
       story.ordinal = ++currOrdinal
-      story.sprint = backlog // if we're ordering it in the backlog it must belong
-      story.save()
+      // here is where we should be setting it to the backlog
 
-      // new
-      //story.save()
+      story.sprint = backlog // if we're ordering it in the backlog it must belong
+      story.save(flush: true)
 
       log.debug  '\tattempting to add ' + story + " to " + backlog
     }
@@ -132,28 +128,29 @@ class BacklogController {
     }
   }
 
-  def save = {
-    log.debug  'params: ' + params
+  def save = 
+  {
+      log.debug  'params: ' + params
+      project = Project.get(params.id)
+      log.debug  'project: ' + project
+    
+      backlog = project.findBacklog()
+      log.debug  'backlog: ' + backlog
 
-    //project = Project.get(params.projectId)
-    project = Project.get(params.id)
-    log.debug  'project: ' + project
+      def storyInstance = new Story(params)
+	   while(Story.findByOrdinal(storyInstance.ordinal)) 
+      {
+         storyInstance.ordinal = storyInstance.ordinal + 1
+      }
+      storyInstance.sprint = backlog
+      log.debug  storyInstance
+      if (!storyInstance.points) 
+      {
+         storyInstance.points = 0
+      }
+      storyInstance.save(flush: true)
+      log.debug  'story after saving: ' + storyInstance
 
-    backlog = project.findBacklog()
-    log.debug  'backlog: ' + backlog
-
-    def storyInstance = new Story(params)
-	// make sure we have a good ordinal
-	while(Story.findByOrdinal(storyInstance.ordinal)) {storyInstance.ordinal = storyInstance.ordinal + 1}
-    storyInstance.sprint = backlog
-    log.debug  storyInstance
-    if (!storyInstance.points) {
-      storyInstance.points = 0
-    }
-    storyInstance.save(flush: true)
-
-    log.debug  'story after saving: ' + storyInstance
-
-    redirect(controller: 'backlog', action: 'list', id: project.id)
+      redirect(controller: 'backlog', action: 'list', id: project.id)
   }
 }
