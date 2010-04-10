@@ -18,8 +18,8 @@ class ProjectController {
    Integer moreSprints
    private def SPRINTS_TO_SHOW_IN_BACKLOG = 5
 
-   String velocityChartUrl
-   String burndownChartUrl
+   String burndownChartData
+   String velocityChartData
 
    Boolean showGraphs = true
    Boolean showSprints = true
@@ -105,117 +105,44 @@ class ProjectController {
             }
          }
 
-         burndownChartUrl = createBurndownChartUrl()
-         velocityChartUrl = createVelocityChartUrl()
+         burndownChartData = createBurndownChartData()
+         velocityChartData = createVelocityChartData()
    }
 
-   String createBurndownChartUrl()
+   String createVelocityChartData()
    {
-         // create the url for the burndown chart
-         def burndownChartUrl = "cht=lc&"
-         burndownChartUrl += "chxt=x,y&"
-         burndownChartUrl += "chls=4,1,0&"
-         burndownChartUrl += "chs=400x200&"
-         burndownChartUrl += "chco=ddddee&"
-
-         // do labels
-         def currSprintNumber = 0
-         def labels = "chxl=0:|"
-         (0..(project.sprints.size() - 2)).each
-         {
-            labels += currSprintNumber++ + "|"
-         }
-         burndownChartUrl += labels + "&"
-
-         // figure out total story points in the entire project
-         def totalStoryPoints = project.findStoryPoints()
-
-         log.debug "total story points: ${totalStoryPoints}"
-         
-         // velocityChartUrl += "chxr=1,0," + top + "&"
-         def burndownTop = totalStoryPoints + 10 
-         burndownChartUrl += "chxr=1,0," + burndownTop + "&" 
-         def burndownMultiplier = (100.div(burndownTop)).round(new MathContext(1))
-
-         // now create data points by decrementing the total points
-         def dataSet = "${totalStoryPoints * burndownMultiplier}"
-         def currPoints = totalStoryPoints
-
-         // got to make sure this doesn't include the backlog and
-         // the current sprint that has points in it but the points
-         // are not done
-         def firstSprint = true
-         totalStoryPoints = 0
-
-         //(currSprint in project.sprints)
-         project.sprints.each
-         {
-            if(firstSprint)
-            {
-               firstSprint = false
-            }
-            else
-            {
-               currPoints = currPoints - it.findStoryPoints()
-               totalStoryPoints += currPoints
-               //def adjustedPoints = currPoints * burndownMultiplier 
-               dataSet = dataSet + "," + (currPoints * burndownMultiplier)
-            }
-         }
-
-         log.debug "dataSet: ${dataSet}"
-         burndownChartUrl += "chd=t:${dataSet}"
-         return burndownChartUrl
-   }
-
-   String createVelocityChartUrl()
-   {
-      // create the url for the velocity chart
-      def velocityChartUrl = "cht=bvg&"
-      velocityChartUrl += "chs=400x200&"
-      velocityChartUrl += "chxt=x,y&"
-      velocityChartUrl += "chco=ddddee&"
-      velocityChartUrl += "chxl=0:|"
-      (1..(project.sprints.size() - 1)).each
-      {
-            velocityChartUrl += it + "|"
-      }
-      velocityChartUrl += "&"
-
-      def top = project.findMaxVelocity() + 2
-      log.debug "top >> ${top}"
-
-      def multiplier = (100.div(top)).round(new MathContext(0))
-      log.debug "multiplier >> ${multiplier}"
-
-      velocityChartUrl += "chxr=1,0," + top + "&"
-      velocityChartUrl += "chd=t:"
-
-      def dataSet = "" 
-      def sprintCount = project.sprints.size()
-      def firstSprint = true
+      def outData = "[" 
+      //int currSprintNum = 0      
+      int currSprintNum = project.sprints.size()
       project.sprints.each
       {
-         if(it.number != 0)
-         {
-            log.debug "]]] it: ${it}"
-            def currVelocity = it.findCompletedStoryPoints()
-            log.debug "]]] currVelocity:       ${currVelocity}"
-            log.debug "]]] multiplier:         ${multiplier}"
-            def adjustedVelocity = currVelocity * multiplier
-
-            log.debug "\t]]] adjustedVelocity: ${adjustedVelocity}"
-            if(adjustedVelocity.toString().contains("0E"))
-            {
-                adjustedVelocity = 0
-            }
-            dataSet = adjustedVelocity + "," + dataSet 
-         }
+         outData += "[" + currSprintNum-- + ", " + it.findCompletedStoryPoints() + "],"
       }
-      velocityChartUrl += dataSet[0..(dataSet.size()-2)]
 
-      log.debug "velocityChartUrl: ${velocityChartUrl}"
-      return velocityChartUrl
+      outData += "]"
+
+      return outData
+   }
+
+
+   String createBurndownChartData()
+   {
+      //int currStoryPoints = project.findCompletedStoryPoints()
+      int currStoryPoints = 0 
+
+
+      def outData = "[" 
+      int currSprintNum = project.sprints.size()
+
+      project.sprints.each
+      {
+         outData += "[" + currSprintNum-- + ", " + currStoryPoints + "],"
+         currStoryPoints += it.findCompletedStoryPoints()
+      }
+
+      outData += "]"
+
+      return outData
     }
 
     def edit = 

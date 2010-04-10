@@ -36,10 +36,31 @@
 <g:if test="${showGraphs}">
   <fieldset style="margin-left: 10px;">
    <legend>project burndown</legend>
-   <img 
-      width="400" height="200" 
-      src="${request.contextPath}/chart?${burndownChartUrl}"/>
-  </fieldset>
+
+<div id="projectBurndown" style="width:400px;height:200px;"></div> 
+<script id="source" language="javascript" type="text/javascript"> 
+$(function () 
+{
+   var tableData = 
+   [
+      /*{data: [[1, 30],  [2, 22],  [3, 21],  [4, 17], [5, 32], [6, 18]]},*/
+      {data: ${burndownChartData}},
+   ];
+ 
+   $.plot
+   (
+      $("#projectBurndown"), 
+      tableData, 
+      {
+         series: 
+         {
+            lines: { show: true },
+            points: { show: true }
+         }
+      }
+   )
+});
+</script> 
 </g:if>
 
 </td></tr>
@@ -70,9 +91,48 @@
 <g:if test="${showGraphs}">
   <fieldset style="margin-left: 10px;">
       <legend>velocity</legend>
-      <img 
-         width="400" height="200" 
-         src="${request.contextPath}/chart?${velocityChartUrl}"/>
+
+<div id="projectVelocity" style="width:400px;height:200px;"></div> 
+<script id="source" language="javascript" type="text/javascript"> 
+$(function () 
+{
+   var tableData = 
+   [
+      {data: ${velocityChartData}},
+   ];
+ 
+   $.plot
+   (
+      $("#projectVelocity"), 
+      tableData, 
+      {
+         series: 
+         {
+            lines: { show: true },
+            points: { show: true }
+         }
+      }
+   )
+});
+</script> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </fieldset>
 </g:if>
 
