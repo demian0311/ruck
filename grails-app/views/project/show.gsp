@@ -47,7 +47,6 @@ $(function ()
 {
    var tableData = 
    [
-      /*{data: [[1, 30],  [2, 22],  [3, 21],  [4, 17], [5, 32], [6, 18]]},*/
       {data: ${burndownChartData}},
    ];
  
@@ -56,11 +55,8 @@ $(function ()
       $("#projectBurndown"), 
       tableData, 
       {
-         series: 
-         {
-            lines: { show: true },
-            points: { show: true }
-         }
+         lines: { show: true, fill: true },
+         points: { show: true }
       }
    )
 });
@@ -110,11 +106,7 @@ $(function ()
       $("#projectVelocity"), 
       tableData, 
       {
-         series: 
-         {
-            lines: { show: true },
-            points: { show: true }
-         }
+         bars: { show: true, barWidth: 0.6}
       }
    )
 });
