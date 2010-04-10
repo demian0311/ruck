@@ -15,6 +15,10 @@
   <div class="ruck-success">${flash.message}</div>
 </g:if>
 
+<g:javascript library="jquery"/>
+<g:javascript library="jquery.flot"/>
+
+
 <table>
   <tr>
     <td valign="top">

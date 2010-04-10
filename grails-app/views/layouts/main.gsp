@@ -14,11 +14,6 @@
   <g:javascript library="prototype"/>
   <g:javascript library="scriptaculous"/>
   <g:javascript library="taskboard"/>
-
-   <%-- graphs --%>
-   <g:javascript library="jquery"/>
-   <g:javascript library="jquery.flot"/>
-
 </head>
 <body>
 
