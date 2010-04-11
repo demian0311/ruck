@@ -55,7 +55,11 @@ $(function ()
       $("#projectBurndown"), 
       tableData, 
       {
-         lines: { show: true, fill: true },
+         lines: { 
+            show: true, 
+            fill: true, 
+            fillColor: {colors: ["#FFFFFF", "#E5ECF9"]}
+         },
          points: { show: true }
       }
    )
@@ -106,7 +110,7 @@ $(function ()
       $("#projectVelocity"), 
       tableData, 
       {
-         bars: { show: true, barWidth: 0.6}
+         bars: { show: true, barWidth: 0.6, fillColor: "#E5ECF9"}
       }
    )
 });
