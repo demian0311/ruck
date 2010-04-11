@@ -1,7 +1,8 @@
 import java.math.RoundingMode
 import java.math.MathContext
 
-class ProjectController {
+class ProjectController 
+{
     
    def index = { redirect(action:list,params:params) }
    Sprint backlog
@@ -72,13 +73,12 @@ class ProjectController {
          moreStories = backlog.stories.size() - STORIES_TO_SHOW_IN_BACKLOG 
          topStories = backlog.findTopStories(STORIES_TO_SHOW_IN_BACKLOG)
 
-         //if(project.findStoryPoints() == 0)
-         //if(backlog.stories.size() == 0 || project.sprints.size() >= 2)
          if(backlog.findStoryPoints() == 0)
          {
             log.debug "there are no stories in the backlog so we won't display the sprints"
             log.debug "backlog.stories.size() : ${backlog.stories.size()}"
             log.debug "project.sprints.size() : ${project.sprints.size()}"
+
             // no story points, user needs to add stories to the
             // backlog first
             showSprints = false
@@ -112,7 +112,7 @@ class ProjectController {
    String createVelocityChartData()
    {
       def outData = "[" 
-      //int currSprintNum = 0      
+
       int currSprintNum = project.sprints.size()
       project.sprints.each
       {
@@ -127,9 +127,7 @@ class ProjectController {
 
    String createBurndownChartData()
    {
-      //int currStoryPoints = project.findCompletedStoryPoints()
       int currStoryPoints = 0 
-
 
       def outData = "[" 
       int currSprintNum = project.sprints.size()
@@ -149,35 +147,42 @@ class ProjectController {
     {
         def projectInstance = Project.get( params.id )
 
-        if(!projectInstance) {
+        if(!projectInstance) 
+        {
             flash.message = "Project not found with id ${params.id}"
             redirect(action:list)
         }
-        else {
+        else 
+        {
             return [ projectInstance : projectInstance ]
         }
     }
 
-    def update = {
+    def update = 
+    {
         def projectInstance = Project.get( params.id )
-        if(projectInstance) {
+        if(projectInstance) 
+        {
             projectInstance.properties = params
-            if(!projectInstance.hasErrors() && projectInstance.save()) {
+            if(!projectInstance.hasErrors() && projectInstance.save()) 
+            {
                 flash.message = "Project ${params.id} updated"
                 redirect(action:show,id:projectInstance.id)
             }
-            else {
+            else 
+            {
                 render(view:'edit',model:[projectInstance:projectInstance])
             }
         }
-        else {
+        else 
+        {
             flash.message = "Project not found with id ${params.id}"
             redirect(action:edit,id:params.id)
         }
     }
 
-
-    def save = {
+    def save = 
+    {
         def projectInstance = new Project(params)
         if(projectInstance.startDate == null)
         {
@@ -189,7 +194,8 @@ class ProjectController {
            projectInstance.sprintLength = 1 
         }
 
-        if(!projectInstance.hasErrors() && projectInstance.save()) {
+        if(!projectInstance.hasErrors() && projectInstance.save()) 
+        {
             log.debug "project ${projectInstance.name} saved"
 
             def backlogSprint = new Sprint()

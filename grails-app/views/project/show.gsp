@@ -15,9 +15,9 @@
   <div class="ruck-success">${flash.message}</div>
 </g:if>
 
+<%-- For Graphs --%>
 <g:javascript library="jquery"/>
 <g:javascript library="jquery.flot"/>
-
 
 <table>
   <tr>
@@ -71,6 +71,7 @@ $(function ()
 <tr><td valign="top">
 
 <g:if test="${showSprints}">
+
   <fieldset style="margin-right: 10px;">
       <legend><g:link controller="sprint" action="list" id="${project.id}">sprints</g:link></legend>
     <ul>
@@ -87,6 +88,7 @@ $(function ()
     </g:if>
     </ul>
   </fieldset>
+
 </g:if>
 
 </td><td valign="top">
@@ -116,23 +118,6 @@ $(function ()
 });
 </script> 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   </fieldset>
 </g:if>
 
@@ -145,7 +130,6 @@ $(function ()
    action="showText" 
    id="${project.id}" 
    params="[level:'task']">txt</g:link>
-
 
 </body>
 </html>

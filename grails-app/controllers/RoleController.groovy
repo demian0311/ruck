@@ -8,15 +8,18 @@ class RoleController {
 
   def authenticateService
 
-  def index = {
+  def index = 
+  {
     redirect action: list, params: params
   }
 
   /**
    * Display the list authority page.
    */
-  def list = {
-    if (!params.max) {
+  def list = 
+  {
+    if (!params.max) 
+    {
       params.max = 10
     }
     [authorityList: Role.list(params)]
@@ -25,9 +28,11 @@ class RoleController {
   /**
    * Display the show authority page.
    */
-  def show = {
+  def show = 
+  {
     def authority = Role.get(params.id)
-    if (!authority) {
+    if (!authority) 
+    {
       flash.message = "Role not found with id $params.id"
       redirect action: list
       return
@@ -39,9 +44,11 @@ class RoleController {
   /**
    * Delete an authority.
    */
-  def delete = {
+  def delete = 
+  {
     def authority = Role.get(params.id)
-    if (!authority) {
+    if (!authority) 
+    {
       flash.message = "Role not found with id $params.id"
       redirect action: list
       return
@@ -56,9 +63,11 @@ class RoleController {
   /**
    * Display the edit authority page.
    */
-  def edit = {
+  def edit = 
+  {
     def authority = Role.get(params.id)
-    if (!authority) {
+    if (!authority) 
+    {
       flash.message = "Role not found with id $params.id"
       redirect action: list
       return
@@ -70,27 +79,31 @@ class RoleController {
   /**
    * Authority update action.
    */
-  def update = {
-
+  def update = 
+  {
     def authority = Role.get(params.id)
-    if (!authority) {
+    if (!authority) 
+    {
       flash.message = "Role not found with id $params.id"
       redirect action: edit, id: params.id
       return
     }
 
     long version = params.version.toLong()
-    if (authority.version > version) {
+    if (authority.version > version) 
+    {
       authority.errors.rejectValue 'version', 'authority.optimistic.locking.failure',
               'Another user has updated this Role while you were editing.'
       render view: 'edit', model: [authority: authority]
       return
     }
 
-    if (authenticateService.updateRole(authority, params)) {
+    if (authenticateService.updateRole(authority, params)) 
+    {
       authenticateService.clearCachedRequestmaps()
       redirect action: show, id: authority.id
-    } else {
+    } else 
+    {
       render view: 'edit', model: [authority: authority]
     }
   }
@@ -98,20 +111,24 @@ class RoleController {
   /**
    * Display the create new authority page.
    */
-  def create = {
+  def create = 
+  {
     [authority: new Role()]
   }
 
   /**
    * Save a new authority.
    */
-  def save = {
-
+  def save = 
+  {
     def authority = new Role()
     authority.properties = params
-    if (authority.save()) {
+    if (authority.save()) 
+    {
       redirect action: show, id: authority.id
-    } else {
+    } 
+    else 
+    {
       render view: 'create', model: [authority: authority]
     }
   }
