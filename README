@@ -7,4 +7,8 @@ The license is GPLv3.  We implemented it in Grails.
 demian0311@gmail.com
 johnnywey@gmail.com
 
-foo
+To run it with the in-memory database:
+grails run-app
+
+To run it using a MySQL database on localhost named 'ruck' with a user 'ruck' and password 'ruck'.
+grails prod run-app
